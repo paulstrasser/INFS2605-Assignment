@@ -21,6 +21,7 @@ import javafx.stage.Stage;
  * FXML Controller class
  *
  * @author paulstrasser
+ * @author EdHopkins
  */
 public class SignUp3Controller implements Initializable {
 
@@ -47,6 +48,8 @@ public class SignUp3Controller implements Initializable {
     
     @FXML
     public Circle StartCircle;
+    
+    
     
     @FXML
     public void homeButton(MouseEvent event) throws Exception {
