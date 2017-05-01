@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 /**
  *
  * @author paulstrasser
+ * @author edHopkins
  */
 public class WelcomeController implements Initializable {
     
