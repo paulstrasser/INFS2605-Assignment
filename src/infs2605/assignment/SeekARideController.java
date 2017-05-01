@@ -14,7 +14,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -30,6 +32,15 @@ public class SeekARideController implements Initializable {
     
     @FXML
     private Text Name;
+    
+    @FXML
+    private GridPane results;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        addResults();
+    } 
+    
     
     private void SignOut(ActionEvent event) throws Exception {
         Stage stage;
@@ -53,9 +64,19 @@ public class SeekARideController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    
+    private void addResults() {
+        Label test = new Label("Hello");      
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                results.add(test,i,j);
+            }
+        }
+    }
+    
+    
+    
+    
+       
     
 }
