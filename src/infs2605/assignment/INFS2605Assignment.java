@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author yew
+ * @author edHopkins
  */
 public class INFS2605Assignment extends Application {
     
