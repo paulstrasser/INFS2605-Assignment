@@ -144,6 +144,7 @@ public class SignUp1Controller implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
+        
         else if (event.getSource()==TypeOfUserCircle) {
             stage=(Stage) TypeOfUserCircle.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("Sign Up 2.fxml"));

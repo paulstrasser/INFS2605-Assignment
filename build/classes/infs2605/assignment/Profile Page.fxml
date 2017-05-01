@@ -71,7 +71,7 @@
                                           </Text>
                                           <SplitMenuButton graphicTextGap="0.0" layoutX="6.0" layoutY="212.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #93cff2;" text="Seek" textAlignment="CENTER">
                                             <items>
-                                              <MenuItem fx:id="SeekaRide" mnemonicParsing="false" onAction="#SeekARide" onMenuValidation="#SeekARide" text="Seek a Ride" />
+                                              <MenuItem fx:id="Seek" mnemonicParsing="false" onAction="#SeekARide" text="Seek a Ride" />
                                                 <SeparatorMenuItem mnemonicParsing="false" />
                                                 <MenuItem mnemonicParsing="false" text="Your Seeks" />
                                             </items>
@@ -259,7 +259,8 @@
                                                                         <Font name="Avenir Roman" size="24.0" />
                                                                      </font>
                                                                   </Label>
-                                                               </children></AnchorPane>
+                                                               </children>
+                                                            </AnchorPane>
                                                         </content>
                                                          <font>
                                                             <Font size="20.0" />

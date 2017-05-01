@@ -5,6 +5,7 @@
  */
 package infs2605.assignment;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,8 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
 /**
@@ -32,7 +33,19 @@ public class ProfilePageController implements Initializable {
     private SplitMenuButton Seek;
     
     @FXML
-    private MenuItem SeekaRide;
+    private TitledPane AccountInformation;
+    
+    @FXML
+    private TitledPane Addresses;
+    
+    @FXML
+    private TitledPane CarDetails;
+    
+    @FXML
+    private TitledPane LicenseDetails;
+    
+    @FXML
+    private TitledPane Payment;
     
     @FXML
     private void SignOut(ActionEvent event) throws Exception {
@@ -62,7 +75,11 @@ public class ProfilePageController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        AccountInformation.setCollapsible(false);
+        Addresses.setCollapsible(false);
+        CarDetails.setCollapsible(false);
+        LicenseDetails.setCollapsible(false);
+        Payment.setCollapsible(false);
     }    
     
 }
