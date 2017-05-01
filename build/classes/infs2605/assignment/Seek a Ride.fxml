@@ -75,7 +75,7 @@
                                                 <MenuItem mnemonicParsing="false" text="Your Seeks" />
                                              </items>
                                              <font>
-                                                <Font name="Avenir Roman" size="24.0" />
+                                                <Font name="Avenir Roman" size="22.0" />
                                              </font>
                                           </SplitMenuButton>
                                           <SplitMenuButton graphicTextGap="0.0" layoutX="6.0" layoutY="285.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #93cff2;" text="Offer" textAlignment="CENTER">
@@ -85,7 +85,7 @@
                                                 <MenuItem mnemonicParsing="false" text="Your Offers" />
                                              </items>
                                              <font>
-                                                <Font name="Avenir Roman" size="24.0" />
+                                                <Font name="Avenir Roman" size="22.0" />
                                              </font>
                                           </SplitMenuButton>
                                           <SplitMenuButton graphicTextGap="0.0" layoutX="6.0" layoutY="358.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #93cff2;" text="Matches" textAlignment="CENTER">
@@ -95,7 +95,7 @@
                                                 <MenuItem mnemonicParsing="false" text="Adjustments" />
                                              </items>
                                              <font>
-                                                <Font name="Avenir Roman" size="24.0" />
+                                                <Font name="Avenir Roman" size="22.0" />
                                              </font>
                                           </SplitMenuButton>
                                           <Button fx:id="Signout1" layoutX="29.0" layoutY="608.0" mnemonicParsing="false" onAction="#SignOut" style="-fx-background-color: #67afeb;" text="Sign Out" textAlignment="CENTER" textFill="WHITE">

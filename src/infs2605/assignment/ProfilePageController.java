@@ -79,7 +79,7 @@ public class ProfilePageController implements Initializable {
         Addresses.setCollapsible(false);
         CarDetails.setCollapsible(false);
         LicenseDetails.setCollapsible(false);
-        Payment.setCollapsible(false);
+        Payment.setCollapsible(false); 
     }    
     
 }
