@@ -11,19 +11,15 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infs2605.assignment.SeekARideController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infs2605.assignment.OfferARideController">
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -78,7 +74,7 @@
                                           <MenuButton fx:id="Seek" layoutX="4.0" layoutY="228.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Seek">
                                             <items>
                                               <MenuItem fx:id="SeekaRide" mnemonicParsing="false" onAction="#SeekARide" text="Seek a Ride" />
-                                              <MenuItem fx:id="YourSeeks" mnemonicParsing="false" onAction="#YourSeeks" text="Your Seeks" />
+                                              <MenuItem mnemonicParsing="false" onAction="#YourSeeks" text="Your Seeks" />
                                             </items>
                                              <font>
                                                 <Font name="Avenir Roman" size="20.0" />
@@ -111,7 +107,7 @@
                                                 <AnchorPane prefHeight="1750.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
                                                    <children>
                                                       <Rectangle arcHeight="5.0" fill="#67afeb" height="278.0" layoutX="41.0" layoutY="120.0" stroke="#6b4c4c00" strokeType="INSIDE" width="749.0" />
-                                                      <Label layoutX="28.0" layoutY="31.0" text="Seek a Ride" textFill="WHITE">
+                                                      <Label layoutX="28.0" layoutY="31.0" text="Offer a Ride" textFill="WHITE">
                                                          <font>
                                                             <Font name="Avenir Roman" size="52.0" />
                                                          </font>
@@ -167,28 +163,17 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TitledPane fx:id="searchResultsTitledPane" animated="false" layoutX="39.0" layoutY="485.0" prefHeight="361.0" prefWidth="752.0" style="-fx-background-color: #67afeb;" text="Search Results">
+                                                      <TextField layoutX="219.0" layoutY="342.0" prefHeight="44.0" prefWidth="182.0" promptText="Min Price $">
                                                          <font>
-                                                            <Font name="Avenir Roman" size="22.0" />
+                                                            <Font name="Avenir Roman" size="20.0" />
                                                          </font>
-                                                         <content>
-                                                            <GridPane fx:id="results" prefHeight="1089.0" prefWidth="751.0" style="-fx-background-color: #67afeb;">
-                                                              <columnConstraints>
-                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                              </columnConstraints>
-                                                              <rowConstraints>
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                              </rowConstraints>
-                                                            </GridPane>
-                                                         </content>
-                                                      </TitledPane>
-                                                      <Button fx:id="Search" layoutX="344.0" layoutY="417.0" mnemonicParsing="false" onAction="#findResults" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
+                                                      </TextField>
+                                                      <TextField layoutX="415.0" layoutY="342.0" prefHeight="44.0" prefWidth="182.0" promptText="Max Price $">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Button fx:id="Post" layoutX="346.0" layoutY="623.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: white;" text="Post" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -206,7 +191,7 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Text fill="WHITE" layoutX="425.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dropoff" textAlignment="CENTER">
+                                                      <Text fill="WHITE" layoutX="421.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dropoff" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="Avenir Roman" size="24.0" />
                                                          </font>
@@ -217,16 +202,42 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="212.0" layoutY="339.0" prefHeight="44.0" prefWidth="182.0" promptText="Min Price $">
+                                                      <Rectangle arcHeight="5.0" fill="#67afeb" height="182.0" layoutX="41.0" layoutY="422.0" stroke="#6b4c4c00" strokeType="INSIDE" width="749.0" />
+                                                      <TextField layoutX="79.0" layoutY="445.0" prefHeight="44.0" prefWidth="180.0" promptText="Car Make">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="409.0" layoutY="339.0" prefHeight="44.0" prefWidth="182.0" promptText="Max Price $">
+                                                      <TextField layoutX="79.0" layoutY="502.0" prefHeight="44.0" prefWidth="180.0" promptText="Registration">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
+                                                      <TextField layoutX="319.0" layoutY="446.0" prefHeight="44.0" prefWidth="180.0" promptText="Car Model">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField layoutX="319.0" layoutY="503.0" prefHeight="44.0" prefWidth="180.0" promptText="Number of Seats">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField layoutX="563.0" layoutY="443.0" prefHeight="44.0" prefWidth="180.0" promptText="Car Year">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField layoutX="563.0" layoutY="509.0" prefHeight="44.0" prefWidth="180.0" promptText="Colour">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Label layoutX="609.0" layoutY="567.0" text="Change Car Details" textFill="WHITE" underline="true">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="18.0" />
+                                                         </font>
+                                                      </Label>
                                                    </children>
                                                 </AnchorPane>
                                              </content>
