@@ -8,7 +8,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
@@ -78,16 +77,16 @@
                                           <Rectangle arcHeight="5.0" fill="#67afeb" height="96.0" layoutX="36.0" layoutY="32.0" stroke="#6b4c4c00" strokeType="INSIDE" width="107.0" />
                                           <MenuButton fx:id="Seek" layoutX="4.0" layoutY="228.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Seek">
                                             <items>
-                                              <MenuItem fx:id="SeekaRide" mnemonicParsing="false" text="Seek a Ride" />
-                                              <MenuItem mnemonicParsing="false" text="Your Seeks" />
+                                              <MenuItem fx:id="SeekaRide" mnemonicParsing="false" onAction="#SeekARide" text="Seek a Ride" />
+                                              <MenuItem fx:id="YourSeeks" mnemonicParsing="false" onAction="#YourSeeks" text="Your Seeks" />
                                             </items>
                                              <font>
                                                 <Font name="Avenir Roman" size="20.0" />
                                              </font>
                                           </MenuButton>
-                                          <MenuButton layoutX="4.0" layoutY="298.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Offer">
+                                          <MenuButton fx:id="Offer" layoutX="4.0" layoutY="298.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Offer">
                                              <items>
-                                                <MenuItem mnemonicParsing="false" text="Offer a Ride" />
+                                                <MenuItem fx:id="OfferaRide" mnemonicParsing="false" onAction="#OfferARide" text="Offer a Ride" />
                                                 <MenuItem mnemonicParsing="false" text="Your Offers" />
                                              </items>
                                              <font>
@@ -189,15 +188,7 @@
                                                             </GridPane>
                                                          </content>
                                                       </TitledPane>
-                                                      <RadioButton layoutX="501.0" layoutY="343.0" mnemonicParsing="false" text="One Off" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="22.0" />
-                                                         </font></RadioButton>
-                                                      <RadioButton layoutX="632.0" layoutY="343.0" mnemonicParsing="false" text="Regular" textFill="WHITE">
-                                                         <font>
-                                                            <Font size="22.0" />
-                                                         </font></RadioButton>
-                                                      <Button fx:id="Search" layoutX="344.0" layoutY="417.0" mnemonicParsing="false" onAction="#addResults" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Search" layoutX="344.0" layoutY="417.0" mnemonicParsing="false" onAction="#findResults" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -215,13 +206,23 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Text fill="WHITE" layoutX="421.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dropoff" textAlignment="CENTER">
+                                                      <Text fill="WHITE" layoutX="425.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dropoff" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="Avenir Roman" size="24.0" />
                                                          </font>
                                                       </Text>
                                                       <DatePicker layoutX="517.0" layoutY="285.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="38.0" prefWidth="126.0" promptText="  /    / " />
                                                       <TextField layoutX="656.0" layoutY="283.0" prefHeight="44.0" prefWidth="98.0" promptText="Time">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField layoutX="212.0" layoutY="339.0" prefHeight="44.0" prefWidth="182.0" promptText="Min Price $">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField layoutX="409.0" layoutY="339.0" prefHeight="44.0" prefWidth="182.0" promptText="Max Price $">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>

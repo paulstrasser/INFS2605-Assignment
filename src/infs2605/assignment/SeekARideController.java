@@ -41,10 +41,10 @@ public class SeekARideController implements Initializable {
     private Text Name;
     
     @FXML
-    private MenuButton Seek;
+    private MenuButton Seek, Offer;
     
     @FXML
-    private MenuItem SeekaRide;
+    private MenuItem SeekaRide, YourSeeks, OfferaRide;
     
     @FXML
     private GridPane results;
@@ -71,6 +71,28 @@ public class SeekARideController implements Initializable {
     }
     
     @FXML
+    private void SeekARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Seek.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Seek a Ride.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+    
+    @FXML
+    private void YourSeeks(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Seek.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Your Seeks.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+    
+    @FXML
     private void Profile(MouseEvent event) throws Exception {
 
         stage=(Stage) Name.getScene().getWindow();
@@ -81,9 +103,20 @@ public class SeekARideController implements Initializable {
     }
     
     @FXML
-    private void addResults(ActionEvent event) throws Exception {
+    private void OfferARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Offer.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Offer a Ride.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void findResults(ActionEvent event) throws Exception {
     //this method is a test done by Paul. It displays 'hello' in each grid of the gridpane.
     //Essentially, we want to show seek records in each gridPane.
+    //If no results are found, put a button there that allows user to create a new seek
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 Label test = new Label("Hello");

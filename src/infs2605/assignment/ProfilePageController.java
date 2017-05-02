@@ -35,10 +35,10 @@ public class ProfilePageController implements Initializable {
     private Button Signout;
     
     @FXML
-    private MenuButton Seek;
+    private MenuButton Seek, Offer;
     
     @FXML
-    private MenuItem SeekaRide;
+    private MenuItem SeekaRide, YourSeeks, OfferaRide;
     
     @FXML
     private TitledPane AccountInformation;
@@ -81,6 +81,27 @@ public class ProfilePageController implements Initializable {
 
         stage=(Stage) Seek.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Seek a Ride.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+    
+    @FXML
+    private void OfferARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Offer.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Offer a Ride.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void YourSeeks(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Seek.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Your Seeks.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
