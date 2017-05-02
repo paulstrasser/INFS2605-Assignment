@@ -63,7 +63,7 @@ public class SignInController implements Initializable {
         
 
         stage=(Stage) SignUp.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("Sign Up 1.fxml"));
+        root = FXMLLoader.load(getClass().getResource("Seek a Ride.fxml")); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

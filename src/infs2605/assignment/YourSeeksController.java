@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
@@ -28,34 +28,32 @@ import javafx.stage.Stage;
  *
  * @author paulstrasser
  */
-public class SeekARideController implements Initializable {
+public class YourSeeksController implements Initializable {
 
     @FXML
     Stage stage;
     Parent root;
     
     @FXML
-    private Button Signout, Search;
+    private Text Name;
     
     @FXML
-    private Text Name;
+    private Button Signout;
     
     @FXML
     private MenuButton Seek, Offer;
     
     @FXML
     private MenuItem SeekaRide, YourSeeks, OfferaRide;
-    
+     
     @FXML
-    private GridPane results;
+    private ListView yourSeeksList;
     
-    @FXML
-    private TitledPane searchResultsTitledPane;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Makes the 'Results' TitledPane not collapseable 
-        searchResultsTitledPane.setCollapsible(false); 
+        //Add code here that feeds data into the listview
+        
     
     } 
     
@@ -68,6 +66,16 @@ public class SeekARideController implements Initializable {
         stage.setScene(scene);
         stage.show();
         
+    }
+    
+    @FXML
+    private void Profile(MouseEvent event) throws Exception {
+
+        stage=(Stage) Name.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Profile Page.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
     @FXML
@@ -93,16 +101,6 @@ public class SeekARideController implements Initializable {
     }
     
     @FXML
-    private void Profile(MouseEvent event) throws Exception {
-
-        stage=(Stage) Name.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("Profile Page.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    @FXML
     private void OfferARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
 
         stage=(Stage) Offer.getScene().getWindow();
@@ -111,23 +109,4 @@ public class SeekARideController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-    @FXML
-    private void findResults(ActionEvent event) throws Exception {
-    //this method is a test done by Paul. It displays 'hello' in each grid of the gridpane.
-    //Essentially, we want to show seek records in each gridPane.
-    //If no results are found, put a button there that allows user to create a new seek
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                Label test = new Label("Hello");
-                results.add(test,i,j);
-            }
-        }
-    }
-    
-    
-    
-    
-       
-    
 }
