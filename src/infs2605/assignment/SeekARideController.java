@@ -27,6 +27,7 @@ import javafx.stage.Stage;
  * FXML Controller class
  *
  * @author paulstrasser
+ * @author EdHopkins
  */
 public class SeekARideController implements Initializable {
 
