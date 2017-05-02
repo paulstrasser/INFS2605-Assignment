@@ -15,7 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
 import javafx.stage.Stage;
 
@@ -27,10 +28,17 @@ import javafx.stage.Stage;
 public class ProfilePageController implements Initializable {
 
     @FXML
+    Stage stage;
+    Parent root;
+    
+    @FXML
     private Button Signout;
     
-    @FXML 
-    private SplitMenuButton Seek;
+    @FXML
+    private MenuButton Seek;
+    
+    @FXML
+    private MenuItem SeekaRide;
     
     @FXML
     private TitledPane AccountInformation;
@@ -47,11 +55,19 @@ public class ProfilePageController implements Initializable {
     @FXML
     private TitledPane Payment;
     
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        //Makes all the titledPanes not able to be collapsed
+        AccountInformation.setCollapsible(false);
+        Addresses.setCollapsible(false);
+        CarDetails.setCollapsible(false);
+        LicenseDetails.setCollapsible(false);
+        Payment.setCollapsible(false); 
+    }   
+    
     @FXML
-    private void SignOut(ActionEvent event) throws Exception {
-        Stage stage;
-        Parent root;
-        
+    private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
+
         stage=(Stage) Signout.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Sign In.fxml"));
         Scene scene = new Scene(root);
@@ -61,10 +77,8 @@ public class ProfilePageController implements Initializable {
     }
     
     @FXML
-    private void SeekARide(ActionEvent event) throws Exception {
-        Stage stage;
-        Parent root;
-        
+    private void SeekARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
         stage=(Stage) Seek.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Seek a Ride.fxml"));
         Scene scene = new Scene(root);
@@ -73,13 +87,6 @@ public class ProfilePageController implements Initializable {
         
     }
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        AccountInformation.setCollapsible(false);
-        Addresses.setCollapsible(false);
-        CarDetails.setCollapsible(false);
-        LicenseDetails.setCollapsible(false);
-        Payment.setCollapsible(false); 
-    }    
+     
     
 }

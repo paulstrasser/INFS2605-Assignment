@@ -25,6 +25,10 @@ import javafx.stage.Stage;
 public class SignUp4Controller implements Initializable {
 
     @FXML
+    Stage stage;
+    Parent root;
+    
+    @FXML
     public ImageView home;
     
     @FXML 
@@ -50,9 +54,7 @@ public class SignUp4Controller implements Initializable {
     
     @FXML
     public void homeButton(MouseEvent event) throws Exception {
-        Stage stage;
-        Parent root;
-        
+ 
         stage=(Stage) home.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
         Scene scene = new Scene(root);
@@ -62,9 +64,7 @@ public class SignUp4Controller implements Initializable {
     
     @FXML
     public void leftOrRight(MouseEvent event) throws Exception {
-        Stage stage;
-        Parent root;
-        
+  
         if (event.getSource()==right) {
             stage=(Stage) right.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("Sign Up 5.fxml"));
@@ -84,9 +84,7 @@ public class SignUp4Controller implements Initializable {
     
     @FXML
     public void circles(MouseEvent event) throws Exception {
-        Stage stage;
-        Parent root;
-        
+  
         if (event.getSource()==beginCircle) {
             stage=(Stage) beginCircle.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("Sign Up 1.fxml"));

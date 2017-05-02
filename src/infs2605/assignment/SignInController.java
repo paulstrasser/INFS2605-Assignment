@@ -29,7 +29,11 @@ import javafx.stage.Stage;
 public class SignInController implements Initializable {
     
     @FXML
-    private Button SignUp;
+    Stage stage;
+    Parent root;
+
+    @FXML
+    private Button SignUp, SignIn;
     
     @FXML 
     private ImageView home;
@@ -42,8 +46,7 @@ public class SignInController implements Initializable {
 
     @FXML
     private void SignUpButton(ActionEvent event) throws Exception{
-        Stage stage;
-        Parent root;
+
         
         stage=(Stage) SignUp.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Sign Up 1.fxml"));
@@ -54,10 +57,22 @@ public class SignInController implements Initializable {
     }
     
     @FXML
-    private void homeButton(MouseEvent event) throws Exception {
-        Stage stage;
-        Parent root;
+    private void SignInButton(ActionEvent event) throws Exception{
+        //Should be an if statement here that says if the inputted username and password match to one in the database, grant access to application. Need to check usertype first to determine which screen to go to e.g.Seeker goes to 'Seek a Ride' screen 
+        //if no match, display a label that says 'Couldnt login'
         
+
+        stage=(Stage) SignUp.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Sign Up 1.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+ 
+    }
+    
+    @FXML
+    private void homeButton(MouseEvent event) throws Exception {
+
         stage=(Stage) home.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Welcome.fxml"));
         Scene scene = new Scene(root);

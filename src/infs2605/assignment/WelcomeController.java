@@ -27,12 +27,11 @@ public class WelcomeController implements Initializable {
     
     @FXML
     private Button welcome;
+    Stage stage;
+    Parent root;
 
     @FXML
-    private void welcomeButton(ActionEvent event) throws Exception{
-        Stage stage;
-        Parent root;
-       
+    private void welcomeButton(ActionEvent event) throws Exception{ //Goes from Welcome Screen to Sign In Screen
         stage=(Stage) welcome.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Sign In.fxml"));
         Scene scene = new Scene(root);

@@ -7,12 +7,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -62,52 +61,51 @@
                            <children>
                               <SplitPane dividerPositions="0.1873015873015873" layoutX="95.0" layoutY="-14.0" prefHeight="361.0" prefWidth="632.0" style="-fx-background-color: #93cff2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
                                 <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
                                           <Text fill="WHITE" layoutX="29.0" layoutY="159.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="John Smith" textAlignment="CENTER">
                                              <font>
                                                 <Font name="Avenir Roman" size="24.0" />
                                              </font>
                                           </Text>
-                                          <SplitMenuButton graphicTextGap="0.0" layoutX="6.0" layoutY="212.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #93cff2;" text="Seek" textAlignment="CENTER">
-                                            <items>
-                                              <MenuItem fx:id="Seek" mnemonicParsing="false" onAction="#SeekARide" text="Seek a Ride" />
-                                                <SeparatorMenuItem mnemonicParsing="false" />
-                                                <MenuItem mnemonicParsing="false" text="Your Seeks" />
-                                            </items>
-                                             <font>
-                                                <Font name="Avenir Roman" size="22.0" />
-                                             </font>
-                                          </SplitMenuButton>
-                                          <SplitMenuButton graphicTextGap="0.0" layoutX="6.0" layoutY="285.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #93cff2;" text="Offer" textAlignment="CENTER">
-                                             <items>
-                                                <MenuItem mnemonicParsing="false" text="Offer a Ride" />
-                                                <SeparatorMenuItem mnemonicParsing="false" />
-                                                <MenuItem mnemonicParsing="false" text="Your Offers" />
-                                             </items>
-                                             <font>
-                                                <Font name="Avenir Roman" size="22.0" />
-                                             </font>
-                                          </SplitMenuButton>
-                                          <SplitMenuButton graphicTextGap="0.0" layoutX="6.0" layoutY="358.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #93cff2;" text="Matches" textAlignment="CENTER">
-                                             <items>
-                                                <MenuItem mnemonicParsing="false" text="Agreement Requests" />
-                                                <SeparatorMenuItem mnemonicParsing="false" />
-                                                <MenuItem mnemonicParsing="false" text="Adjustments" />
-                                             </items>
-                                             <font>
-                                                <Font name="Avenir Roman" size="22.0" />
-                                             </font>
-                                          </SplitMenuButton>
                                           <Button fx:id="Signout" layoutX="29.0" layoutY="608.0" mnemonicParsing="false" onAction="#SignOut" style="-fx-background-color: #67afeb;" text="Sign Out" textAlignment="CENTER" textFill="WHITE">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                              <font>
                                                 <Font size="24.0" />
-                                             </font></Button>
+                                             </font>
+                                          </Button>
                                           <Rectangle arcHeight="5.0" fill="#67afeb" height="96.0" layoutX="36.0" layoutY="32.0" stroke="#6b4c4c00" strokeType="INSIDE" width="107.0" />
-                                       </children></AnchorPane>
+                                          <MenuButton fx:id="Seek" layoutX="4.0" layoutY="228.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Seek">
+                                             <items>
+                                                <MenuItem fx:id="SeekaRide" mnemonicParsing="false" onAction="#SeekARide" text="Seek a Ride" />
+                                                <MenuItem mnemonicParsing="false" text="Your Seeks" />
+                                             </items>
+                                             <font>
+                                                <Font name="Avenir Roman" size="20.0" />
+                                             </font>
+                                          </MenuButton>
+                                          <MenuButton layoutX="4.0" layoutY="298.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Offer">
+                                             <items>
+                                                <MenuItem mnemonicParsing="false" text="Offer a Ride" />
+                                                <MenuItem mnemonicParsing="false" text="Your Offers" />
+                                             </items>
+                                             <font>
+                                                <Font name="Avenir Roman" size="20.0" />
+                                             </font>
+                                          </MenuButton>
+                                          <MenuButton layoutX="4.0" layoutY="368.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Matches">
+                                             <items>
+                                                <MenuItem mnemonicParsing="false" text="Agreement Requests" />
+                                                <MenuItem mnemonicParsing="false" text="Adjustments" />
+                                             </items>
+                                             <font>
+                                                <Font name="Avenir Roman" size="20.0" />
+                                             </font>
+                                          </MenuButton>
+                                       </children>
+                                    </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #93cff2;">
                                        <children>
                                           <ScrollPane hbarPolicy="NEVER" prefHeight="361.0" prefWidth="508.0" style="-fx-background-color: #93cff2;" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -191,7 +189,7 @@
                                                             <Font name="Avenir Roman" size="13.0" />
                                                          </font>
                                                       </Label>
-                                                      <TitledPane animated="false" layoutX="18.0" layoutY="300.0" prefHeight="178.0" prefWidth="785.0" text="Account Information">
+                                                      <TitledPane fx:id="AccountInformation" animated="false" layoutX="18.0" layoutY="300.0" prefHeight="178.0" prefWidth="785.0" text="Account Information">
                                                         <content>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="76.0" prefWidth="451.0" style="-fx-background-color: #67afeb;">
                                                                <children>
@@ -266,7 +264,7 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </TitledPane>
-                                                      <TitledPane animated="false" layoutX="19.0" layoutY="500.0" prefHeight="173.0" prefWidth="783.0" text="Addresses">
+                                                      <TitledPane fx:id="Addresses" animated="false" layoutX="19.0" layoutY="500.0" prefHeight="173.0" prefWidth="783.0" text="Addresses">
                                                          <content>
                                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="76.0" prefWidth="451.0" style="-fx-background-color: #67afeb;">
                                                                <children>
@@ -376,7 +374,7 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </TitledPane>
-                                                      <TitledPane animated="false" layoutX="18.0" layoutY="750.0" prefHeight="157.0" prefWidth="372.0" text="Car Details">
+                                                      <TitledPane fx:id="CarDetails" animated="false" layoutX="18.0" layoutY="750.0" prefHeight="157.0" prefWidth="372.0" text="Car Details">
                                                          <content>
                                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="78.0" prefWidth="214.0" style="-fx-background-color: #67afeb;" />
                                                          </content>
@@ -384,7 +382,7 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </TitledPane>
-                                                      <TitledPane animated="false" layoutX="431.0" layoutY="750.0" prefHeight="157.0" prefWidth="372.0" text="License Details">
+                                                      <TitledPane fx:id="LicenseDetails" animated="false" layoutX="431.0" layoutY="750.0" prefHeight="157.0" prefWidth="372.0" text="License Details">
                                                          <content>
                                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="89.0" prefWidth="370.0" style="-fx-background-color: #67afeb;" />
                                                          </content>
@@ -392,7 +390,7 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </TitledPane>
-                                                      <TitledPane animated="false" layoutX="13.0" layoutY="950.0" prefHeight="166.0" prefWidth="785.0" text="Payment">
+                                                      <TitledPane fx:id="Payment" animated="false" layoutX="13.0" layoutY="950.0" prefHeight="166.0" prefWidth="785.0" text="Payment">
                                                          <content>
                                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="76.0" prefWidth="451.0" style="-fx-background-color: #67afeb;" />
                                                          </content>
