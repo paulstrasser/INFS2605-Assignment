@@ -15,7 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
+import java.sql.*;
 import javafx.stage.Stage;
 
 /**
@@ -32,6 +32,9 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void welcomeButton(ActionEvent event) throws Exception{ //Goes from Welcome Screen to Sign In Screen
+        DBController thisTest = new DBController();
+        System.out.println(thisTest.returnName(1));
+        
         stage=(Stage) welcome.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Sign In.fxml"));
         Scene scene = new Scene(root);
