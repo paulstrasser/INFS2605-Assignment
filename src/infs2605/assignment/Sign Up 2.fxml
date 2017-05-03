@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -104,7 +105,7 @@
                         <Font name="Avenir Heavy" size="18.0" />
                      </font>
                   </Label>
-                  <Label accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="418.0" layoutY="323.0" prefHeight="52.0" prefWidth="224.0" text="Type Of User" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                  <Label accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="417.0" layoutY="343.0" prefHeight="52.0" prefWidth="224.0" text="Type Of User" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -134,21 +135,53 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <TabPane layoutX="273.0" layoutY="379.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="260.0" prefWidth="497.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane layoutX="271.0" layoutY="408.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="203.0" prefWidth="497.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
-                        <Tab text="Seeker">
+                        <Tab text="Normal Member">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="496.0" style="-fx-background-color: #67afeb;" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="496.0" style="-fx-background-color: #67afeb;">
+                                 <children>
+                                    <RadioButton layoutX="193.0" layoutY="52.0" mnemonicParsing="false" text="Seek" textFill="WHITE">
+                                       <font>
+                                          <Font name="Avenir Roman" size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <RadioButton layoutX="193.0" layoutY="89.0" mnemonicParsing="false" text="Offer" textFill="WHITE">
+                                       <font>
+                                          <Font name="Avenir Roman" size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <RadioButton layoutX="193.0" layoutY="127.0" mnemonicParsing="false" text="Both Seek and Offer" textFill="WHITE">
+                                       <font>
+                                          <Font name="Avenir Roman" size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                    <Label accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="117.0" layoutY="-1.0" prefHeight="52.0" prefWidth="242.0" text="I want to be able to:" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Avenir Roman" size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Offerer">
+                        <Tab text="Corporate Member">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #67afeb;" />
                            </content>
                         </Tab>
-                        <Tab text="Both Seek &amp; Offer">
+                        <Tab text="Staff">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #67afeb;" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #67afeb;">
+                                 <children>
+                                    <RadioButton layoutX="214.0" layoutY="75.0" mnemonicParsing="false" text="Staff" textFill="WHITE">
+                                       <font>
+                                          <Font name="Avenir Roman" size="18.0" />
+                                       </font>
+                                    </RadioButton>
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                      </tabs>

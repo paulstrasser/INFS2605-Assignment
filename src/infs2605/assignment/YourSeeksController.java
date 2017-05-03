@@ -17,9 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -41,10 +39,16 @@ public class YourSeeksController implements Initializable {
     private Button Signout;
     
     @FXML
-    private MenuButton Seek, Offer;
+    private MenuButton Seek, Offer, Matches;
     
     @FXML
-    private MenuItem SeekaRide, YourSeeks, OfferaRide;
+    private MenuItem SeekaRide, YourSeeks, OfferaRide, YourOffers;
+    
+    @FXML
+    private MenuItem AdjustmentRequests;
+    
+    @FXML
+    private MenuItem AgreementRequests;
      
     @FXML
     private ListView yourSeeksList;
@@ -105,6 +109,36 @@ public class YourSeeksController implements Initializable {
 
         stage=(Stage) Offer.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Offer a Ride.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void YourOffers(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Offer.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Your Offers.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void AgreementRequests(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Matches.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Agreement Requests.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void AdjustmentRequests(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Matches.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Adjustment Requests.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

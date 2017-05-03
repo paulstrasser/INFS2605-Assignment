@@ -41,10 +41,13 @@ public class SeekARideController implements Initializable {
     private Text Name;
     
     @FXML
-    private MenuButton Seek, Offer;
+    private MenuButton Seek, Offer, Matches;
     
     @FXML
-    private MenuItem SeekaRide, YourSeeks, OfferaRide;
+    private MenuItem SeekaRide, YourSeeks, OfferaRide, YourOffers, AgreementRequests;
+    
+    @FXML
+    private MenuItem AdjustmentRequests;;
     
     @FXML
     private GridPane results;
@@ -111,6 +114,37 @@ public class SeekARideController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @FXML
+    private void YourOffers(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Offer.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Your Offers.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void AgreementRequests(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Matches.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Agreement Requests.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    @FXML
+    private void AdjustmentRequests(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Matches.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Adjustment Requests.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+   
     
     @FXML
     private void findResults(ActionEvent event) throws Exception {
