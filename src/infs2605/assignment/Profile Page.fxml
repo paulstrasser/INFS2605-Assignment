@@ -81,7 +81,7 @@
                                           <MenuButton fx:id="Seek" layoutX="4.0" layoutY="228.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Seek">
                                              <items>
                                                 <MenuItem fx:id="SeekaRide" mnemonicParsing="false" onAction="#SeekARide" text="Seek a Ride" />
-                                                <MenuItem mnemonicParsing="false" text="Your Seeks" />
+                                                <MenuItem fx:id="YourSeeks" mnemonicParsing="false" onAction="#YourSeeks" text="Your Seeks" />
                                              </items>
                                              <font>
                                                 <Font name="Avenir Roman" size="20.0" />
@@ -90,16 +90,16 @@
                                           <MenuButton fx:id="Offer" layoutX="4.0" layoutY="298.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Offer">
                                              <items>
                                                 <MenuItem fx:id="OfferaRide" mnemonicParsing="false" onAction="#OfferARide" text="Offer a Ride" />
-                                                <MenuItem mnemonicParsing="false" text="Your Offers" />
+                                                <MenuItem fx:id="YourOffers" mnemonicParsing="false" onAction="#YourOffers" text="Your Offers" />
                                              </items>
                                              <font>
                                                 <Font name="Avenir Roman" size="20.0" />
                                              </font>
                                           </MenuButton>
-                                          <MenuButton layoutX="4.0" layoutY="368.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Matches">
+                                          <MenuButton fx:id="Matches" layoutX="4.0" layoutY="368.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Matches">
                                              <items>
-                                                <MenuItem mnemonicParsing="false" text="Agreement Requests" />
-                                                <MenuItem mnemonicParsing="false" text="Adjustments" />
+                                                <MenuItem fx:id="AgreementtRequests" mnemonicParsing="false" onAction="#AgreementRequests" text="Agreement Requests" />
+                                                <MenuItem fx:id="AdjustmentRequests" mnemonicParsing="false" onAction="#AdjustmentRequests" text="Adjustments" />
                                              </items>
                                              <font>
                                                 <Font name="Avenir Roman" size="20.0" />

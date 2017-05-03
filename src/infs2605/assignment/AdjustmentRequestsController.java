@@ -5,7 +5,6 @@
  */
 package infs2605.assignment;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -15,9 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -25,11 +26,14 @@ import javafx.stage.Stage;
  *
  * @author paulstrasser
  */
-public class ProfilePageController implements Initializable {
+public class AdjustmentRequestsController implements Initializable {
 
     @FXML
     Stage stage;
     Parent root;
+    
+    @FXML
+    private Text Name;
     
     @FXML
     private Button Signout;
@@ -38,44 +42,27 @@ public class ProfilePageController implements Initializable {
     private MenuButton Seek, Offer, Matches;
     
     @FXML
-    private MenuItem SeekaRide, OfferaRide;
-    
-    @FXML
-    private MenuItem YourSeeks, YourOffers;
-    
-    @FXML
-    private MenuItem AgreementtRequests;
-    
+    private MenuItem SeekaRide, YourSeeks, OfferaRide, YourOffers;
+     
     @FXML
     private MenuItem AdjustmentRequests;
     
     @FXML
-    private TitledPane AccountInformation;
+    private MenuItem AgreementRequests;
     
     @FXML
-    private TitledPane Addresses;
+    private ListView AdjustmentRequestsList;
     
-    @FXML
-    private TitledPane CarDetails;
-    
-    @FXML
-    private TitledPane LicenseDetails;
-    
-    @FXML
-    private TitledPane Payment;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Makes all the titledPanes not able to be collapsed
-        AccountInformation.setCollapsible(false);
-        Addresses.setCollapsible(false);
-        CarDetails.setCollapsible(false);
-        LicenseDetails.setCollapsible(false);
-        Payment.setCollapsible(false); 
-    }   
+        //Add code here that feeds data into the listview
+        
+    
+    } 
     
     @FXML
-    private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
+    private void SignOut(ActionEvent event) throws Exception {
 
         stage=(Stage) Signout.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Sign In.fxml"));
@@ -83,6 +70,16 @@ public class ProfilePageController implements Initializable {
         stage.setScene(scene);
         stage.show();
         
+    }
+    
+    @FXML
+    private void Profile(MouseEvent event) throws Exception {
+
+        stage=(Stage) Name.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Profile Page.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
     @FXML
@@ -97,17 +94,7 @@ public class ProfilePageController implements Initializable {
     }
     
     @FXML
-    private void OfferARide(ActionEvent event) throws Exception { //Goes to 'Offer a Ride' screen
-
-        stage=(Stage) Offer.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("Offer a Ride.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    @FXML
-    private void YourSeeks(ActionEvent event) throws Exception { //Goes to 'Your Seeks' screen
+    private void YourSeeks(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
 
         stage=(Stage) Seek.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Your Seeks.fxml"));
@@ -115,6 +102,16 @@ public class ProfilePageController implements Initializable {
         stage.setScene(scene);
         stage.show();
         
+    }
+    
+    @FXML
+    private void OfferARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+
+        stage=(Stage) Offer.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Offer a Ride.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
     @FXML
@@ -146,7 +143,6 @@ public class ProfilePageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-     
-    
 }
+
+
