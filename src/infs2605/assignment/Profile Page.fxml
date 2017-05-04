@@ -275,56 +275,12 @@
                                                                         <Font name="Avenir Roman" size="24.0" />
                                                                      </font>
                                                                   </Text>
-                                                                  <TextField layoutX="474.0" layoutY="13.0" prefHeight="44.0" prefWidth="101.0" promptText="Num">
-                                                                     <font>
-                                                                        <Font name="Avenir Roman" size="20.0" />
-                                                                     </font>
-                                                                     <opaqueInsets>
-                                                                        <Insets />
-                                                                     </opaqueInsets>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="TEXT" />
-                                                                     </cursor>
-                                                                  </TextField>
-                                                                  <TextField layoutX="587.0" layoutY="13.0" prefHeight="44.0" prefWidth="171.0" promptText="Street ">
-                                                                     <font>
-                                                                        <Font name="Avenir Roman" size="20.0" />
-                                                                     </font>
-                                                                     <opaqueInsets>
-                                                                        <Insets />
-                                                                     </opaqueInsets>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="TEXT" />
-                                                                     </cursor>
-                                                                  </TextField>
-                                                                  <TextField layoutX="475.0" layoutY="66.0" prefHeight="44.0" prefWidth="168.0" promptText="Suburb">
-                                                                     <font>
-                                                                        <Font name="Avenir Roman" size="20.0" />
-                                                                     </font>
-                                                                     <opaqueInsets>
-                                                                        <Insets />
-                                                                     </opaqueInsets>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="TEXT" />
-                                                                     </cursor>
-                                                                  </TextField>
-                                                                  <TextField layoutX="658.0" layoutY="66.0" prefHeight="44.0" prefWidth="100.0" promptText="PCode ">
-                                                                     <font>
-                                                                        <Font name="Avenir Roman" size="20.0" />
-                                                                     </font>
-                                                                     <opaqueInsets>
-                                                                        <Insets />
-                                                                     </opaqueInsets>
-                                                                     <cursor>
-                                                                        <Cursor fx:constant="TEXT" />
-                                                                     </cursor>
-                                                                  </TextField>
                                                                   <Text fill="WHITE" layoutX="10.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Home" textAlignment="CENTER" wrappingWidth="68.99999510496855">
                                                                      <font>
                                                                         <Font name="Avenir Roman" size="24.0" />
                                                                      </font>
                                                                   </Text>
-                                                                  <TextField layoutX="87.0" layoutY="13.0" prefHeight="44.0" prefWidth="101.0" promptText="Num">
+                                                                  <TextField layoutX="87.0" layoutY="13.0" prefHeight="44.0" prefWidth="73.0" promptText="Num">
                                                                      <font>
                                                                         <Font name="Avenir Roman" size="20.0" />
                                                                      </font>
@@ -335,7 +291,7 @@
                                                                         <Cursor fx:constant="TEXT" />
                                                                      </cursor>
                                                                   </TextField>
-                                                                  <TextField layoutX="195.0" layoutY="13.0" prefHeight="44.0" prefWidth="171.0" promptText="Street ">
+                                                                  <TextField layoutX="168.0" layoutY="13.0" prefHeight="44.0" prefWidth="198.0" promptText="Street ">
                                                                      <font>
                                                                         <Font name="Avenir Roman" size="20.0" />
                                                                      </font>
@@ -346,7 +302,7 @@
                                                                         <Cursor fx:constant="TEXT" />
                                                                      </cursor>
                                                                   </TextField>
-                                                                  <TextField layoutX="87.0" layoutY="66.0" prefHeight="44.0" prefWidth="168.0" promptText="Suburb">
+                                                                  <TextField layoutX="87.0" layoutY="66.0" prefHeight="44.0" prefWidth="86.0" promptText="Suburb">
                                                                      <font>
                                                                         <Font name="Avenir Roman" size="20.0" />
                                                                      </font>
@@ -357,7 +313,73 @@
                                                                         <Cursor fx:constant="TEXT" />
                                                                      </cursor>
                                                                   </TextField>
-                                                                  <TextField layoutX="266.0" layoutY="66.0" prefHeight="44.0" prefWidth="100.0" promptText="PCode ">
+                                                                  <TextField layoutX="280.0" layoutY="66.0" prefHeight="44.0" prefWidth="86.0" promptText="PCode">
+                                                                     <font>
+                                                                        <Font name="Avenir Roman" size="20.0" />
+                                                                     </font>
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="TEXT" />
+                                                                     </cursor>
+                                                                  </TextField>
+                                                                  <TextField layoutX="183.0" layoutY="66.0" prefHeight="44.0" prefWidth="86.0" promptText="City">
+                                                                     <font>
+                                                                        <Font name="Avenir Roman" size="20.0" />
+                                                                     </font>
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="TEXT" />
+                                                                     </cursor>
+                                                                  </TextField>
+                                                                  <TextField layoutX="479.0" layoutY="13.0" prefHeight="44.0" prefWidth="73.0" promptText="Num">
+                                                                     <font>
+                                                                        <Font name="Avenir Roman" size="20.0" />
+                                                                     </font>
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="TEXT" />
+                                                                     </cursor>
+                                                                  </TextField>
+                                                                  <TextField layoutX="560.0" layoutY="13.0" prefHeight="44.0" prefWidth="198.0" promptText="Street ">
+                                                                     <font>
+                                                                        <Font name="Avenir Roman" size="20.0" />
+                                                                     </font>
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="TEXT" />
+                                                                     </cursor>
+                                                                  </TextField>
+                                                                  <TextField layoutX="479.0" layoutY="66.0" prefHeight="44.0" prefWidth="86.0" promptText="Suburb">
+                                                                     <font>
+                                                                        <Font name="Avenir Roman" size="20.0" />
+                                                                     </font>
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="TEXT" />
+                                                                     </cursor>
+                                                                  </TextField>
+                                                                  <TextField layoutX="672.0" layoutY="66.0" prefHeight="44.0" prefWidth="86.0" promptText="PCode">
+                                                                     <font>
+                                                                        <Font name="Avenir Roman" size="20.0" />
+                                                                     </font>
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="TEXT" />
+                                                                     </cursor>
+                                                                  </TextField>
+                                                                  <TextField layoutX="575.0" layoutY="66.0" prefHeight="44.0" prefWidth="86.0" promptText="City">
                                                                      <font>
                                                                         <Font name="Avenir Roman" size="20.0" />
                                                                      </font>
@@ -379,7 +401,7 @@
                                                          <content>
                                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="370.0" style="-fx-background-color: #67afeb;">
                                                                <children>
-                                                                  <TextField layoutX="45.0" layoutY="17.0" prefHeight="44.0" prefWidth="291.0" promptText="Rego" style="-fx-background-color: white;">
+                                                                  <TextField layoutX="45.0" layoutY="17.0" prefHeight="44.0" prefWidth="291.0" promptText="Registration" style="-fx-background-color: white;">
                                                                      <font>
                                                                         <Font name="Avenir Roman" size="20.0" />
                                                                      </font>
@@ -435,7 +457,7 @@
                                                          <content>
                                                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="89.0" prefWidth="370.0" style="-fx-background-color: #67afeb;">
                                                                <children>
-                                                                  <TextField layoutX="64.0" layoutY="18.0" prefHeight="44.0" prefWidth="250.0" promptText="Rego" style="-fx-background-color: white;">
+                                                                  <TextField layoutX="64.0" layoutY="18.0" prefHeight="44.0" prefWidth="250.0" promptText="License Number" style="-fx-background-color: white;">
                                                                      <font>
                                                                         <Font name="Avenir Roman" size="20.0" />
                                                                      </font>
