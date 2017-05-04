@@ -49,8 +49,7 @@ public class SeekARideController implements Initializable {
     @FXML
     private MenuItem AdjustmentRequests;;
     
-    @FXML
-    private GridPane results;
+    
     
     @FXML
     private TitledPane searchResultsTitledPane;
@@ -146,7 +145,7 @@ public class SeekARideController implements Initializable {
     }
    
     
-    @FXML
+    /*@FXML
     private void findResults(ActionEvent event) throws Exception {
     //this method is a test done by Paul. It displays 'hello' in each grid of the gridpane.
     //Essentially, we want to show seek records in each gridPane.
@@ -157,7 +156,7 @@ public class SeekARideController implements Initializable {
                 results.add(test,i,j);
             }
         }
-    }
+    }*/
     
     
     
