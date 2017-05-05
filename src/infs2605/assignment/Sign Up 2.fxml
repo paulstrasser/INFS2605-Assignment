@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -195,7 +196,21 @@
                         </Tab>
                         <Tab text="                  License Details                      ">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #67afeb;" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #67afeb;">
+                                 <children>
+                                    <TextField layoutX="124.0" layoutY="26.0" prefHeight="44.0" prefWidth="250.0" promptText="License Number" style="-fx-background-color: white;">
+                                       <font>
+                                          <Font name="Avenir Roman" size="20.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
+                                    </TextField>
+                                    <DatePicker layoutX="125.0" layoutY="97.0" prefHeight="49.0" prefWidth="250.0" promptText="Expiry Date" />
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                      </tabs>
