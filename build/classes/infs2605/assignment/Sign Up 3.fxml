@@ -136,22 +136,17 @@
                      </cursor>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#67afebe5" height="109.0" layoutX="293.0" layoutY="392.0" stroke="#3088c300" strokeType="INSIDE" width="460.0" />
-                  <PasswordField alignment="CENTER" layoutX="479.0" layoutY="403.0" prefHeight="35.0" prefWidth="249.0" promptText="Street Name">
+                  <PasswordField alignment="CENTER" layoutX="422.0" layoutY="403.0" prefHeight="35.0" prefWidth="306.0" promptText="Street Name">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </PasswordField>
-                  <TextField alignment="CENTER" layoutX="318.0" layoutY="403.0" prefHeight="35.0" prefWidth="140.0" promptText="Number">
+                  <TextField alignment="CENTER" layoutX="318.0" layoutY="403.0" prefHeight="35.0" prefWidth="94.0" promptText="Number">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <PasswordField alignment="CENTER" layoutX="584.0" layoutY="452.0" prefHeight="35.0" prefWidth="143.0" promptText="Post Code">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </PasswordField>
-                  <TextField alignment="CENTER" layoutX="318.0" layoutY="452.0" prefHeight="35.0" prefWidth="249.0" promptText="Suburb">
+                  <TextField alignment="CENTER" layoutX="318.0" layoutY="452.0" prefHeight="35.0" prefWidth="129.0" promptText="Suburb">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -162,31 +157,46 @@
                      </font>
                   </Label>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#67afebe5" height="108.0" layoutX="291.0" layoutY="534.0" stroke="#3088c300" strokeType="INSIDE" width="460.0" />
-                  <PasswordField alignment="CENTER" layoutX="477.0" layoutY="546.0" prefHeight="35.0" prefWidth="249.0" promptText="Street Name">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </PasswordField>
-                  <TextField alignment="CENTER" layoutX="316.0" layoutY="546.0" prefHeight="35.0" prefWidth="140.0" promptText="Number">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <PasswordField alignment="CENTER" layoutX="582.0" layoutY="593.0" prefHeight="35.0" prefWidth="143.0" promptText="Post Code">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </PasswordField>
-                  <TextField alignment="CENTER" layoutX="316.0" layoutY="593.0" prefHeight="35.0" prefWidth="249.0" promptText="Suburb">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
                   <Label layoutX="294.0" layoutY="506.0" text="Work Address" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="Avenir Roman" size="18.0" />
                      </font>
                   </Label>
+                  <TextField alignment="CENTER" layoutX="457.0" layoutY="452.0" prefHeight="35.0" prefWidth="129.0" promptText="City">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField alignment="CENTER" layoutX="599.0" layoutY="452.0" prefHeight="35.0" prefWidth="129.0" promptText="PostCode">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField alignment="CENTER" layoutX="421.0" layoutY="546.0" prefHeight="35.0" prefWidth="306.0" promptText="Street Name">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </PasswordField>
+                  <TextField alignment="CENTER" layoutX="317.0" layoutY="546.0" prefHeight="35.0" prefWidth="94.0" promptText="Number">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField alignment="CENTER" layoutX="317.0" layoutY="595.0" prefHeight="35.0" prefWidth="129.0" promptText="Suburb">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField alignment="CENTER" layoutX="456.0" layoutY="595.0" prefHeight="35.0" prefWidth="129.0" promptText="City">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField alignment="CENTER" layoutX="598.0" layoutY="595.0" prefHeight="35.0" prefWidth="129.0" promptText="PostCode">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="35.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="160.0">

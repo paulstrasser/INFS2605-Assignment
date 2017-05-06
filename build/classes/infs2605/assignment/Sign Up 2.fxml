@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -104,7 +108,7 @@
                         <Font name="Avenir Heavy" size="18.0" />
                      </font>
                   </Label>
-                  <Label accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="418.0" layoutY="323.0" prefHeight="52.0" prefWidth="224.0" text="Type Of User" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
+                  <Label accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="417.0" layoutY="317.0" prefHeight="52.0" prefWidth="224.0" text="Type Of User" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -134,25 +138,89 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <TabPane layoutX="273.0" layoutY="379.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="260.0" prefWidth="497.0" tabClosingPolicy="UNAVAILABLE">
+                  <TabPane layoutX="272.0" layoutY="417.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="203.0" prefWidth="497.0" tabClosingPolicy="UNAVAILABLE">
                      <tabs>
-                        <Tab text="Seeker">
+                        <Tab text="                      Car Details                      ">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="496.0" style="-fx-background-color: #67afeb;" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="496.0" style="-fx-background-color: #67afeb;">
+                                 <children>
+                                    <TextField layoutX="39.0" layoutY="13.0" prefHeight="22.0" prefWidth="173.0" promptText="Registration" style="-fx-background-color: white;">
+                                       <font>
+                                          <Font name="Avenir Roman" size="18.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
+                                    </TextField>
+                                    <TextField layoutX="38.0" layoutY="60.0" prefHeight="44.0" prefWidth="175.0" promptText="Make">
+                                       <font>
+                                          <Font name="Avenir Roman" size="18.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
+                                    </TextField>
+                                    <TextField layoutX="39.0" layoutY="112.0" prefHeight="44.0" prefWidth="175.0" promptText="Model">
+                                       <font>
+                                          <Font name="Avenir Roman" size="18.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
+                                    </TextField>
+                                    <TextField layoutX="288.0" layoutY="13.0" prefHeight="39.0" prefWidth="177.0" promptText="Year" style="-fx-background-color: white;">
+                                       <font>
+                                          <Font name="Avenir Roman" size="18.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
+                                    </TextField>
+                                    <ComboBox editable="true" layoutX="288.0" layoutY="112.0" prefHeight="42.0" prefWidth="175.0" promptText="Number of Seats" />
+                                    <ComboBox editable="true" layoutX="288.0" layoutY="61.0" prefHeight="42.0" prefWidth="175.0" promptText="Colour" />
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Offerer">
+                        <Tab text="                  License Details                      ">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #67afeb;" />
-                           </content>
-                        </Tab>
-                        <Tab text="Both Seek &amp; Offer">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #67afeb;" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #67afeb;">
+                                 <children>
+                                    <TextField layoutX="124.0" layoutY="26.0" prefHeight="44.0" prefWidth="250.0" promptText="License Number" style="-fx-background-color: white;">
+                                       <font>
+                                          <Font name="Avenir Roman" size="20.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <cursor>
+                                          <Cursor fx:constant="TEXT" />
+                                       </cursor>
+                                    </TextField>
+                                    <DatePicker layoutX="125.0" layoutY="97.0" prefHeight="49.0" prefWidth="250.0" promptText="Expiry Date" />
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                      </tabs>
                   </TabPane>
+                  <ComboBox layoutX="487.0" layoutY="376.0" prefWidth="150.0" promptText="Choose one" />
+                  <Label layoutX="389.0" layoutY="376.0" text="I want to..." textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Avenir Heavy" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="35.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="160.0">
