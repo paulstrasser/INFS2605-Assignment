@@ -208,12 +208,12 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="212.0" layoutY="380.0" prefHeight="44.0" prefWidth="182.0" promptText="Min Price $">
+                                                      <TextField layoutX="385.0" layoutY="380.0" prefHeight="44.0" prefWidth="182.0" promptText="Min Price $">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="409.0" layoutY="380.0" prefHeight="44.0" prefWidth="182.0" promptText="Max Price $">
+                                                      <TextField layoutX="582.0" layoutY="380.0" prefHeight="44.0" prefWidth="182.0" promptText="Max Price $">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
@@ -276,6 +276,16 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </Text>
+                                                      <Text fill="WHITE" layoutX="54.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seats Required" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="24.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <TextField layoutX="227.0" layoutY="380.0" prefHeight="44.0" prefWidth="98.0" promptText="Seats">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
                                                    </children>
                                                 </AnchorPane>
                                              </content>
