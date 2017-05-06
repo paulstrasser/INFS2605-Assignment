@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  *
  * @author paulstrasser
  */
-public class StaffNormalMembersController implements Initializable {
+public class StaffCorporateMembersController implements Initializable {
 
     @FXML
     Stage stage;

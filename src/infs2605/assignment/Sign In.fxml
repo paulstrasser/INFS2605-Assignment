@@ -89,7 +89,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Text fill="RED" fontSmoothingType="LCD" layoutX="408.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your login details are incorrect" visible="false">
+                  <Text fx:id="SignInError" fill="RED" fontSmoothingType="LCD" layoutX="408.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your login details are incorrect" visible="false">
                      <font>
                         <Font name="Avenir Roman" size="18.0" />
                      </font>
@@ -99,16 +99,21 @@
                         <Font name="Avenir Roman" size="13.0" />
                      </font>
                   </Label>
-                  <RadioButton layoutX="436.0" layoutY="490.0" mnemonicParsing="false" text="Normal Member" textFill="WHITE">
+                  <RadioButton fx:id="NormalMember" layoutX="436.0" layoutY="490.0" mnemonicParsing="false" text="Normal Member" textFill="WHITE">
                      <font>
                         <Font name="Avenir Roman" size="13.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="566.0" layoutY="490.0" mnemonicParsing="false" text="Staff Member" textFill="WHITE">
+                  <RadioButton fx:id="Staff" layoutX="566.0" layoutY="490.0" mnemonicParsing="false" text="Staff Member" textFill="WHITE">
                      <font>
                         <Font name="Avenir Roman" size="13.0" />
                      </font>
                   </RadioButton>
+                  <Text fx:id="UserTypeError" fill="RED" fontSmoothingType="LCD" layoutX="430.0" layoutY="487.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please select a user type" visible="false">
+                     <font>
+                        <Font name="Avenir Roman" size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="35.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="619.0">
