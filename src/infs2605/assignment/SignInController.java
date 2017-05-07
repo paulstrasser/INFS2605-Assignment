@@ -6,8 +6,11 @@
 package infs2605.assignment;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +19,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import javafx.stage.Stage;
 
@@ -43,11 +49,28 @@ public class SignInController implements Initializable {
     
     @FXML
     private PasswordField password;
+    
+    @FXML
+    private RadioButton NormalMember;
+    
+    @FXML
+    private RadioButton Staff;
+    
+    @FXML
+    private Text SignInError;
+    
+    @FXML
+    private Text UserTypeError;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+        
+    } 
+    
+    
     @FXML
     private void SignUpButton(ActionEvent event) throws Exception{
-
-        
         stage=(Stage) SignUp.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Sign Up 1.fxml"));
         Scene scene = new Scene(root);
@@ -58,16 +81,43 @@ public class SignInController implements Initializable {
     
     @FXML
     private void SignInButton(ActionEvent event) throws Exception{
-        //Should be an if statement here that says if the inputted username and password match to one in the database, grant access to application. Need to check usertype first to determine which screen to go to e.g.Seeker goes to 'Seek a Ride' screen 
-        //if no match, display a label that says 'Couldnt login'
+        ToggleGroup group = new ToggleGroup();
+        NormalMember.setToggleGroup(group);
+        Staff.setToggleGroup(group);
         
-
+        
+        if (group.getSelectedToggle() == NormalMember) {
+            DBController auth = new DBController();
+            if (auth.authenticate(username.getText(), password.getText())){
+                loadNext("Seek a Ride.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+            }
+            else {
+                SignInError.setVisible(true);
+            }
+        }
+        
+        else if (group.getSelectedToggle() == Staff) {
+            //ADD AUTHENTICATION HERE
+            loadNext("StaffNormalMembers.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+        }
+        //There will always be a selected button - Ed
+        //else if (group.getSelectedToggle() == null) {
+        //    UserTypeError.setVisible(true);
+        //}
+    }
+    
+    //Saves duplicates
+    public void loadNext(String destination){
+        SignInError.setVisible(false);
         stage=(Stage) SignUp.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("Seek a Ride.fxml")); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+        try {
+            root = FXMLLoader.load(getClass().getResource(destination)); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+        } catch (IOException ex) {
+            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
- 
     }
     
     @FXML
@@ -81,9 +131,5 @@ public class SignInController implements Initializable {
     }
     
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        
-    } 
     
 }
