@@ -32,15 +32,12 @@ public class WelcomeController implements Initializable {
 
     @FXML
     private void welcomeButton(ActionEvent event) throws Exception{ //Goes from Welcome Screen to Sign In Screen
-        DBController thisTest = new DBController();
-        System.out.println(thisTest.returnName(1));
-        
         stage=(Stage) welcome.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Sign In.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

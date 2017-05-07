@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -99,12 +100,15 @@
                         <Font name="Avenir Roman" size="13.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="NormalMember" layoutX="436.0" layoutY="488.0" mnemonicParsing="false" text="Normal Member" textFill="WHITE">
+                  <RadioButton fx:id="NormalMember" layoutX="436.0" layoutY="488.0" mnemonicParsing="false" selected="true" text="Normal Member" textFill="WHITE">
                      <font>
                         <Font name="Avenir Roman" size="13.0" />
                      </font>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="UserType" />
+                     </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="Staff" layoutX="566.0" layoutY="488.0" mnemonicParsing="false" text="Staff Member" textFill="WHITE">
+                  <RadioButton fx:id="Staff" layoutX="566.0" layoutY="488.0" mnemonicParsing="false" text="Staff Member" textFill="WHITE" toggleGroup="$UserType">
                      <font>
                         <Font name="Avenir Roman" size="13.0" />
                      </font>
