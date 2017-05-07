@@ -90,45 +90,50 @@ public class SignUp1Controller implements Initializable {
     
     @FXML
     public void moveLeft(MouseEvent event) throws Exception {
-        System.out.println(currPage);
-        if (currPage == 1){
+        if (currPage == 1) {
             stage=(Stage) right.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("Sign In.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }
-        else {
-            switch (currPage){
-                case 2: goPage1();
-                case 3: goPage2();
-                case 4: goPage3();
-                case 5: goPage4();
-            }
+        else if (currPage == 2) {
+            goPage1();
         }
-        System.out.println(currPage);
+        else if (currPage == 3) {
+            goPage2();
+        }
+        else if (currPage == 4) {
+            goPage3();
+        }
+        else if (currPage ==5) {
+            goPage4();
+        }
+
     }
     
     @FXML
     public void moveRight(MouseEvent event) throws Exception {
-        System.out.println(currPage);
-        if (currPage == 5){
+        
+        if (currPage == 1) {
+            goPage2();
+        }
+        else if (currPage == 2) {
+            goPage3();
+        }
+        else if (currPage == 3) {
+            goPage4();
+        }
+        else if (currPage == 4) {
+            goPage5();
+        }
+        else if (currPage ==5) {
             stage=(Stage) left.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("Profile Page.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }
-        else {
-            switch (currPage){
-                case 1: goPage2();
-                case 2: goPage3();
-                case 3: goPage4();
-                case 4: goPage5();
-                default: goPage2();
-            }
-        }
-        System.out.println(currPage);
     }
     
     @FXML
