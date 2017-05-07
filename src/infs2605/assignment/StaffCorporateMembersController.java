@@ -49,6 +49,15 @@ public class StaffCorporateMembersController implements Initializable {
     private Button Matches;
     
     @FXML
+    private Button GoToConsultations;
+    
+    @FXML
+    private Button Add;
+    
+    @FXML
+    private Button Edit;
+    
+    @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
 
         stage=(Stage) Signout.getScene().getWindow();
@@ -124,6 +133,34 @@ public class StaffCorporateMembersController implements Initializable {
         stage.show();
         
     }
+    
+    @FXML
+    private void GoToConsultations(ActionEvent event) throws Exception { //Goes to 'Matches' screen
+
+        stage=(Stage) GoToConsultations.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("StaffConsultations.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+    
+    @FXML
+    private void Add(ActionEvent event) throws Exception { //Goes to 'Add' screen
+
+        stage=(Stage) Add.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("StaffAddCorporateMember.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+    
+    /*@FXML  MAKE THE TABLEVIEW EDITABLE
+    private void Edit(ActionEvent event) throws Exception {
+    
+    }
+    */
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

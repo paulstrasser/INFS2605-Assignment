@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infs2605.assignment.StaffAddNormalMembersController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infs2605.assignment.StaffAddCorporateMemberController">
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -70,35 +70,53 @@
                                              </font>
                                           </Button>
                                           <Rectangle arcHeight="5.0" fill="#67afeb" height="96.0" layoutX="36.0" layoutY="32.0" stroke="#6b4c4c00" strokeType="INSIDE" width="107.0" />
-                                          <Button layoutX="3.0" layoutY="196.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Normal Members" textFill="WHITE">
+                                          <Button fx:id="NormalMembers" layoutX="3.0" layoutY="196.0" mnemonicParsing="false" onAction="#NormalMembers" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Normal Members" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
-                                          <Button layoutX="3.0" layoutY="254.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Corporate Members" textFill="WHITE">
+                                          <Button fx:id="CorporateMembers" layoutX="3.0" layoutY="254.0" mnemonicParsing="false" onAction="#CorporateMembers" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Corporate Members" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
-                                          <Button layoutX="3.0" layoutY="312.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Staff" textFill="WHITE">
+                                          <Button fx:id="Staff" layoutX="3.0" layoutY="312.0" mnemonicParsing="false" onAction="#Staff" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Staff" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
-                                          <Button layoutX="3.0" layoutY="370.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Offers" textFill="WHITE">
+                                          <Button fx:id="Offers" layoutX="3.0" layoutY="370.0" mnemonicParsing="false" onAction="#Offers" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Offers" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
-                                          <Button layoutX="3.0" layoutY="428.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Seeks" textFill="WHITE">
+                                          <Button fx:id="Seeks" layoutX="3.0" layoutY="428.0" mnemonicParsing="false" onAction="#Seeks" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Seeks" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
-                                          <Button layoutX="3.0" layoutY="486.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Matches" textFill="WHITE">
+                                          <Button fx:id="Matches" layoutX="3.0" layoutY="486.0" mnemonicParsing="false" onAction="#Matches" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Matches" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </Button>
                                        </children>
                                     </AnchorPane>
@@ -114,7 +132,7 @@
                                                          </font>
                                                       </Label>
                                                       <Rectangle arcHeight="5.0" fill="#67afeb" height="70.0" layoutX="59.0" layoutY="126.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
-                                                      <Button fx:id="Signout1" layoutX="427.0" layoutY="303.0" mnemonicParsing="false" onAction="#SignOut" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: white;" text="Add" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Add" layoutX="427.0" layoutY="303.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: white;" text="Add" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -142,7 +160,7 @@
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Button fx:id="Signout11" layoutX="314.0" layoutY="303.0" mnemonicParsing="false" onAction="#SignOut" style="-fx-background-color: white;" text="Cancel" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Cancel" layoutX="314.0" layoutY="303.0" mnemonicParsing="false" onAction="#Cancel" style="-fx-background-color: white;" text="Cancel" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -173,6 +191,9 @@
                                                          </font>
                                                       </TextField>
                                                    </children>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
                                                 </AnchorPane>
                                              </content>
                                           </ScrollPane>

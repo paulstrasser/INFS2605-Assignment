@@ -49,6 +49,12 @@ public class StaffViewStaffController implements Initializable {
     private Button Matches;
     
     @FXML
+    private Button Add;
+    
+    @FXML
+    private Button Edit;
+    
+    @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
 
         stage=(Stage) Signout.getScene().getWindow();
@@ -124,6 +130,23 @@ public class StaffViewStaffController implements Initializable {
         stage.show();
         
     }
+    
+    @FXML
+    private void Add(ActionEvent event) throws Exception { //Goes to 'Add' screen
+
+        stage=(Stage) Add.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("StaffAddStaff.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
+    
+    /*@FXML  MAKE THE TABLEVIEW EDITABLE
+    private void Edit(ActionEvent event) throws Exception {
+    
+    }
+    */
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

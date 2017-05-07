@@ -78,7 +78,7 @@
                                              </font>
                                           </Button>
                                           <Rectangle arcHeight="5.0" fill="#67afeb" height="96.0" layoutX="36.0" layoutY="32.0" stroke="#6b4c4c00" strokeType="INSIDE" width="107.0" />
-                                          <MenuButton fx:id="Seek" layoutX="4.0" layoutY="228.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Seek">
+                                          <MenuButton fx:id="Seek" layoutX="4.0" layoutY="228.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Seek" textFill="WHITE">
                                              <items>
                                                 <MenuItem fx:id="SeekaRide" mnemonicParsing="false" onAction="#SeekARide" text="Seek a Ride" />
                                                 <MenuItem fx:id="YourSeeks" mnemonicParsing="false" onAction="#YourSeeks" text="Your Seeks" />
@@ -86,8 +86,11 @@
                                              <font>
                                                 <Font name="Avenir Roman" size="20.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </MenuButton>
-                                          <MenuButton fx:id="Offer" layoutX="4.0" layoutY="298.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Offer">
+                                          <MenuButton fx:id="Offer" layoutX="4.0" layoutY="298.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Offer" textFill="WHITE">
                                              <items>
                                                 <MenuItem fx:id="OfferaRide" mnemonicParsing="false" onAction="#OfferARide" text="Offer a Ride" />
                                                 <MenuItem fx:id="YourOffers" mnemonicParsing="false" onAction="#YourOffers" text="Your Offers" />
@@ -95,8 +98,11 @@
                                              <font>
                                                 <Font name="Avenir Roman" size="20.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </MenuButton>
-                                          <MenuButton fx:id="Matches" layoutX="4.0" layoutY="368.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" text="Matches">
+                                          <MenuButton fx:id="Matches" layoutX="4.0" layoutY="368.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Matches" textFill="WHITE">
                                              <items>
                                                 <MenuItem fx:id="AgreementtRequests" mnemonicParsing="false" onAction="#AgreementRequests" text="Agreement Requests" />
                                                 <MenuItem fx:id="AdjustmentRequests" mnemonicParsing="false" onAction="#AdjustmentRequests" text="Adjustments" />
@@ -104,6 +110,9 @@
                                              <font>
                                                 <Font name="Avenir Roman" size="20.0" />
                                              </font>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
                                           </MenuButton>
                                        </children>
                                     </AnchorPane>
