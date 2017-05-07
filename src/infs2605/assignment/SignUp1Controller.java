@@ -16,10 +16,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import java.util.ArrayList;
 
 /**
  * FXML Controller class
@@ -27,67 +30,53 @@ import javafx.stage.Stage;
  * @author paulstrasser
  */
 public class SignUp1Controller implements Initializable {
-
+    
+    int currPage = 1;
+    
     @FXML
     Stage stage;
     Parent root;
     
     @FXML
-    public ImageView home;
+    public ImageView home, right, left;
     
-    @FXML 
-    public ImageView right;
-    
-    @FXML 
-    public ImageView left;
-    
+    @FXML //Big circles
+    public Circle beginCircle, TypeOfUserCircle, AddressesCircle, PaymentCircle, StartCircle;
+
+    @FXML //Small circle
+    public Circle beginSelect, typeSelect, addressSelect, PaymentSelect, startSelect;
+
+    @FXML //Anchor panes
+    public AnchorPane beginPane, typePane, addPane, cardPane, lastPane;
+
+    @FXML //First anchor Pane
+    public TextField username, firstName, lastname, email, homePhone, mobilePhone, workPhone;
     @FXML
-    public Circle beginCircle;
-    
-    @FXML
-    public Circle TypeOfUserCircle;
-    
-    @FXML
-    public Circle AddressesCircle;
-    
-    @FXML
-    public Circle PaymentCircle;
-    
-    @FXML
-    public Circle StartCircle;
-    
-    @FXML
-    public TextField username;
-    
-    @FXML
-    public PasswordField password;
-    
-    @FXML
-    public PasswordField passwordVerification;
-    
-    @FXML
-    public TextField firstName;
-    
-    @FXML
-    public TextField lastName;
-    
-    @FXML
-    public TextField email;
-    
+    public PasswordField password, passwordVerification;
     @FXML
     public DatePicker DOB;
-    
     @FXML
     public ComboBox Gender;
     
+    @FXML //Second Pane
+    public ComboBox userType, carColor, carSeats;
     @FXML
-    public TextField homeNum;
+    public TextField carRego, carMake, carModel, carYear, licenseNum;
+    @FXML
+    public DatePicker expDate;
     
-    @FXML
-    public TextField mobileNum;
+    @FXML //Third Pane
+    public TextField homeNum, homeStreet, homeSub, homeCity, homePC, workNum, workStreet, workSub, workCity, workPC;
     
+    @FXML //Fourth Pane
+    public TextField cardName, cardNum, cvv;
     @FXML
-    public TextField workNum;
+    public DatePicker cardExp;
+    
+    @FXML //Fifth Pane
+    public Label startText;
+    @FXML
+    public Circle startCircle;
     
     @FXML
     public void homeButton(MouseEvent event) throws Exception {
@@ -100,84 +89,192 @@ public class SignUp1Controller implements Initializable {
     }
     
     @FXML
-    public void leftOrRight(MouseEvent event) throws Exception {
- 
-        if (event.getSource()==right) {
+    public void moveLeft(MouseEvent event) throws Exception {
+        System.out.println(currPage);
+        if (currPage == 1){
             stage=(Stage) right.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("Sign Up 2.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (event.getSource()==left) {
-            stage=(Stage) left.getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("Sign In.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }
-            
+        else {
+            switch (currPage){
+                case 2: goPage1();
+                case 3: goPage2();
+                case 4: goPage3();
+                case 5: goPage4();
+            }
+        }
+        System.out.println(currPage);
     }
     
-    /*@FXML
-    public void goToSignUp2(MouseEvent event) throws Exception {
-        Stage stage;
-        Parent root;
-        
-        stage=(Stage) right.getScene().getWindow();
-        root = FXMLLoader.load(getClass().getResource("Sign Up 2.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        
-    }*/
-    
     @FXML
-    public void circles(MouseEvent event) throws Exception {
-
-        if (event.getSource()==beginCircle) {
-            stage=(Stage) beginCircle.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("Sign Up 1.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        
-        else if (event.getSource()==TypeOfUserCircle) {
-            stage=(Stage) TypeOfUserCircle.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("Sign Up 2.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (event.getSource()==AddressesCircle) {
-            stage=(Stage) AddressesCircle.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("Sign Up 3.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if (event.getSource()==PaymentCircle) {
-            stage=(Stage) PaymentCircle.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("Sign Up 4.fxml"));
+    public void moveRight(MouseEvent event) throws Exception {
+        System.out.println(currPage);
+        if (currPage == 5){
+            stage=(Stage) left.getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("Profile Page.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         }
         else {
-            stage=(Stage) StartCircle.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("Sign Up 5.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            switch (currPage){
+                case 1: goPage2();
+                case 2: goPage3();
+                case 3: goPage4();
+                case 4: goPage5();
+                default: goPage2();
+            }
         }
+        System.out.println(currPage);
+    }
+    
+    @FXML
+    public void Start(MouseEvent event) throws Exception {
+ 
+        stage=(Stage) StartCircle.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Profile Page.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
         
     }
     
+    //IMPORTANT
+    //This code is INEFFICIENT but FX doesn't play nice with arrays,
+    //Meaning FOR statements couldn't be used
+    //IMPORTANT
+    
+    @FXML
+    public void circle1(MouseEvent event) throws Exception {
+        goPage1();
+    }
+    
+    public void goPage1(){
+        currPage = 1;
+        
+        beginSelect.setVisible(true);
+        typeSelect.setVisible(false);
+        addressSelect.setVisible(false);
+        PaymentSelect.setVisible(false);
+        startSelect.setVisible(false);
+        
+        beginPane.setVisible(true);
+        typePane.setVisible(false);
+        addPane.setVisible(false);
+        cardPane.setVisible(false);
+        lastPane.setVisible(false);
+    }
+    
+    //IMPORTANT
+    //This code is INEFFICIENT but FX doesn't play nice with arrays,
+    //Meaning FOR statements couldn't be used
+    //IMPORTANT
+    
+    @FXML
+    public void circle2(MouseEvent event) throws Exception {
+        goPage2();
+    }
+    
+    public void goPage2(){
+        currPage = 2;
+        
+        beginSelect.setVisible(false);
+        typeSelect.setVisible(true);
+        addressSelect.setVisible(false);
+        PaymentSelect.setVisible(false);
+        startSelect.setVisible(false);
+        
+        beginPane.setVisible(false);
+        typePane.setVisible(true);
+        addPane.setVisible(false);
+        cardPane.setVisible(false);
+        lastPane.setVisible(false);
+    }
+    
+    //IMPORTANT
+    //This code is INEFFICIENT but FX doesn't play nice with arrays,
+    //Meaning FOR statements couldn't be used
+    //IMPORTANT
+    
+    @FXML
+    public void circle3(MouseEvent event) throws Exception {
+        goPage3();
+    }
+    
+    public void goPage3(){
+        currPage = 3;
+        
+        beginSelect.setVisible(false);
+        typeSelect.setVisible(false);
+        addressSelect.setVisible(true);
+        PaymentSelect.setVisible(false);
+        startSelect.setVisible(false);
+        
+        beginPane.setVisible(false);
+        typePane.setVisible(false);
+        addPane.setVisible(true);
+        cardPane.setVisible(false);
+        lastPane.setVisible(false);
+    }
+    
+    //IMPORTANT
+    //This code is INEFFICIENT but FX doesn't play nice with arrays,
+    //Meaning FOR statements couldn't be used
+    //IMPORTANT
+    
+    @FXML
+    public void circle4(MouseEvent event) throws Exception {
+        goPage4();
+    }
+    
+    public void goPage4(){
+        currPage = 4;
+        
+        beginSelect.setVisible(false);
+        typeSelect.setVisible(false);
+        addressSelect.setVisible(false);
+        PaymentSelect.setVisible(true);
+        startSelect.setVisible(false);
+        
+        beginPane.setVisible(false);
+        typePane.setVisible(false);
+        addPane.setVisible(false);
+        cardPane.setVisible(true);
+        lastPane.setVisible(false);
+    }
+    
+    //IMPORTANT
+    //This code is INEFFICIENT but FX doesn't play nice with arrays of objects,
+    //Meaning FOR statements couldn't be used
+    //IMPORTANT
+    
+    @FXML
+    public void circle5(MouseEvent event) throws Exception {
+        goPage5();
+    }
+    
+    public void goPage5(){
+        currPage = 5;
+        
+        beginSelect.setVisible(false);
+        typeSelect.setVisible(false);
+        addressSelect.setVisible(false);
+        PaymentSelect.setVisible(false);
+        startSelect.setVisible(true);
+        
+        beginPane.setVisible(false);
+        typePane.setVisible(false);
+        addPane.setVisible(false);
+        cardPane.setVisible(false);
+        lastPane.setVisible(true);
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-        // TODO
+        
     }    
     
 }
