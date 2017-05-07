@@ -26,9 +26,9 @@ public class DBController {
         }
     }
     
+    //Not yet used
     public String returnName(int userID){
         currentQuery = "SELECT GENDER FROM USER WHERE ID = " + Integer.toString(userID);
-        System.out.println(currentQuery);
         try {
             rs = st.executeQuery(currentQuery);
             if (rs.next()){
@@ -37,10 +37,28 @@ public class DBController {
             else {
                 return "NOTHING FOUND";
             }
+           
         } catch (SQLException ex) {
             Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
             return "ERROR";
-        }   
+        }
+    }
+    
+    //Authenticate
+    public boolean authenticate(String username, String password){
+        currentQuery = "SELECT ID FROM USER WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "'";
+        try {
+            rs = st.executeQuery(currentQuery);
+            if (rs.next()){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
 }

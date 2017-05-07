@@ -6,8 +6,11 @@
 package infs2605.assignment;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -84,27 +87,37 @@ public class SignInController implements Initializable {
         
         
         if (group.getSelectedToggle() == NormalMember) {
-            stage=(Stage) SignUp.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("Seek a Ride.fxml")); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            DBController auth = new DBController();
+            if (auth.authenticate(username.getText(), password.getText())){
+                loadNext("Seek a Ride.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+            }
+            else {
+                SignInError.setVisible(true);
+            }
         }
+        
         else if (group.getSelectedToggle() == Staff) {
-            stage=(Stage) SignUp.getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("StaffNormalMembers.fxml")); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            //ADD AUTHENTICATION HERE
+            loadNext("StaffNormalMembers.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
         }
-        else if (group.getSelectedToggle() == null) {
-            UserTypeError.setVisible(true);
+        //There will always be a selected button - Ed
+        //else if (group.getSelectedToggle() == null) {
+        //    UserTypeError.setVisible(true);
+        //}
+    }
+    
+    //Saves duplicates
+    public void loadNext(String destination){
+        SignInError.setVisible(false);
+        stage=(Stage) SignUp.getScene().getWindow();
+        try {
+            root = FXMLLoader.load(getClass().getResource(destination)); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+        } catch (IOException ex) {
+            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-
-        
- 
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
     @FXML
