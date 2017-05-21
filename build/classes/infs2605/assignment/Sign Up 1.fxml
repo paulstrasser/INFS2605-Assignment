@@ -60,7 +60,7 @@
                               <Font size="14.0" />
                            </font>
                         </TextField>
-                        <DatePicker fx:id="DOB" layoutX="307.0" layoutY="129.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="179.0" promptText="           /            /     ">
+                        <DatePicker fx:id="DOB" editable="false" layoutX="307.0" layoutY="129.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="179.0" promptText="           /            /     ">
                            <effect>
                               <ColorAdjust contrast="1.0" />
                            </effect>
@@ -70,19 +70,19 @@
                               <Font name="Avenir Roman" size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="Gender" layoutX="307.0" layoutY="170.0" prefHeight="27.0" prefWidth="178.0" promptText="Gender">
+                        <ComboBox fx:id="Gender" layoutX="364.0" layoutY="170.0" prefHeight="27.0" prefWidth="121.0" promptText="Male">
                            <effect>
                               <ColorAdjust brightness="0.17" contrast="1.0" />
                            </effect>
                         </ComboBox>
-                        <Label layoutX="293.0" layoutY="230.0" text="Phone" textAlignment="CENTER" textFill="WHITE">
+                        <Label layoutX="311.0" layoutY="234.0" text="Phone" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font name="Avenir Roman" size="18.0" />
+                              <Font name="Avenir Roman" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="282.0" layoutY="250.0" text="Numbers" textAlignment="CENTER" textFill="WHITE">
+                        <Label layoutX="302.0" layoutY="250.0" text="Numbers" textAlignment="CENTER" textFill="WHITE">
                            <font>
-                              <Font name="Avenir Roman" size="18.0" />
+                              <Font name="Avenir Roman" size="14.0" />
                            </font>
                         </Label>
                         <TextField fx:id="mobilePhone" alignment="CENTER" layoutX="362.0" layoutY="212.0" prefHeight="28.0" prefWidth="124.0" promptText="Mobile">
@@ -108,6 +108,11 @@
                               <Font name="Avenir Roman" size="36.0" />
                            </font>
                         </Label>
+                        <Label layoutX="307.0" layoutY="174.0" text="Gender" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Avenir Roman" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="typePane" layoutX="258.0" layoutY="326.0" prefHeight="295.0" prefWidth="514.0" visible="false">
@@ -125,8 +130,8 @@
                               <Font name="Avenir Heavy" size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="userType" layoutX="250.0" layoutY="52.0" prefWidth="150.0" promptText="Driver" />
-                        <TabPane layoutY="85.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="214.0" prefWidth="522.0" tabClosingPolicy="UNAVAILABLE">
+                        <ComboBox fx:id="userType" layoutX="250.0" layoutY="52.0" onAction="#userType" prefWidth="150.0" promptText="Driver" />
+                        <TabPane fx:id="tabP" layoutY="85.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="214.0" prefWidth="522.0" tabClosingPolicy="UNAVAILABLE">
                            <tabs>
                               <Tab text="                      Car Details                      ">
                                  <content>
@@ -176,8 +181,18 @@
                                                 <Cursor fx:constant="TEXT" />
                                              </cursor>
                                           </TextField>
-                                          <ComboBox fx:id="carSeats" editable="true" layoutX="296.0" layoutY="119.0" prefHeight="42.0" prefWidth="175.0" promptText="Number of Seats" />
-                                          <ComboBox fx:id="carColor" editable="true" layoutX="296.0" layoutY="68.0" prefHeight="42.0" prefWidth="175.0" promptText="Colour" />
+                                          <ComboBox fx:id="carSeats" layoutX="363.0" layoutY="119.0" prefHeight="42.0" prefWidth="108.0" promptText="2" />
+                                          <ComboBox fx:id="carColor" layoutX="362.0" layoutY="68.0" prefHeight="42.0" prefWidth="109.0" promptText="Black" />
+                                          <Label layoutX="293.0" layoutY="80.0" text="Car Color" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="Avenir Roman" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="293.0" layoutY="130.0" text="Car Seats" textAlignment="CENTER" textFill="WHITE">
+                                             <font>
+                                                <Font name="Avenir Roman" size="14.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -197,7 +212,7 @@
                                                 <Cursor fx:constant="TEXT" />
                                              </cursor>
                                           </TextField>
-                                          <DatePicker fx:id="expDate" layoutX="137.0" layoutY="97.0" prefHeight="49.0" prefWidth="250.0" promptText="Expiry Date" />
+                                          <DatePicker fx:id="expDate" editable="false" layoutX="137.0" layoutY="97.0" prefHeight="49.0" prefWidth="250.0" promptText="Expiry Date" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -301,7 +316,7 @@
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <DatePicker fx:id="cardExp" layoutX="57.0" layoutY="216.0" prefHeight="36.0" prefWidth="235.0" promptText="Expiry Date" />
+                        <DatePicker fx:id="cardExp" editable="false" layoutX="57.0" layoutY="216.0" prefHeight="36.0" prefWidth="235.0" promptText="Expiry Date" />
                         <TextField fx:id="Cvv" alignment="CENTER" layoutX="325.0" layoutY="217.0" prefHeight="35.0" prefWidth="140.0" promptText="CVV">
                            <font>
                               <Font size="18.0" />
@@ -309,7 +324,7 @@
                         </TextField>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="lastPane" layoutX="262.0" layoutY="326.0" prefHeight="264.0" prefWidth="514.0" visible="false">
+                  <AnchorPane fx:id="lastPane" layoutX="262.0" layoutY="326.0" prefHeight="318.0" prefWidth="514.0" visible="false">
                      <children>
                         <Label accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="85.0" prefHeight="52.0" prefWidth="345.0" text="Start Using SuBer" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS" wrapText="true">
                            <cursor>
@@ -330,6 +345,14 @@
                            </cursor>
                            <font>
                               <Font name="Avenir Heavy" size="36.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="emptyFieldError" accessibleRole="BUTTON" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" layoutX="85.0" layoutY="263.0" prefHeight="52.0" prefWidth="345.0" text="Error: Field Left Empty" textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS" visible="false" wrapText="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <font>
+                              <Font name="Avenir Roman" size="16.0" />
                            </font>
                         </Label>
                      </children>
