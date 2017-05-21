@@ -128,4 +128,27 @@ public class DBController {
             Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
         }        
     }
+    
+    public String GetUserPK(){
+        java.sql.Statement statement = null;
+        currentQuery = "SELECT MAX(USERID) AS MAXX FROM USER";
+        openConnection();
+        try {
+            statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(currentQuery);
+            if (rs.next()){ 
+                conn.commit();
+                return rs.getString("MAXX");
+            }
+            else {
+                statement.close();
+                conn.commit();
+                return "NOTHING FOUND";
+            }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
+            return "ERROR";
+        }
+    }
 }
