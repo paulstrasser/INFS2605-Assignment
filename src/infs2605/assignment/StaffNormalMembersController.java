@@ -6,10 +6,13 @@
 package infs2605.assignment;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /**
@@ -59,21 +61,18 @@ public class StaffNormalMembersController implements Initializable {
     
     @FXML
     private Button Edit;
-
-    @FXML
-    private TableView<ArrayList<String>> resultsTable;
     
     @FXML
     private TableView<NormalMember> Table;
 
     @FXML
-    private TableColumn<NormalMember, String> USERIDColumn;
+    private TableColumn<NormalMember, String> USERIDCol;
 
     @FXML
-    private TableColumn<NormalMember, String> FNAMEColumn;
+    private TableColumn<NormalMember, String> FNAMECol;
 
     @FXML
-    private TableColumn<NormalMember, String> LNAMEColumn;
+    private TableColumn<NormalMember, String> LNAMECol;
         
     @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -163,30 +162,31 @@ public class StaffNormalMembersController implements Initializable {
         
     }
     
-    /*@FXML  MAKE THE TABLEVIEW EDITABLE
-    private void Edit(ActionEvent event) throws Exception {
     
-    }
-    */
+    DBController d = new DBController(); //Establish a connection to the db
+    
+    ArrayList<NormalMember> normalMembersList = new ArrayList<>(); //Creates the array list
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /* TABLEVIEW SHIT I COULDNT GET TO WORK
-        assert Table != null : "fx:id=\"tableview\" was not injected: check your FXML file 'UserMaster.fxml'.";
-        USERIDColumn.setCellValueFactory(new PropertyValueFactory<>("USERID"));
-        FNAMEColumn.setCellValueFactory(new PropertyValueFactory<>("FNAME"));
-        LNAMEColumn.setCellValueFactory(new PropertyValueFactory<>("LNAME"));
-        DBController test = new DBController();
-        buildData(); */
-    }    
-    /*
-    private ObservableList<NormalMember> data;
-    
-    public void buildData(){
-        data = FXCollections.observableArrayList();
-        test.returnResultSet("Select * From User");
+        USERIDCol.setCellValueFactory(cellData -> cellData.getValue().getUSERIDProperty());
+        FNAMECol.setCellValueFactory(cellData -> cellData.getValue().getFNAMEProperty());
+        LNAMECol.setCellValueFactory(cellData -> cellData.getValue().getLNAMEProperty());
+        getNormalMembers();
+        Table.setItems(FXCollections.observableArrayList(normalMembersList));
     }
-*/
+    
+    public void getNormalMembers() {
+        try {
+            ResultSet rs = d.getResultSet("SELECT USERID, FNAME, LNAME " 
+                    + "FROM USER");
+            while (rs.next()) {
+                normalMembersList.add(new NormalMember(rs.getString("USERID"),rs.getString("FNAME"),rs.getString("LNAME")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffNormalMembersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }   
     
 

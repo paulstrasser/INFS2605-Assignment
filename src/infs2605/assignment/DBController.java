@@ -2,8 +2,6 @@
 package infs2605.assignment;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -11,34 +9,57 @@ import java.util.regex.Pattern;
 
 public class DBController {
     
-    protected Connection conn;
-    protected Statement st;
-    protected ResultSet rs;
-    protected ResultSetMetaData rsmd;
+    public static Connection conn;
+    //protected Statement st;
+    //protected ResultSet rs;
+    //protected ResultSetMetaData rsmd;
     protected String currentQuery;
     
-    public DBController(){
+    
+    //Paul added this in - used to open the connection to the database
+    public static void openConnection() {
+        if (conn == null) {
+            try {
+                conn = DriverManager.getConnection("jdbc:h2:./INFS2605 Assi");
+                java.sql.Statement st = conn.createStatement();
+                
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                
+            }
+        }
+    }
+    
+    //Ed's old constructor method
+    /*public DBController(){
         //Connect to DB
         try {
             Class.forName("org.h2.Driver");
             conn = DriverManager.getConnection("jdbc:h2:./INFS2605 Assi");
-            st = conn.createStatement();
+            java.sql.Statement st = conn.createStatement();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(INFS2605Assignment.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(INFS2605Assignment.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
+    }*/
     
     //Not yet used
     public String returnName(int userID){
+        java.sql.Statement statement = null;
         currentQuery = "SELECT GENDER FROM USER WHERE ID = " + Integer.toString(userID);
+        openConnection();
         try {
-            rs = st.executeQuery(currentQuery);
+            statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(currentQuery);
             if (rs.next()){
+                statement.close();
+                conn.commit();
                 return rs.getString("GENDER");
             }
             else {
+                statement.close();
+                conn.commit();
                 return "NOTHING FOUND";
             }
            
@@ -50,7 +71,8 @@ public class DBController {
     
     public boolean sanitise(String username, String password){
                 //check special characters
-        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        
+                Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher m1 = p.matcher(username);
         Matcher m2 = p.matcher(password);
         boolean b1 = m1.find();
@@ -63,58 +85,38 @@ public class DBController {
     
     //Authenticate
     public boolean authenticate(String username, String password){
+        java.sql.Statement statement = null;
         currentQuery = "SELECT USERID FROM USER WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "'";
+        openConnection();
         try {
-            rs = st.executeQuery(currentQuery);
+            statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(currentQuery);
             if (rs.next()){
+                statement.close();
+                conn.commit();
                 return true;
             }
             else {
+                statement.close();
+                conn.commit();
                 return false;
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }
     
-    /* ALL THIS TABLEVIEW SHIT I CANT GET TO WORK
-    public ResultSet returnResultSet(String s) throws SQLException{
-        rs=st.executeQuery(s);
-        
-        return rs;
+    // This method reads in an sql string and returns a result set
+    public ResultSet getResultSet(String sqlstatement) throws SQLException {
+        openConnection();
+        java.sql.Statement statement = conn.createStatement();
+        ResultSet RS = statement.executeQuery(sqlstatement);
+        return RS;
     }
     
     
-    public List<ArrayList<String>> returnNormalMembers(ResultSet rs) throws SQLException{
-        String SQL = "Select * From USER";
-        rs=st.executeQuery(SQL);
-
-        //Initiate results list
-        List<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
-        
-        //Get the column count
-        ResultSetMetaData rsmd = rs.getMetaData();
-        int columnCount = rsmd.getColumnCount();
-        
-        //Build the column headings list
-        ArrayList<String> columnHeadings = new ArrayList<String>();
-        for (int i = 1; i <= columnCount; i++) {
-            columnHeadings.add(rsmd.getColumnLabel(i));
-        }
-        results.add(columnHeadings);
-        
-        //Fill Results
-        while (rs.next()) {
-            ArrayList<String> row = new ArrayList<String>();
-            for (int i = 1; i <= columnCount; i++) {
-                row.add(rs.getString(i));
-            }
-            results.add(row);
-        }
-        
-        return results;
-    } */
     
 
 
