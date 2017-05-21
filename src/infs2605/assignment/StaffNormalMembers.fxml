@@ -127,7 +127,7 @@
                                        <children>
                                           <ScrollPane hbarPolicy="NEVER" prefHeight="361.0" prefWidth="508.0" style="-fx-background-color: #93cff2;" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <content>
-                                                <AnchorPane prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
+                                                <AnchorPane fx:id="clickAway" onMouseClicked="#clearSearch" prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
                                                    <children>
                                                       <Label layoutX="35.0" layoutY="31.0" text="Normal Members" textFill="WHITE">
                                                          <font>
@@ -158,7 +158,7 @@
                                                          </font>
                                                       </Button>
                                                       <Rectangle arcHeight="5.0" fill="#67afeb" height="123.0" layoutX="60.0" layoutY="122.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
-                                                      <Button layoutX="354.0" layoutY="189.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Search" layoutX="354.0" layoutY="189.0" mnemonicParsing="false" onAction="#Search" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -171,12 +171,12 @@
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="149.0" layoutY="137.0" prefHeight="33.0" prefWidth="99.0" promptText="First Name">
+                                                      <TextField fx:id="filterField" layoutX="149.0" layoutY="137.0" prefHeight="33.0" prefWidth="99.0" promptText="First Name">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="262.0" layoutY="137.0" prefHeight="33.0" prefWidth="99.0" promptText="Last Name">
+                                                      <TextField fx:id="LNAME" layoutX="262.0" layoutY="137.0" prefHeight="33.0" prefWidth="99.0" promptText="Last Name">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>

@@ -57,10 +57,12 @@ public class SignInController implements Initializable {
     private RadioButton Staff;
     
     @FXML
-    private Text SignInError;
+    private Text SignInError, InjectionError;
     
     @FXML
     private Text UserTypeError;
+    
+    public static String loggedInUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -88,17 +90,27 @@ public class SignInController implements Initializable {
         
         if (group.getSelectedToggle() == NormalMember) {
             DBController auth = new DBController();
-            if (auth.authenticate(username.getText(), password.getText())){
-                loadNext("Seek a Ride.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+            if (auth.sanitise(username.getText(), password.getText())){
+                InjectionError.setVisible(false);
+                if (auth.authenticate(username.getText(), password.getText())){
+                    loadNext("Seek a Ride.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+                    loggedInUser = username.getText();
+                    
+                }
+                else {
+                    SignInError.setVisible(true);
+                }
             }
             else {
-                SignInError.setVisible(true);
+                InjectionError.setVisible(true);
             }
         }
         
         else if (group.getSelectedToggle() == Staff) {
             //ADD AUTHENTICATION HERE
             loadNext("StaffNormalMembers.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+            loggedInUser = username.getText();
+
         }
         //There will always be a selected button - Ed
         //else if (group.getSelectedToggle() == null) {

@@ -5,6 +5,7 @@
  */
 package infs2605.assignment;
 
+import static infs2605.assignment.SignInController.loggedInUser;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,11 +15,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -49,7 +50,8 @@ public class OfferARideController implements Initializable {
          
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Name.setText(loggedInUser);
+        Name.setTextAlignment(TextAlignment.CENTER);
     }
 
      

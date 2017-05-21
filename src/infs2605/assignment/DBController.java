@@ -116,8 +116,16 @@ public class DBController {
         return RS;
     }
     
-    
-    
-
-
+    public void Insert(String insertSQL) {
+        java.sql.Statement statement = null;
+        openConnection();
+        try {
+            statement = conn.createStatement();
+            statement.executeUpdate(insertSQL);
+            statement.close();
+            conn.commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
 }

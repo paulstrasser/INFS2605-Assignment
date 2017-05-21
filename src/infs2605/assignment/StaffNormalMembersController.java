@@ -6,6 +6,7 @@
 package infs2605.assignment;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,7 +14,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +26,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -63,6 +71,9 @@ public class StaffNormalMembersController implements Initializable {
     private Button Edit;
     
     @FXML
+    private Button Search;
+    
+    @FXML
     private TableView<NormalMember> Table;
 
     @FXML
@@ -73,6 +84,15 @@ public class StaffNormalMembersController implements Initializable {
 
     @FXML
     private TableColumn<NormalMember, String> LNAMECol;
+    
+    @FXML
+    private TextField filterField;
+    
+    @FXML
+    private TextField LNAME;
+    
+    @FXML
+    private AnchorPane clickAway;
         
     @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -171,11 +191,44 @@ public class StaffNormalMembersController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         USERIDCol.setCellValueFactory(cellData -> cellData.getValue().getUSERIDProperty());
         FNAMECol.setCellValueFactory(cellData -> cellData.getValue().getFNAMEProperty());
+        FNAMECol.setCellFactory(
+                TextFieldTableCell.forTableColumn());
+
+        FNAMECol.setOnEditCommit(
+                (TableColumn.CellEditEvent<NormalMember, String> t) ->
+                    ( t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                    ).setFNAME(t.getNewValue())
+                );
+                
         LNAMECol.setCellValueFactory(cellData -> cellData.getValue().getLNAMEProperty());
         getNormalMembers();
+        
+        
         Table.setItems(FXCollections.observableArrayList(normalMembersList));
+        Table.setEditable(true);
+        
+        /*FilteredList<NormalMember> filteredData = new FilteredList<>(FXCollections.observableArrayList(normalMembersList), p -> true);
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(normalMember -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                
+                String lowerCaseFilter = newValue.toLowerCase();
+                
+                if (normalMember.getFNAME().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                }
+                else if (normalMember.getLNAME().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                    return true;
+                }
+                return false; 
+            });
+        });*/
+ 
     }
-    
+
     public void getNormalMembers() {
         try {
             ResultSet rs = d.getResultSet("SELECT USERID, FNAME, LNAME " 
@@ -187,6 +240,32 @@ public class StaffNormalMembersController implements Initializable {
             Logger.getLogger(StaffNormalMembersController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @FXML
+    private void Search(ActionEvent event) throws Exception { //Goes to 'Staff' screen
+        String SearchLNAME = LNAME.getText();
+        normalMembersList.clear();
+        try {
+            ResultSet rs = d.getResultSet("SELECT USERID, FNAME, LNAME "
+                + "FROM USER "
+                + "WHERE LNAME = '" + SearchLNAME + "'");
+            while (rs.next()) {
+                normalMembersList.add(new NormalMember(rs.getString("USERID"),rs.getString("FNAME"),rs.getString("LNAME")));
+            }
+            Table.setItems(FXCollections.observableArrayList(normalMembersList));            
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(StaffNormalMembersController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
+    
+    @FXML
+    private void clearSearch(MouseEvent event) throws Exception {
+        normalMembersList.clear();
+        getNormalMembers();
+        Table.setItems(FXCollections.observableArrayList(normalMembersList));  
+    }
+    
 }   
     
 
