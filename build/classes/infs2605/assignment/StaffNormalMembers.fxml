@@ -138,10 +138,11 @@
                                                         <content>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1496.0" prefWidth="1312.0">
                                                                <children>
-                                                                  <TableView prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <TableView fx:id="Table" prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <columns>
-                                                                      <TableColumn prefWidth="75.0" text="C1" />
-                                                                      <TableColumn prefWidth="75.0" text="C2" />
+                                                                      <TableColumn fx:id="USERIDCol" prefWidth="75.0" text="USERID" />
+                                                                      <TableColumn fx:id="FNAMECol" prefWidth="75.0" text="FNAME" />
+                                                                        <TableColumn fx:id="LNAMECol" prefWidth="75.0" text="LNAME" />
                                                                     </columns>
                                                                   </TableView>
                                                                </children>
