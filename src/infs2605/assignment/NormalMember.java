@@ -5,14 +5,6 @@
  */
 package infs2605.assignment;
 
-import java.awt.Container;
-import java.util.Date;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -23,105 +15,227 @@ import javafx.beans.property.StringProperty;
 
 
 public class NormalMember {
-    public StringProperty USERID;
+    public Long USERID;
     public StringProperty FNAME;
     public StringProperty LNAME;
-    /*public IntegerProperty USERTYPE;
+    public StringProperty USERTYPE;
     public StringProperty GENDER;
-    public ObjectProperty DOB;
-    public LongProperty HPHONE;
-    public LongProperty WPHONE;
-    public LongProperty MPHONE;
+    /*DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    public Date DOB1;
+    public String DOB = df.format(DOB1);*/
+    
+
+    //public Date DOB;
+    public Long HPHONE;
+    public Long WPHONE;
+    public Long MPHONE;
     public StringProperty EMAIL;
-    public IntegerProperty HNUM;
+    public Integer HNUM;
     public StringProperty HSTREET;
     public StringProperty HSUBURB;
     public StringProperty HCITY;
-    public IntegerProperty HPOSTCODE;
-    public IntegerProperty WNUM;
+    public Integer HPOSTCODE;
+    public Integer WNUM;
     public StringProperty WSTREET;
     public StringProperty WSUBURB;
     public StringProperty WCITY;
-    public IntegerProperty WPOSTCODE;
+    public Integer WPOSTCODE;
     public StringProperty MAKE;
     public StringProperty MODEL;
     public StringProperty COLOUR;
     public StringProperty YEARMADE;
     public StringProperty REGISTRATION;
-    public IntegerProperty NUMOFSEATS;
-    public LongProperty LICENSENUM;
-    public ObjectProperty EXPDATE;
-    public ObjectProperty PROFILEPIC;
+    public Integer NUMOFSEATS;
+    public Long LICENSENUM;
+    //public ObjectProperty EXPDATE;
+    //public ObjectProperty PROFILEPIC;
     public StringProperty USERNAME;
     public StringProperty PASSWORD;
     public StringProperty DESCRIPTION;
     public StringProperty NAMEONCARD;
-    public LongProperty CARDNUM;
-    public ObjectProperty CARDEXPIRY;
-    public IntegerProperty CVV;*/
+    public Long CARDNUM;
+    //public ObjectProperty CARDEXPIRY;
+    public Integer CVV;
 
 
-    public NormalMember(String USERID, String FNAME, String LNAME/*, int USERTYPE, String GENDER, Date DOB, long HPHONE
+    public NormalMember(long USERID, String FNAME, String LNAME, String USERTYPE, String GENDER, /*String DOB, */long HPHONE
     , long WPHONE, long MPHONE, String EMAIL, int HNUM, String HSTREET, String HSUBURB, String HCITY, int HPOSTCODE, int WNUM
     , String WSTREET, String WSUBURB, String WCITY, int WPOSTCODE, String MAKE, String MODEL, String COLOUR, String YEARMADE, String REGISTRATION
-    , int NUMOFSEATS, long LICENSENUM, Date EXPDATE, Container PROFILEPIC, String USERNAME, String PASSWORD, String DESCRIPTION, String NAMEONCARD, long CARDNUM
-    , Date CARDEXPIRY, int CVV*/){
-        this.USERID = new SimpleStringProperty(USERID);
+    , int NUMOFSEATS, long LICENSENUM, /*Date EXPDATE, Container PROFILEPIC, */String USERNAME, String PASSWORD, String DESCRIPTION, String NAMEONCARD, long CARDNUM
+    , /*Date CARDEXPIRY, */int CVV){
+        this.USERID = new Long(USERID);
         this.FNAME = new SimpleStringProperty(FNAME);
         this.LNAME = new SimpleStringProperty(LNAME);
-        /*this.USERTYPE = new SimpleIntegerProperty(USERTYPE);
+        this.USERTYPE = new SimpleStringProperty(USERTYPE);
         this.GENDER = new SimpleStringProperty(GENDER);
-        this.DOB = new SimpleObjectProperty(DOB);
-        this.HPHONE = new SimpleLongProperty(HPHONE);
-        this.WPHONE = new SimpleLongProperty(WPHONE);
-        this.MPHONE = new SimpleLongProperty(MPHONE);
+        //this.DOB = new String(DOB);
+        this.HPHONE = new Long(HPHONE);
+        this.WPHONE = new Long(WPHONE);
+        this.MPHONE = new Long(MPHONE);
         this.EMAIL = new SimpleStringProperty(EMAIL);
-        this.HNUM = new SimpleIntegerProperty(HNUM);
+        this.HNUM = new Integer(HNUM);
         this.HSTREET = new SimpleStringProperty(HSTREET);
         this.HSUBURB = new SimpleStringProperty(HSUBURB);
         this.HCITY = new SimpleStringProperty(HCITY);
-        this.HPOSTCODE = new SimpleIntegerProperty(HPOSTCODE);
-        this.WNUM = new SimpleIntegerProperty(WNUM);
+        this.HPOSTCODE = new Integer(HPOSTCODE);
+        this.WNUM = new Integer(WNUM);
         this.WSTREET = new SimpleStringProperty(WSTREET);
         this.WSUBURB = new SimpleStringProperty(WSUBURB);
         this.WCITY = new SimpleStringProperty(WCITY);
-        this.WPOSTCODE = new SimpleIntegerProperty(WPOSTCODE);
+        this.WPOSTCODE = new Integer(WPOSTCODE);
         this.MAKE = new SimpleStringProperty(MAKE);
         this.MODEL = new SimpleStringProperty(MODEL);
         this.COLOUR = new SimpleStringProperty(COLOUR);
         this.YEARMADE = new SimpleStringProperty(YEARMADE);
         this.REGISTRATION = new SimpleStringProperty(REGISTRATION);
-        this.NUMOFSEATS = new SimpleIntegerProperty(NUMOFSEATS);
-        this.LICENSENUM = new SimpleLongProperty(LICENSENUM);
-        this.EXPDATE = new SimpleObjectProperty(EXPDATE);
-        this.PROFILEPIC = new SimpleObjectProperty(PROFILEPIC);
+        this.NUMOFSEATS = new Integer(NUMOFSEATS);
+        this.LICENSENUM = new Long(LICENSENUM);
+        //this.EXPDATE = new SimpleObjectProperty(EXPDATE);
+        //this.PROFILEPIC = new SimpleObjectProperty(PROFILEPIC);
         this.USERNAME = new SimpleStringProperty(USERNAME);
         this.PASSWORD = new SimpleStringProperty(PASSWORD);
         this.DESCRIPTION = new SimpleStringProperty(DESCRIPTION);
         this.NAMEONCARD = new SimpleStringProperty(NAMEONCARD);
-        this.CARDNUM = new SimpleLongProperty(CARDNUM);
-        this.CARDEXPIRY = new SimpleObjectProperty(CARDEXPIRY);
-        this.CVV = new SimpleIntegerProperty(CVV);*/
+        this.CARDNUM = new Long(CARDNUM);
+        //this.CARDEXPIRY = new SimpleObjectProperty(CARDEXPIRY);
+        this.CVV = new Integer(CVV);
 
     }
-    public NormalMember() {
-        this("-","-","-");
+    /*public NormalMember() {
+        this();  
+    }*/
+    
+    public String getUSERID() {
+        return USERID.toString();
     }
     
     public String getFNAME() {
         return FNAME.get();
     }
     
-    public void setFNAME(String fname) {
-        FNAME.set(fname);
-    }
-    
     public String getLNAME() {
         return LNAME.get();
     }
     
+    public String getUSERTYPE() {
+        return USERTYPE.get();
+    }
     
-    public StringProperty getUSERIDProperty() {
+    public String getGENDER() {
+        return GENDER.get();
+    }
+    
+    public String getHPHONE() {
+        return HPHONE.toString();
+    }
+    
+    public String getWPHONE() {
+        return WPHONE.toString();
+    }
+    
+    public String getMPHONE() {
+        return MPHONE.toString();
+    }
+    
+    public String getEMAIL() {
+        return EMAIL.get();
+    }
+    
+    public String getHNUM() {
+        return HNUM.toString();
+    }
+    
+    public String getHSTREET() {
+        return HSTREET.get();
+    }
+    
+    public String getHSUBURB() {
+        return HSUBURB.get();
+    }
+    
+    public String getHCITY() {
+        return HCITY.get();
+    }
+    
+    public String getHPOSTCODE() {
+        return HPOSTCODE.toString();
+    }
+    
+    public String getWNUM() {
+        return WNUM.toString();
+    }
+    
+    public String getWSTREET() {
+        return WSTREET.get();
+    }
+    
+    public String getWSUBURB() {
+        return WSUBURB.get();
+    }
+    
+    public String getWCITY() {
+        return WCITY.get();
+    }
+    
+    public String getWPOSTCODE() {
+        return WPOSTCODE.toString();
+    }
+    
+    public String getMAKE() {
+        return MAKE.get();
+    }
+    
+    public String getMODEL() {
+        return MODEL.get();
+    }
+    
+    public String getCOLOUR() {
+        return COLOUR.get();
+    }
+    
+    public String getYEARMADE() {
+        return YEARMADE.get();
+    }
+    
+    public String getREGISTRATION() {
+        return REGISTRATION.get();
+    }
+    
+    public String getNUMOFSEATS() {
+        return NUMOFSEATS.toString();
+    }
+    
+    public String getLICENSENUM() {
+        return LICENSENUM.toString();
+    }
+    
+    public String getUSERNAME() {
+        return USERNAME.get();
+    }
+    
+    public String getPASSWORD() {
+        return PASSWORD.get();
+    }
+    
+    public String getDESCRIPTION() {
+        return DESCRIPTION.get();
+    }
+    
+    public String getNAMEONCARD() {
+        return NAMEONCARD.get();
+    }
+    
+    public String getCARDNUM() {
+        return CARDNUM.toString();
+    }
+    
+    public String getCVV() {
+        return CVV.toString();
+    }
+    
+    
+    
+    public Long getUSERIDProperty() {
         return USERID;
     }
     
@@ -133,13 +247,125 @@ public class NormalMember {
         return LNAME;
     }
     
+    public StringProperty getUSERTYPEProperty() {
+        return USERTYPE;
+    }
     
+    public StringProperty getGENDERProperty() {
+        return GENDER;
+    }
     
+    /*public String getDOBProperty() {
+        return DOB;
+    }*/
     
+    public Long getHPHONEProperty() {
+        return HPHONE;
+    }
     
+    public Long getWPHONEProperty() {
+        return WPHONE;
+    }
     
+    public Long getMPHONEProperty() {
+        return MPHONE;
+    }
     
+    public StringProperty getEMAILProperty() {
+        return EMAIL;
+    }
     
+    public Integer getHNUMProperty() {
+        return HNUM;
+    }
+    
+    public StringProperty getHSTREETProperty() {
+        return HSTREET;
+    }
+    
+    public StringProperty getHSUBURBProperty() {
+        return HSUBURB;
+    }
+    
+    public StringProperty getHCITYProperty() {
+        return HCITY;
+    }
+    
+    public Integer getHPOSTCODEProperty() {
+        return HPOSTCODE;
+    }
+    
+    public Integer getWNUMProperty() {
+        return WNUM;
+    }
+    
+    public StringProperty getWSTREETProperty() {
+        return WSTREET;
+    }
+    
+    public StringProperty getWSUBURBProperty() {
+        return WSUBURB;
+    }
+    
+    public StringProperty getWCITYProperty() {
+        return WCITY;
+    }
+    
+    public Integer getWPOSTCODEProperty() {
+        return WPOSTCODE;
+    }
+    
+    public StringProperty getMAKEProperty() {
+        return MAKE;
+    }
+    
+    public StringProperty getMODELProperty() {
+        return MODEL;
+    }
+    
+    public StringProperty getCOLOURProperty() {
+        return COLOUR;
+    }
+    
+    public StringProperty getYEARMADEProperty() {
+        return YEARMADE;
+    }
+    
+    public StringProperty getREGISTRATIONProperty() {
+        return REGISTRATION;
+    }
+    
+    public Integer getNUMOFSEATSProperty() {
+        return NUMOFSEATS;
+    }
+    
+    public Long getLICENSENUMProperty() {
+        return LICENSENUM;
+    }
+    
+    public StringProperty getUSERNAMEProperty() {
+        return USERNAME;
+    }
+    
+    public StringProperty getPASSWORDProperty() {
+        return PASSWORD;
+    }
+    
+    public StringProperty getDESCRIPTIONProperty() {
+        return DESCRIPTION;
+    }
+    
+    public StringProperty getNAMEONCARDProperty() {
+        return NAMEONCARD;
+    }  
+    
+    public Long getCARDNUMProperty() {
+        return CARDNUM;
+    }
+    
+    public Integer getCVVProperty() {
+        return CVV;
+    }
 }
 
 
