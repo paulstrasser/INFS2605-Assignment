@@ -118,6 +118,11 @@
                         <Font name="Avenir Roman" size="18.0" />
                      </font>
                   </Text>
+                  <Text fx:id="InjectionError" fill="RED" fontSmoothingType="LCD" layoutX="408.0" layoutY="600.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stop SQL Injecting please :)" visible="false">
+                     <font>
+                        <Font name="Avenir Roman" size="18.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
           <AnchorPane maxHeight="35.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="619.0">
