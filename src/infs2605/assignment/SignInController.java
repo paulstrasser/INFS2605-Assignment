@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author paulstrasser
+ * @author edhopkins
  */
 public class SignInController implements Initializable {
     
@@ -62,7 +62,7 @@ public class SignInController implements Initializable {
     @FXML
     private Text UserTypeError;
     
-    public static String loggedInUser;
+    private static String loggedInUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -86,36 +86,37 @@ public class SignInController implements Initializable {
         ToggleGroup group = new ToggleGroup();
         NormalMember.setToggleGroup(group);
         Staff.setToggleGroup(group);
+        DBController auth = new DBController();
+        SignInError.setVisible(false);
+        InjectionError.setVisible(false);
         
-        
-        if (group.getSelectedToggle() == NormalMember) {
-            DBController auth = new DBController();
-            if (auth.sanitise(username.getText(), password.getText())){
-                InjectionError.setVisible(false);
-                if (auth.authenticate(username.getText(), password.getText())){
-                    loadNext("Seek a Ride.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+        if (auth.sanitise(username.getText(), password.getText())){
+            //InjectionError.setVisible(false);
+            if (group.getSelectedToggle() == Staff){
+                if (auth.authenticate(username.getText(), password.getText(), true)){
+                    loadNext("StaffSeeks.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
                     loggedInUser = username.getText();
-                    
+
                 }
                 else {
                     SignInError.setVisible(true);
                 }
             }
-            else {
-                InjectionError.setVisible(true);
+            else{
+                if (auth.authenticate(username.getText(), password.getText(), false)){
+                    loadNext("Seek a Ride.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+                    loggedInUser = username.getText();
+
+                }
+                else {
+                    SignInError.setVisible(true);
+                } 
             }
         }
-        
-        else if (group.getSelectedToggle() == Staff) {
-            //ADD AUTHENTICATION HERE
-            loadNext("StaffNormalMembers.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
-            loggedInUser = username.getText();
-
+        else {
+            InjectionError.setVisible(true);
         }
-        //There will always be a selected button - Ed
-        //else if (group.getSelectedToggle() == null) {
-        //    UserTypeError.setVisible(true);
-        //}
+
     }
     
     //Saves duplicates
@@ -140,6 +141,10 @@ public class SignInController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    public static String getUser(){
+        return loggedInUser;
     }
     
     

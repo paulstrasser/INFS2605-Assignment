@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -15,6 +16,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -125,53 +127,33 @@
                                                             <Font name="Avenir Roman" size="52.0" />
                                                          </font>
                                                       </Label>
-                                                      <TextField layoutX="66.0" layoutY="181.0" prefHeight="44.0" prefWidth="170.0" promptText="Starting Suburb">
+                                                      <TextField fx:id="startSub" disable="true" layoutX="55.0" layoutY="254.0" prefHeight="44.0" prefWidth="192.0" promptText="Suburb">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="248.0" layoutY="182.0" prefHeight="44.0" prefWidth="124.0" promptText="Strt PCode">
+                                                      <TextField fx:id="startPC" disable="true" layoutX="256.0" layoutY="254.0" prefHeight="44.0" prefWidth="114.0" promptText="Postcode">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="68.0" layoutY="265.0" prefHeight="44.0" prefWidth="113.0" promptText="Street No.">
+                                                      <TextField fx:id="startNum" disable="true" layoutX="55.0" layoutY="197.0" prefHeight="44.0" prefWidth="99.0" promptText="Number">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="193.0" layoutY="265.0" prefHeight="44.0" prefWidth="181.0" promptText="Street Name">
+                                                      <TextField fx:id="startStreet" disable="true" layoutX="166.0" layoutY="197.0" prefHeight="44.0" prefWidth="203.0" promptText="Street Name">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <Text fill="WHITE" layoutX="61.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actual Starting Address" textAlignment="CENTER">
+                                                      <Text fill="WHITE" layoutX="52.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="Avenir Roman" size="24.0" />
                                                          </font>
                                                       </Text>
-                                                      <TextField layoutX="446.0" layoutY="182.0" prefHeight="44.0" prefWidth="182.0" promptText="End Suburb">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="20.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <TextField layoutX="637.0" layoutY="180.0" prefHeight="44.0" prefWidth="130.0" promptText="End PCode">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="20.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <Text fill="WHITE" layoutX="434.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Actual End Address" textAlignment="CENTER">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="24.0" />
-                                                         </font>
-                                                      </Text>
-                                                      <Text fill="WHITE" layoutX="54.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pickup" textAlignment="CENTER">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="24.0" />
-                                                         </font>
-                                                      </Text>
-                                                      <DatePicker layoutX="137.0" layoutY="326.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="38.0" prefWidth="126.0" promptText="  /    / " />
-                                                      <TextField layoutX="276.0" layoutY="324.0" prefHeight="44.0" prefWidth="98.0" promptText="Time">
+                                                      <DatePicker fx:id="pickupDate" editable="false" layoutX="130.0" layoutY="326.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="38.0" prefWidth="114.0" promptText="DD/MM/YY" />
+                                                      <TextField fx:id="pickupTime" layoutX="257.0" layoutY="324.0" prefHeight="44.0" prefWidth="114.0" promptText="HH:MM">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
@@ -189,7 +171,7 @@
                                                             </TableView>
                                                          </content>
                                                       </TitledPane>
-                                                      <Button fx:id="Search" layoutX="344.0" layoutY="459.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="139.0" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Search" layoutX="442.0" layoutY="380.0" mnemonicParsing="false" onAction="#makeSearch" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -197,37 +179,12 @@
                                                             <Font size="24.0" />
                                                          </font>
                                                       </Button>
-                                                      <TextField layoutX="449.0" layoutY="265.0" prefHeight="44.0" prefWidth="113.0" promptText="Street No.">
+                                                      <TextField fx:id="maxPrice" layoutX="613.0" layoutY="324.0" prefHeight="44.0" prefWidth="146.0" promptText="Price">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="574.0" layoutY="265.0" prefHeight="44.0" prefWidth="181.0" promptText="Street Name">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="20.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <Text fill="WHITE" layoutX="453.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dropoff" textAlignment="CENTER">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="24.0" />
-                                                         </font>
-                                                      </Text>
-                                                      <TextField layoutX="547.0" layoutY="324.0" prefHeight="44.0" prefWidth="98.0" promptText="Time">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="20.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <TextField layoutX="385.0" layoutY="380.0" prefHeight="44.0" prefWidth="182.0" promptText="Min Price $">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="20.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <TextField layoutX="582.0" layoutY="380.0" prefHeight="44.0" prefWidth="182.0" promptText="Max Price $">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="20.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <Button fx:id="Search1" layoutX="291.0" layoutY="1100.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="235.0" style="-fx-background-color: white;" text="Post New Seek" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Post" layoutX="611.0" layoutY="380.0" mnemonicParsing="false" onAction="#postSeek" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: white;" text="Post Seek" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -235,22 +192,25 @@
                                                             <Font size="24.0" />
                                                          </font>
                                                       </Button>
-                                                      <Text fill="WHITE" layoutX="140.0" layoutY="1130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If no results:" textAlignment="CENTER">
+                                                      <Text fill="WHITE" layoutX="140.0" layoutY="1130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If no results:" textAlignment="CENTER" visible="false">
                                                          <font>
                                                             <Font name="Avenir Roman" size="24.0" />
                                                          </font>
                                                       </Text>
-                                                      <RadioButton layoutX="158.0" layoutY="149.0" mnemonicParsing="false" text="Home" textFill="WHITE">
+                                                      <RadioButton fx:id="startHome" layoutX="158.0" layoutY="149.0" mnemonicParsing="false" onAction="#RBbuttonPressed" selected="true" text="Home" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="16.0" />
+                                                         </font>
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="startGroup" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="startWork" layoutX="239.0" layoutY="149.0" mnemonicParsing="false" onAction="#RBbuttonPressed" text="Work" textFill="WHITE" toggleGroup="$startGroup">
                                                          <font>
                                                             <Font name="Avenir Roman" size="16.0" />
                                                          </font>
                                                       </RadioButton>
-                                                      <RadioButton layoutX="239.0" layoutY="149.0" mnemonicParsing="false" text="Work" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="16.0" />
-                                                         </font>
-                                                      </RadioButton>
-                                                      <RadioButton layoutX="313.0" layoutY="149.0" mnemonicParsing="false" text="Other" textFill="WHITE">
+                                                      <RadioButton fx:id="startOther" layoutX="313.0" layoutY="149.0" mnemonicParsing="false" onAction="#RBbuttonPressed" text="Other" textFill="WHITE" toggleGroup="$startGroup">
                                                          <font>
                                                             <Font name="Avenir Roman" size="16.0" />
                                                          </font>
@@ -260,17 +220,20 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </Text>
-                                                      <RadioButton layoutX="512.0" layoutY="149.0" mnemonicParsing="false" text="Home" textFill="WHITE">
+                                                      <RadioButton fx:id="endHome" layoutX="512.0" layoutY="149.0" mnemonicParsing="false" onAction="#RBbuttonPressed" selected="true" text="Home" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="16.0" />
+                                                         </font>
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="endGroup" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="endWork" layoutX="593.0" layoutY="149.0" mnemonicParsing="false" onAction="#RBbuttonPressed" selected="true" text="Work" textFill="WHITE" toggleGroup="$endGroup">
                                                          <font>
                                                             <Font name="Avenir Roman" size="16.0" />
                                                          </font>
                                                       </RadioButton>
-                                                      <RadioButton layoutX="593.0" layoutY="149.0" mnemonicParsing="false" text="Work" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="16.0" />
-                                                         </font>
-                                                      </RadioButton>
-                                                      <RadioButton layoutX="667.0" layoutY="149.0" mnemonicParsing="false" text="Other" textFill="WHITE">
+                                                      <RadioButton fx:id="endOther" layoutX="667.0" layoutY="149.0" mnemonicParsing="false" onAction="#RBbuttonPressed" text="Other" textFill="WHITE" toggleGroup="$endGroup">
                                                          <font>
                                                             <Font name="Avenir Roman" size="16.0" />
                                                          </font>
@@ -280,21 +243,47 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </Text>
-                                                      <Text fill="WHITE" layoutX="492.0" layoutY="489.0" strokeType="OUTSIDE" strokeWidth="0.0" text="if any corresponding offers exist" textAlignment="CENTER">
+                                                      <Text fx:id="notifyText" fill="WHITE" layoutX="189.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If there are no suitable Search results, Post a Seek!" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </Text>
-                                                      <Text fill="WHITE" layoutX="54.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seats Required" textAlignment="CENTER">
+                                                      <Text fill="WHITE" layoutX="50.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Passengers" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="Avenir Roman" size="24.0" />
                                                          </font>
                                                       </Text>
-                                                      <TextField layoutX="227.0" layoutY="380.0" prefHeight="44.0" prefWidth="98.0" promptText="Seats">
+                                                      <ComboBox fx:id="numPass" layoutX="310.0" layoutY="381.0" prefHeight="45.0" prefWidth="63.0" promptText="1" />
+                                                      <TextField fx:id="endSub" disable="true" layoutX="447.0" layoutY="254.0" prefHeight="44.0" prefWidth="192.0" promptText="Suburb">
                                                          <font>
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
+                                                      <TextField fx:id="endPC" disable="true" layoutX="648.0" layoutY="254.0" prefHeight="44.0" prefWidth="114.0" promptText="Postcode">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="endNum" disable="true" layoutX="447.0" layoutY="197.0" prefHeight="44.0" prefWidth="99.0" promptText="Number">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <TextField fx:id="endStreet" disable="true" layoutX="558.0" layoutY="197.0" prefHeight="44.0" prefWidth="203.0" promptText="Street Name">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </TextField>
+                                                      <Text fill="WHITE" layoutX="445.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Max Price:     $" textAlignment="CENTER">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="24.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <Text fx:id="errorText" fill="RED" layoutX="262.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Could not post seek - invalid data" textAlignment="CENTER" visible="false">
+                                                         <font>
+                                                            <Font name="Avenir Roman" size="20.0" />
+                                                         </font>
+                                                      </Text>
                                                    </children>
                                                 </AnchorPane>
                                              </content>

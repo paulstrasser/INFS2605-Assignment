@@ -2,6 +2,7 @@
 package infs2605.assignment;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -84,9 +85,14 @@ public class DBController {
     }
     
     //Authenticate
-    public boolean authenticate(String username, String password){
+    public boolean authenticate(String username, String password, Boolean staff){
         java.sql.Statement statement = null;
-        currentQuery = "SELECT USERID FROM USER WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "'";
+        if (staff == true){
+            currentQuery = "SELECT STAFFID FROM STAFF WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "'";
+        }
+        else{
+            currentQuery = "SELECT USERID FROM USER WHERE USERNAME = '" + username + "' AND PASSWORD = '" + password + "'";
+        }
         openConnection();
         try {
             statement = conn.createStatement();
@@ -127,6 +133,29 @@ public class DBController {
         } catch (SQLException ex) {
             Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
         }        
+    }
+    
+    public String returnSingleQuery(String query){
+        java.sql.Statement statement = null;
+        currentQuery = query;
+        openConnection();
+        try {
+            statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(currentQuery);
+            if (rs.next()){ 
+                conn.commit();
+                return rs.getString("ANSWER");
+            }
+            else {
+                statement.close();
+                conn.commit();
+                return "NOTHING FOUND";
+            }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(DBController.class.getName()).log(Level.SEVERE, null, ex);
+            return "ERROR";
+        }
     }
     
     public String GetUserPK(){
