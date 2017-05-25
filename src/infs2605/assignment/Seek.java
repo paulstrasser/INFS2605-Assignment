@@ -1,119 +1,111 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package infs2605.assignment;
 
 import java.util.Date;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 /**
  *
- * @author Hamish Cowan
+ * @author paulstrasser
  */
 public class Seek {
-public long SEEKID;
-public long SEEKERID;
-public StringProperty STRTSUBURB;
-public int STRTPOSTCODE;
-public int STRTSTREETNO;
-public StringProperty STRTSTREETNAME;
-public StringProperty ENDSUBURB;
-public int ENDPOSTCODE;
-public int ENDSTREETNO;
-public StringProperty ENDSTREETNAME;
-public Date DATE;
-public double PRICE;
-public StringProperty PICKUPTIME;
-public Date DATECREATED;
-public StringProperty STATUS;
-public int NUMSEATSREQUIRED;
+public long seekID;
+public long seekerID;
+public StringProperty strtSuburb;
+public int strtPostCode;
+public int strtStreetNo;
+public StringProperty strtStreetName;
+public StringProperty endSuburb;
+public int endPostCode;
+public int endStreetNo;
+public StringProperty endStreetName;
+public Date date;
+public double price;
+public StringProperty pickUpTime;
+public Date dateCreated;
+public StringProperty status;
+public int numSeatsRequired;
 
-public Seek(long SEEKID, long SEEKERID, StringProperty STRTSUBURB, int STRTPOSTCODE, int STRTSTREETNO, StringProperty STRTSTREETNAME, StringProperty ENDSUBURB, int ENDPOSTCODE, int ENDSTREETNO, StringProperty ENDSTREETNAME, Date DATE, double PRICE, StringProperty PICKUPTIME, Date DATECREATED, StringProperty STATUS, int NUMSEATSREQUIRED) {
-        this.SEEKID = SEEKID;
-        this.SEEKERID = SEEKERID;
-        this.STRTSUBURB = STRTSUBURB;
-        this.STRTPOSTCODE = STRTPOSTCODE;
-        this.STRTSTREETNO = STRTSTREETNO;
-        this.STRTSTREETNAME = STRTSTREETNAME;
-        this.ENDSUBURB = ENDSUBURB;
-        this.ENDPOSTCODE = ENDPOSTCODE;
-        this.ENDSTREETNO = ENDSTREETNO;
-        this.ENDSTREETNAME = ENDSTREETNAME;
-        this.DATE = DATE;
-        this.PRICE = PRICE;
-        this.PICKUPTIME = PICKUPTIME;
-        this.DATECREATED = DATECREATED;
-        this.STATUS = STATUS;
-        this.NUMSEATSREQUIRED = NUMSEATSREQUIRED;
+public Seek(long seekID, long seekerID, StringProperty strtSuburb, int strtPostCode, int strtStreetNo, StringProperty strtStreetName, StringProperty endSuburb, int endPostCode, int endStreetNo, StringProperty endStreetName, Date date, double price, StringProperty pickUpTime, Date dateCreated, StringProperty status, int numSeatsRequired) {
+        this.seekID = seekID;
+        this.seekerID = seekerID;
+        this.strtSuburb = strtSuburb;
+        this.strtPostCode = strtPostCode;
+        this.strtStreetNo = strtStreetNo;
+        this.strtStreetName = strtStreetName;
+        this.endSuburb = endSuburb;
+        this.endPostCode = endPostCode;
+        this.endStreetNo = endStreetNo;
+        this.endStreetName = endStreetName;
+        this.date = date;
+        this.price = price;
+        this.pickUpTime = pickUpTime;
+        this.dateCreated = dateCreated;
+        this.status = status;
+        this.numSeatsRequired = numSeatsRequired;
     }
 
-    public long getSEEKID() {
-        return SEEKID;
+    public long getSeekID() {
+        return seekID;
     }
 
-    public long getSEEKERID() {
-        return SEEKERID;
+    public long getSeekerID() {
+        return seekerID;
     }
 
-    public StringProperty getSTRTSUBURB() {
-        return STRTSUBURB;
+    public StringProperty getStrtSuburb() {
+        return strtSuburb;
     }
 
-    public int getSTRTPOSTCODE() {
-        return STRTPOSTCODE;
+    public int getStrtPostCode() {
+        return strtPostCode;
     }
 
-    public int getSTRTSTREETNO() {
-        return STRTSTREETNO;
+    public int getStrtStreetNo() {
+        return strtStreetNo;
     }
 
-    public StringProperty getSTRTSTREETNAME() {
-        return STRTSTREETNAME;
+    public StringProperty getStrtStreetName() {
+        return strtStreetName;
     }
 
-    public StringProperty getENDSUBURB() {
-        return ENDSUBURB;
+    public StringProperty getEndSuburb() {
+        return endSuburb;
     }
 
-    public int getENDPOSTCODE() {
-        return ENDPOSTCODE;
+    public int getEndPostCode() {
+        return endPostCode;
     }
 
-    public int getENDSTREETNO() {
-        return ENDSTREETNO;
+    public int getEndStreetNo() {
+        return endStreetNo;
     }
 
-    public StringProperty getENDSTREETNAME() {
-        return ENDSTREETNAME;
+    public StringProperty getEndStreetName() {
+        return endStreetName;
     }
 
-    public Date getDATE() {
-        return DATE;
+    public Date getDate() {
+        return date;
     }
 
-    public double getPRICE() {
-        return PRICE;
+    public double getPrice() {
+        return price;
     }
 
-    public StringProperty getPICKUPTIME() {
-        return PICKUPTIME;
+    public StringProperty getPickUpTime() {
+        return pickUpTime;
     }
 
-    public Date getDATECREATED() {
-        return DATECREATED;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public StringProperty getSTATUS() {
-        return STATUS;
+    public StringProperty getStatus() {
+        return status;
     }
 
-    public int getNUMSEATSREQUIRED() {
-        return NUMSEATSREQUIRED;
+    public int getnumSeatsRequired() {
+        return numSeatsRequired;
     }
 
 }
-
-
-
