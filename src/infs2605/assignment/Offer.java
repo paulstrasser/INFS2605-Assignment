@@ -1,118 +1,173 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package infs2605.assignment;
 
 import java.util.Date;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
 /**
  *
- * @author Hamish Cowan
+ * @author paulstrasser
  */
 public class Offer {
-public long OFFERID;
-public long OFFERERID;
-public StringProperty STRTSUBURB;
-public int STRTPOSTCODE;
-public int STRTSTREETNO;
-public StringProperty STRTSTREETNAME;
-public StringProperty ENDSUBURB;
-public int ENDPOSTCODE;
-public int ENDSTREETNO;
-public StringProperty ENDSTREETNAME;
-public Date DATE;
-public double PRICE;
-public StringProperty PICKUPTIME;
-public Date DATECREATED;
-public StringProperty STATUS;
-public int NUMSEATSAVAILABLE;
+public Long offerID;
+public Long offererID;
+public StringProperty strtSuburb;
+public Integer strtPostCode;
+public Integer strtStreetNo;
+public StringProperty strtStreetName;
+public StringProperty endSuburb;
+public Integer endPostCode;
+public Integer endStreetNo;
+public StringProperty endStreetName;
+public StringProperty date;
+public Double price;
+public StringProperty pickUpTime;
+public StringProperty dateCreated;
+public StringProperty status;
+public Integer numSeatsAvailable;
 
-public Offer(long OFFERID, long OFFERERID, StringProperty STRTSUBURB, int STRTPOSTCODE, int STRTSTREETNO, StringProperty STRTSTREETNAME, StringProperty ENDSUBURB, int ENDPOSTCODE, int ENDSTREETNO, StringProperty ENDSTREETNAME, Date DATE, double PRICE, StringProperty PICKUPTIME, Date DATECREATED, StringProperty STATUS, int NUMSEATSAVAILABLE) {
-        this.OFFERID = OFFERID;
-        this.OFFERERID = OFFERERID;
-        this.STRTSUBURB = STRTSUBURB;
-        this.STRTPOSTCODE = STRTPOSTCODE;
-        this.STRTSTREETNO = STRTSTREETNO;
-        this.STRTSTREETNAME = STRTSTREETNAME;
-        this.ENDSUBURB = ENDSUBURB;
-        this.ENDPOSTCODE = ENDPOSTCODE;
-        this.ENDSTREETNO = ENDSTREETNO;
-        this.ENDSTREETNAME = ENDSTREETNAME;
-        this.DATE = DATE;
-        this.PRICE = PRICE;
-        this.PICKUPTIME = PICKUPTIME;
-        this.DATECREATED = DATECREATED;
-        this.STATUS = STATUS;
-        this.NUMSEATSAVAILABLE = NUMSEATSAVAILABLE;
+public Offer(Long offerID, Long offererID, String strtSuburb, Integer strtPostCode, Integer strtStreetNo, String strtStreetName, String endSuburb, Integer endPostCode, Integer endStreetNo, String endStreetName, String date, Double price, String pickUpTime, String dateCreated, String status, Integer numSeatsAvailable) {
+        this.offerID = new Long(offerID);
+        this.offererID = new Long(offererID);
+        this.strtSuburb = new SimpleStringProperty(strtSuburb);
+        this.strtPostCode = new Integer(strtPostCode);
+        this.strtStreetNo = new Integer(strtStreetNo);
+        this.strtStreetName = new SimpleStringProperty(strtStreetName);
+        this.endSuburb = new SimpleStringProperty(endSuburb);
+        this.endPostCode = new Integer(endPostCode);
+        this.endStreetNo = new Integer(endStreetNo);
+        this.endStreetName = new SimpleStringProperty(endStreetName);
+        this.date = new SimpleStringProperty(date);
+        this.price = new Double(price);
+        this.pickUpTime = new SimpleStringProperty(pickUpTime);
+        this.dateCreated = new SimpleStringProperty(dateCreated);
+        this.status = new SimpleStringProperty(status);
+        this.numSeatsAvailable = new Integer(numSeatsAvailable);
     }
 
-    public long getOFFERID() {
-        return OFFERID;
+    public String getOfferID() {
+        return offerID.toString();
     }
 
-    public long getOFFERERID() {
-        return OFFERERID;
+    public String getOffererID() {
+        return offererID.toString();
     }
 
-    public StringProperty getSTRTSUBURB() {
-        return STRTSUBURB;
+    public String getStrtSuburb() {
+        return strtSuburb.get();
     }
 
-    public int getSTRTPOSTCODE() {
-        return STRTPOSTCODE;
+    public String getStrtPostCode() {
+        return strtPostCode.toString();
     }
 
-    public int getSTRTSTREETNO() {
-        return STRTSTREETNO;
+    public String getStrtStreetNo() {
+        return strtStreetNo.toString();
     }
 
-    public StringProperty getSTRTSTREETNAME() {
-        return STRTSTREETNAME;
+    public String getStrtStreetName() {
+        return strtStreetName.get();
     }
 
-    public StringProperty getENDSUBURB() {
-        return ENDSUBURB;
+    public String getEndSuburb() {
+        return endSuburb.get();
     }
 
-    public int getENDPOSTCODE() {
-        return ENDPOSTCODE;
+    public String getEndPostCode() {
+        return endPostCode.toString();
     }
 
-    public int getENDSTREETNO() {
-        return ENDSTREETNO;
+    public String getEndStreetNo() {
+        return endStreetNo.toString();
     }
 
-    public StringProperty getENDSTREETNAME() {
-        return ENDSTREETNAME;
+    public String getEndStreetName() {
+        return endStreetName.get();
     }
 
-    public Date getDATE() {
-        return DATE;
+    public String getDate() {
+        return date.get();
     }
 
-    public double getPRICE() {
-        return PRICE;
+    public String getPrice() {
+        return price.toString();
     }
 
-    public StringProperty getPICKUPTIME() {
-        return PICKUPTIME;
+    public String getPickUpTime() {
+        return pickUpTime.get();
     }
 
-    public Date getDATECREATED() {
-        return DATECREATED;
+    public String getDateCreated() {
+        return dateCreated.get();
     }
 
-    public StringProperty getSTATUS() {
-        return STATUS;
+    public String getStatus() {
+        return status.get();
     }
 
-    public int getNUMSEATSAVAILABLE() {
-        return NUMSEATSAVAILABLE;
+    public String getNumSeatsAvailable() {
+        return numSeatsAvailable.toString();
+    }
+public Long getOfferIDProperty() {
+        return offerID;
     }
 
+    public Long getOffererIDProperty() {
+        return offererID;
+    }
 
+    public StringProperty getStrtSuburbProperty() {
+        return strtSuburb;
+    }
+
+    public Integer getStrtPostCodeProperty() {
+        return strtPostCode;
+    }
+
+    public Integer getStrtStreetNoProperty() {
+        return strtStreetNo;
+    }
+
+    public StringProperty getStrtStreetNameProperty() {
+        return strtStreetName;
+    }
+
+    public StringProperty getEndSuburbProperty() {
+        return endSuburb;
+    }
+
+    public Integer getEndPostCodeProperty() {
+        return endPostCode;
+    }
+
+    public Integer getEndStreetNoProperty() {
+        return endStreetNo;
+    }
+
+    public StringProperty getEndStreetNameProperty() {
+        return endStreetName;
+    }
+
+    public StringProperty getDateProperty() {
+        return date;
+    }
+
+    public Double getPriceProperty() {
+        return price;
+    }
+
+    public StringProperty getPickUpTimeProperty() {
+        return pickUpTime;
+    }
+
+    public StringProperty getDateCreatedProperty() {
+        return dateCreated;
+    }
+
+    public StringProperty getStatusProperty() {
+        return status;
+    }
+
+    public Integer getNumSeatsAvailableProperty() {
+        return numSeatsAvailable;
+    }
 }
-
