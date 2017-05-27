@@ -8,13 +8,19 @@ package infs2605.assignment;
 //import static infs2605.assignment.SignInController.loggedInUser;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,12 +30,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -70,21 +80,201 @@ public class OfferARideController implements Initializable {
     private MenuItem SeekaRide, YourSeeks, OfferaRide, YourOffers, AgreementRequests;
     
     @FXML
-    private MenuItem AdjustmentRequests;;
+    private MenuItem AdjustmentRequests;
     
+    @FXML
+    private TableView<Seek> Seeks;
     
+    @FXML
+    private TableColumn<Seek, String> seekIDCol;
+    
+    @FXML
+    private TableColumn<Seek, String> seekerIDCol;
+    
+    @FXML
+    private TableColumn<Seek, String> strtSuburbCol;
+    
+    @FXML    
+    private TableColumn<Seek, String> strtPostCodeCol;    
+    
+    @FXML    
+    private TableColumn<Seek, String> strtStreetNoCol; 
+    
+    @FXML
+    private TableColumn<Seek, String> strtStreetNameCol;
+    
+    @FXML
+    private TableColumn<Seek, String> endSuburbCol;
+    
+    @FXML
+    private TableColumn<Seek, String> endPostCodeCol;
+    
+    @FXML
+    private TableColumn<Seek, String> endStreetNoCol;
+    
+    @FXML
+    private TableColumn<Seek, String> endStreetNameCol;
+    
+    @FXML
+    private TableColumn<Seek, String> dateCol;
+    
+    @FXML
+    private TableColumn<Seek, String> priceCol;
+    
+    @FXML
+    private TableColumn<Seek, String> pickUpTimeCol;
+    
+    @FXML
+    private TableColumn<Seek, String> dateCreatedCol;
+    
+    @FXML
+    private TableColumn<Seek, String> statusCol;
+    
+    @FXML
+    private TableColumn<Seek, String> numSeatsRequiredCol;
+    
+    @FXML
+    private AnchorPane SingleSeek;
+    
+    @FXML
+    private Label seekID;
+    
+    @FXML
+    private Label seekID2;
+    
+    @FXML
+    private Label seekerID;
+    
+    @FXML
+    private Label dateCreated;
+    
+    @FXML
+    private Label status;
+    
+    @FXML
+    private Label strtStreetNo;
+    
+    @FXML
+    private Label strtStreetName;
+    
+    @FXML
+    private Label strtSuburb;
+    
+    @FXML
+    private Label strtPostCode;
+    
+    @FXML
+    private Label endStreetNo;
+    
+    @FXML
+    private Label endStreetName;
+    
+    @FXML
+    private Label endSuburb;
+    
+    @FXML
+    private Label endPostCode;
+    
+    @FXML
+    private Label date;
+    
+    @FXML
+    private Label price;
+    
+    @FXML
+    private Label pickUpTime;
+    
+    @FXML
+    private Label numberOfSeats;
+    
+    @FXML
+    private Button Back;    
     
     @FXML
     private TitledPane searchResultsTitledPane;
+    
+    DBController d = new DBController(); //Establish a connection to the db
+    
+    ArrayList<Seek> seeksList = new ArrayList<>(); //Creates the array list
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Makes the 'Results' TitledPane not collapseable 
         searchResultsTitledPane.setCollapsible(false); 
+        SingleSeek.setVisible(false);
         numPass.getItems().addAll("1", "2", "3","4");
         numPass.getSelectionModel().selectFirst();
+        
+        seekIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeekIDProperty().toString()));
+        
+        seekerIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeekerIDProperty().toString()));
+        
+        strtSuburbCol.setCellValueFactory(cellData -> cellData.getValue().getStrtSuburbProperty());
+        
+        strtPostCodeCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStrtPostCodeProperty().toString()));
+
+        strtStreetNoCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStrtStreetNoProperty().toString()));
+        
+        strtStreetNameCol.setCellValueFactory(cellData -> cellData.getValue().getStrtStreetNameProperty());
+        
+        endSuburbCol.setCellValueFactory(cellData -> cellData.getValue().getEndSuburbProperty());
+        
+        endPostCodeCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEndPostCodeProperty().toString()));
+
+        endStreetNoCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEndStreetNoProperty().toString()));
+        
+        endStreetNameCol.setCellValueFactory(cellData -> cellData.getValue().getEndStreetNameProperty());
+        
+        dateCol.setCellValueFactory(cellData -> cellData.getValue().getDateProperty());
+        
+        priceCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPriceProperty().toString()));
+        
+        pickUpTimeCol.setCellValueFactory(cellData -> cellData.getValue().getPickUpTimeProperty());
+        
+        dateCreatedCol.setCellValueFactory(cellData -> cellData.getValue().getDateCreatedProperty());
+        
+        statusCol.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
+        
+        numSeatsRequiredCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumSeatsRequiredProperty().toString()));
+        getSeeks();
+        
+        Seeks.setItems(FXCollections.observableArrayList(seeksList));
+          
+        Seeks.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showSeek(newValue));
+    }
+     public void getSeeks() {
+        try {
+            seeksList.clear();
+            ResultSet rs = d.getResultSet("SELECT * FROM SEEK");
+            while (rs.next()) {
+                seeksList.add(new Seek(rs.getLong("SEEKID"), rs.getLong("SEEKERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OfferARideController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
-    
+    public void showSeek(Seek seek) {
+        SingleSeek.setVisible(true);
+        seekID2.setText(seek.getSeekID());
+        seekID.setText(seek.getSeekID());
+        seekerID.setText(seek.getSeekerID());
+        dateCreated.setText(seek.getDateCreated());
+        status.setText(seek.getStatus());
+        strtStreetNo.setText(seek.getStrtStreetNo());
+        strtStreetName.setText(seek.getStrtStreetName());
+        strtSuburb.setText(seek.getStrtSuburb());
+        strtPostCode.setText(seek.getStrtPostCode());
+        endStreetNo.setText(seek.getEndStreetNo());
+        endStreetName.setText(seek.getEndStreetName());
+        endSuburb.setText(seek.getEndSuburb());
+        endPostCode.setText(seek.getEndPostCode());
+        date.setText(seek.getDate());
+        price.setText(seek.getPrice());
+        pickUpTime.setText(seek.getPickUpTime());
+        numberOfSeats.setText(seek.getNumSeatsRequired());
+    }
     @FXML
     private void SignOut(ActionEvent event) throws Exception {
 
@@ -446,7 +636,9 @@ public class OfferARideController implements Initializable {
         
         return false;
     }
-    
+    @FXML
+    private void Back(ActionEvent event) throws Exception {
+        SingleSeek.setVisible(false);
     /*@FXML
     private void findResults(ActionEvent event) throws Exception {
     //this method is a test done by Paul (cool story bro). It displays 'hello' in each grid of the gridpane.
@@ -458,11 +650,6 @@ public class OfferARideController implements Initializable {
                 results.add(test,i,j);
             }
         }
-    }*/
-    
-    
-    
-    
-       
-    
+    }*/ 
+    }
 }
