@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -132,6 +133,66 @@ public class StaffSeeksController implements Initializable {
     @FXML
     private AnchorPane refreshSearch;
     
+    @FXML
+    private AnchorPane Single;
+    
+    @FXML
+    private Label seekID;
+    
+    @FXML
+    private Label seekID2;
+    
+    @FXML
+    private Label seekerID;
+    
+    @FXML
+    private Label dateCreated;
+    
+    @FXML
+    private Label status;
+    
+    @FXML
+    private Label strtStreetNo;
+    
+    @FXML
+    private Label strtStreet;
+    
+    @FXML
+    private Label strtSuburb;
+    
+    @FXML
+    private Label strtPostCode;
+    
+    @FXML
+    private Label endStreetNo;
+    
+    @FXML
+    private Label endStreet;
+    
+    @FXML
+    private Label endSuburb;
+    
+    @FXML
+    private Label endPostCode;
+    
+    @FXML
+    private Label date;
+    
+    @FXML
+    private Label price;
+    
+    @FXML
+    private Label pickUpTime;
+    
+    @FXML
+    private Label numberOfSeats;
+    
+    @FXML
+    private Button Back;
+    
+            
+            
+    
     
     
     @FXML
@@ -217,6 +278,8 @@ public class StaffSeeksController implements Initializable {
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Single.setVisible(false);
+        
         seekIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeekIDProperty().toString()));
         
         seekerIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeekerIDProperty().toString()));
@@ -251,7 +314,11 @@ public class StaffSeeksController implements Initializable {
         
         getSeeks();
         
+        
         Table.setItems(FXCollections.observableArrayList(seekList));
+        
+        Table.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showSeek(newValue));
         
         SearchBy.getItems().addAll("ID", "Starting Suburb", "Ending Suburb", "Date", "Date Created", "Price", "Status", "Number of Seats");
         SearchCombo.getItems().addAll("Pending", "Matched");
@@ -272,6 +339,32 @@ public class StaffSeeksController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(StaffSeeksController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void showSeek(Seek seek) {
+        Single.setVisible(true);
+        seekID2.setText(seek.getSeekID());
+        seekID.setText(seek.getSeekID());
+        seekerID.setText(seek.getSeekerID());
+        dateCreated.setText(seek.getDateCreated());
+        status.setText(seek.getStatus());
+        strtStreetNo.setText(seek.getStrtStreetNo());
+        strtStreet.setText(seek.getStrtStreetName());
+        strtSuburb.setText(seek.getStrtSuburb());
+        strtPostCode.setText(seek.getStrtPostCode());
+        endStreetNo.setText(seek.getEndStreetNo());
+        endStreet.setText(seek.getEndStreetName());
+        endSuburb.setText(seek.getEndSuburb());
+        endPostCode.setText(seek.getEndPostCode());
+        date.setText(seek.getDate());
+        price.setText(seek.getPrice());
+        pickUpTime.setText(seek.getPickUpTime());
+        numberOfSeats.setText(seek.getNumSeatsRequired());
+    }
+    
+    @FXML
+    private void Back(ActionEvent event) throws Exception {
+        Single.setVisible(false);
     }
     
     @FXML
