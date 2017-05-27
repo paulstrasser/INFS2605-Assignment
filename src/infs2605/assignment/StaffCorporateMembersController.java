@@ -23,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -92,6 +93,9 @@ public class StaffCorporateMembersController implements Initializable {
     
     @FXML
     private TableColumn<CorporateMember, String> ABNCol;
+    
+    @FXML
+    private Text Name;
     
     @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -198,7 +202,9 @@ public class StaffCorporateMembersController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*corporateMemberIdCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorporateMemberIdProperty().toString()));
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        
+        corporateMemberIdCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorporateMemberIdProperty().toString()));
         
         companyNameCol.setCellValueFactory(cellData -> cellData.getValue().getCompanyNameProperty());
 
@@ -218,10 +224,10 @@ public class StaffCorporateMembersController implements Initializable {
         
         getCorporateMembers();
         
-        Table.setItems(FXCollections.observableArrayList(corporateMembersList));*/
+        Table.setItems(FXCollections.observableArrayList(corporateMembersList));
         //SearchCITY.getItems().addAll("Sydney", "Melbourne", "Brisbane", "Perth", "Darwin", "Adelaide", "Hobart");
     }    
-    /*
+    
     public void getCorporateMembers() {
         try {
             corporateMembersList.clear();
@@ -233,7 +239,7 @@ public class StaffCorporateMembersController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(StaffCorporateMembersController.class.getName()).log(Level.SEVERE, null, ex);
         } 
-    }*/
+    }
 }
 
 

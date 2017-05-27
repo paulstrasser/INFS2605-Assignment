@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -161,11 +162,15 @@ public class StaffAddNormalMembersController implements Initializable {
     @FXML
     private DatePicker CExpiryDate;
     
+    @FXML
+    private Text Name;
+    
     
     DBController d = new DBController();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         UserType.getItems().addAll("Seeker", "Offerer", "Both");
         Gender.getItems().addAll("Male", "Female", "Unspecified");
         HCity.getItems().addAll("Sydney", "Melbourne", "Brisbane", "Perth", "Darwin", "Adelaide", "Hobart");

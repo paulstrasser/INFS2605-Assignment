@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -75,6 +76,9 @@ public class StaffAddStaffController implements Initializable {
     
     @FXML
     private DatePicker dpDOB;
+    
+    @FXML
+    private Text Name;
             
     @FXML
     private void Cancel(ActionEvent event) throws Exception { //Goes to 'Matches' screen
@@ -169,7 +173,7 @@ public class StaffAddStaffController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
     }    
     
     @FXML

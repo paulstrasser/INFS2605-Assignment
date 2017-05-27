@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -313,6 +314,9 @@ public class StaffNormalMembersController implements Initializable {
     
     @FXML
     private ComboBox SearchCity;
+    
+    @FXML
+    private Text Name;
         
     @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -407,6 +411,9 @@ public class StaffNormalMembersController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+
+        
         ViewNormalMembersPane.setVisible(true);
         EditNormalMembersPane.setVisible(false);
         USERIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUSERIDProperty().toString()));
@@ -698,42 +705,7 @@ public class StaffNormalMembersController implements Initializable {
         }
 
     }
-    /*@FXML
-    private void Search(ActionEvent event) throws Exception { //Goes to 'Staff' screen
-        String SrchFName = SearchFNAME.getText();
-        String SrchLName = SearchLNAME.getText();
-        String SrchUserType = (String) SearchUSERTYPE.getSelectionModel().getSelectedItem();
-        String SrchGender = (String) SearchGENDER.getSelectionModel().getSelectedItem();
-        String SrchUsername = SearchUSERNAME.getText();
-        String SrchCity = (String) SearchCITY.getSelectionModel().getSelectedItem();
-        System.out.println(SrchCity);
-                
-        
-        normalMembersList.clear();
-        try { 
-            System.out.println("4");
-            
-            ResultSet rs = d.getResultSet("SELECT * " 
-                    + "FROM USER "
-                    + "WHERE FNAME LIKE '%" + SrchFName + "%' "
-                    + "AND LNAME LIKE '%" + SrchLName + "%' "
-                    + "AND GENDER LIKE '%" + SrchGender + "%' "
-                    + "AND USERNAME LIKE '%" + SrchUsername + "%' "
-                    + "AND HCITY LIKE '%" + SrchCity + "%'");
-                    //+ "AND WCITY LIKE '%" + SearchCITY.getSelectionModel().getSelectedItem() + "%'");        
-            
-            System.out.println("5");
-            while (rs.next()) {
-                normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
-            }
-            System.out.println("6");
-            Table.setItems(FXCollections.observableArrayList(normalMembersList));  
-            System.out.println("7");
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(StaffNormalMembersController.class.getName()).log(Level.SEVERE, null, ex);
-        }   
-    }*/
+    
     
     @FXML
     private void clearSearch(MouseEvent event) throws Exception {

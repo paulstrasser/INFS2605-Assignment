@@ -94,7 +94,7 @@ public class SignInController implements Initializable {
             //InjectionError.setVisible(false);
             if (group.getSelectedToggle() == Staff){
                 if (auth.authenticate(username.getText(), password.getText(), true)){
-                    loadNext("StaffSeeks.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
+                    loadNext("StaffNormalMembers.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
                     loggedInUser = username.getText();
 
                 }
@@ -146,7 +146,5 @@ public class SignInController implements Initializable {
     public static String getUser(){
         return loggedInUser;
     }
-    
-    
     
 }

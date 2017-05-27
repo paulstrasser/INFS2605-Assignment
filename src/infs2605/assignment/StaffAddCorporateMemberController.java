@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -84,6 +85,9 @@ public class StaffAddCorporateMemberController implements Initializable {
     
     @FXML
     private TextField ABN;
+    
+    @FXML
+    private Text Name;
     
             
     @FXML
@@ -180,7 +184,7 @@ public class StaffAddCorporateMemberController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //HCity.getItems().addAll("Sydney", "Melbourne", "Brisbane", "Perth", "Darwin", "Adelaide", "Hobart");
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
 
     }
 

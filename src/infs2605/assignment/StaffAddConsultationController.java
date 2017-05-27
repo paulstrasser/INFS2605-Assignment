@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -78,6 +79,9 @@ public class StaffAddConsultationController implements Initializable {
     
     @FXML
     private DatePicker dpDateClosed;
+    
+    @FXML
+    private Text Name;
     
             
     @FXML
@@ -206,6 +210,8 @@ public class StaffAddConsultationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbStatus.getItems().addAll("Open", "Closed");
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+
     }    
     
 }

@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -64,6 +65,11 @@ public class ProfilePageController implements Initializable {
     @FXML
     private TitledPane Payment;
     
+    @FXML
+    private Text Name;
+    
+    DBController d = new DBController();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Makes all the titledPanes not able to be collapsed
@@ -72,6 +78,8 @@ public class ProfilePageController implements Initializable {
         CarDetails.setCollapsible(false);
         LicenseDetails.setCollapsible(false);
         Payment.setCollapsible(false); 
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+
     }   
     
     @FXML

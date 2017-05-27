@@ -23,7 +23,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -37,7 +36,7 @@ import javafx.stage.Stage;
  *
  * @author paulstrasser
  */
-public class StaffOffersController implements Initializable {
+public class StaffPaymentsController implements Initializable {
 
     @FXML
     Stage stage;
@@ -65,55 +64,55 @@ public class StaffOffersController implements Initializable {
     private Button Matches;
     
     @FXML
-    private TableView<Offer> Table;
+    private TableView<Seek> Table;
 
     @FXML
-    private TableColumn<Offer, String> offerIDCol;
+    private TableColumn<Seek, String> offerIDCol;
 
     @FXML
-    private TableColumn<Offer, String> offererIDCol;
+    private TableColumn<Seek, String> offererIDCol;
 
     @FXML
-    private TableColumn<Offer, String> strtSuburbCol;
+    private TableColumn<Seek, String> strtSuburbCol;
     
     @FXML
-    private TableColumn<Offer, String> strtPostCodeCol;
+    private TableColumn<Seek, String> strtPostCodeCol;
     
     @FXML
-    private TableColumn<Offer, String> strtStreetNoCol;
+    private TableColumn<Seek, String> strtStreetNoCol;
     
     @FXML
-    private TableColumn<Offer, String> strtStreetNameCol;
+    private TableColumn<Seek, String> strtStreetNameCol;
     
     @FXML
-    private TableColumn<Offer, String> endSuburbCol;
+    private TableColumn<Seek, String> endSuburbCol;
     
     @FXML
-    private TableColumn<Offer, String> endPostCodeCol;
+    private TableColumn<Seek, String> endPostCodeCol;
     
     @FXML
-    private TableColumn<Offer, String> endStreetNoCol;
+    private TableColumn<Seek, String> endStreetNoCol;
     
     @FXML
-    private TableColumn<Offer, String> endStreetNameCol;
+    private TableColumn<Seek, String> endStreetNameCol;
     
     @FXML
-    private TableColumn<Offer, String> dateCol;
+    private TableColumn<Seek, String> dateCol;
     
     @FXML
-    private TableColumn<Offer, String> priceCol;
+    private TableColumn<Seek, String> priceCol;
     
     @FXML
-    private TableColumn<Offer, String> pickUpTimeCol;
+    private TableColumn<Seek, String> pickUpTimeCol;
     
     @FXML
-    private TableColumn<Offer, String> dateCreatedCol;
+    private TableColumn<Seek, String> dateCreatedCol;
     
     @FXML
-    private TableColumn<Offer, String> statusCol;
+    private TableColumn<Seek, String> statusCol;
     
     @FXML
-    private TableColumn<Offer, String> numSeatsAvailableCol;
+    private TableColumn<Seek, String> numSeatsRequiredCol;
     
     @FXML
     private Button Search;
@@ -132,63 +131,6 @@ public class StaffOffersController implements Initializable {
     
     @FXML
     private AnchorPane ViewPane;
-    
-    @FXML
-    private AnchorPane Single;
-    
-    @FXML
-    private Label offerID;
-    
-    @FXML
-    private Label offerID2;
-    
-    @FXML
-    private Label offererID;
-    
-    @FXML
-    private Label dateCreated;
-    
-    @FXML
-    private Label status;
-    
-    @FXML
-    private Label strtStreetNo;
-    
-    @FXML
-    private Label strtStreet;
-    
-    @FXML
-    private Label strtSuburb;
-    
-    @FXML
-    private Label strtPostCode;
-    
-    @FXML
-    private Label endStreetNo;
-    
-    @FXML
-    private Label endStreet;
-    
-    @FXML
-    private Label endSuburb;
-    
-    @FXML
-    private Label endPostCode;
-    
-    @FXML
-    private Label date;
-    
-    @FXML
-    private Label price;
-    
-    @FXML
-    private Label pickUpTime;
-    
-    @FXML
-    private Label numberOfSeats;
-    
-    @FXML
-    private Button Back;
     
     @FXML
     private Text Name;
@@ -273,17 +215,15 @@ public class StaffOffersController implements Initializable {
     
     DBController d = new DBController(); //Establish a connection to the db
     
-    ArrayList<Offer> offerList = new ArrayList<>(); //Creates the array list
+    ArrayList<Seek> offerList = new ArrayList<>(); //Creates the array list
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         
-        Single.setVisible(false);
+        offerIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeekIDProperty().toString()));
         
-        offerIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOfferIDProperty().toString()));
-        
-        offererIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOffererIDProperty().toString()));
+        offererIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeekerIDProperty().toString()));
         
         strtSuburbCol.setCellValueFactory(cellData -> cellData.getValue().getStrtSuburbProperty());
         
@@ -311,14 +251,11 @@ public class StaffOffersController implements Initializable {
 
         statusCol.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
 
-        numSeatsAvailableCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumSeatsAvailableProperty().toString()));
+        numSeatsRequiredCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumSeatsRequiredProperty().toString()));
         
         getOffers();
         
         Table.setItems(FXCollections.observableArrayList(offerList));
-        
-        Table.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> showOffer(newValue));
         
         SearchBy.getItems().addAll("ID", "Starting Suburb", "End Suburb", "Date", "Date Created", "Price", "Status", "Number of Seats");
         SearchValue.setVisible(true);
@@ -332,7 +269,7 @@ public class StaffOffersController implements Initializable {
             offerList.clear();
             ResultSet rs = d.getResultSet("SELECT * FROM OFFER");
             while (rs.next()) {
-                offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
             }
             
             
@@ -340,33 +277,6 @@ public class StaffOffersController implements Initializable {
             Logger.getLogger(StaffOffersController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void showOffer(Offer offer) {
-        Single.setVisible(true);
-        offerID2.setText(offer.getOfferID());
-        offerID.setText(offer.getOfferID());
-        offererID.setText(offer.getOffererID());
-        dateCreated.setText(offer.getDateCreated());
-        status.setText(offer.getStatus());
-        strtStreetNo.setText(offer.getStrtStreetNo());
-        strtStreet.setText(offer.getStrtStreetName());
-        strtSuburb.setText(offer.getStrtSuburb());
-        strtPostCode.setText(offer.getStrtPostCode());
-        endStreetNo.setText(offer.getEndStreetNo());
-        endStreet.setText(offer.getEndStreetName());
-        endSuburb.setText(offer.getEndSuburb());
-        endPostCode.setText(offer.getEndPostCode());
-        date.setText(offer.getDate());
-        price.setText(offer.getPrice());
-        pickUpTime.setText(offer.getPickUpTime());
-        numberOfSeats.setText(offer.getNumSeatsAvailable());
-    }
-    
-    @FXML
-    private void Back(ActionEvent event) throws Exception {
-        Single.setVisible(false);
-    }
-    
     @FXML
     private void ComboBoxChoice(ActionEvent event) throws Exception {
         String SearchByType = (String) SearchBy.getSelectionModel().getSelectedItem();
@@ -427,7 +337,7 @@ public class StaffOffersController implements Initializable {
                             + "FROM OFFER "
                             + "WHERE OFFERID  = '" + SearchValue.getText() + "'");
                     while (rs.next()) {
-                        offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                        offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
                     }
                     break;
                 case "Starting Suburb":
@@ -435,7 +345,7 @@ public class StaffOffersController implements Initializable {
                             + "FROM OFFER "
                             + "WHERE STRTSUBURB  LIKE '%" + SearchValue.getText() + "%'");
                     while (rs.next()) {
-                        offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                        offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
                     }
                     break;
                 case "End Suburb":
@@ -443,7 +353,7 @@ public class StaffOffersController implements Initializable {
                             + "FROM OFFER "
                             + "WHERE ENDSUBURB  LIKE '%" + SearchValue.getText() + "%'");
                     while (rs.next()) {
-                        offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                        offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
                     }
                     break;
                 case "Date":
@@ -451,7 +361,7 @@ public class StaffOffersController implements Initializable {
                             + "FROM OFFER "
                             + "WHERE DATE  = '" + SearchDate.getValue().toString() + "'");
                     while (rs.next()) {
-                        offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                        offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
                     }
                     break;
                 case "Date Created":
@@ -459,7 +369,7 @@ public class StaffOffersController implements Initializable {
                             + "FROM OFFER "
                             + "WHERE DATECREATED  = '" + SearchDate.getValue().toString() + "'");
                     while (rs.next()) {
-                        offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                        offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
                     }
                     break;
                 case "Price":
@@ -467,7 +377,7 @@ public class StaffOffersController implements Initializable {
                             + "FROM OFFER "
                             + "WHERE PRICE  = '" + SearchValue.getText() + "'");
                     while (rs.next()) {
-                        offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                        offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
                     }
                     break;
                 case "Status":
@@ -475,7 +385,7 @@ public class StaffOffersController implements Initializable {
                             + "FROM OFFER "
                             + "WHERE STATUS  = '" + SearchCombo.getSelectionModel().getSelectedItem().toString() + "'");
                     while (rs.next()) {
-                        offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                        offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
                     }
                     break;
                 case "Number of Seats":
@@ -483,7 +393,7 @@ public class StaffOffersController implements Initializable {
                             + "FROM OFFER "
                             + "WHERE NUMSEATSREQUIRED  = '" + SearchValue.getText() + "'");
                     while (rs.next()) {
-                        offerList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+                        offerList.add(new Seek(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
                     }
                     break;        
                 default:
@@ -515,4 +425,3 @@ public class StaffOffersController implements Initializable {
    
     
 }
-

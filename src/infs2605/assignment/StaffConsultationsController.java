@@ -28,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -136,6 +137,9 @@ public class StaffConsultationsController implements Initializable {
     
     @FXML
     private Button Search;
+    
+    @FXML
+    private Text Name;
     
     @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -247,6 +251,8 @@ public class StaffConsultationsController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+
         EditPane.setVisible(false);
         tfConsultID.setVisible(false);
         consultIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getConsultIDProperty().toString()));
