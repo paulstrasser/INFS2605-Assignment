@@ -1,16 +1,22 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package infs2605.assignment;
 
-import java.util.Date;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author paulstrasser
  */
-public class Seek {
+public class Agreement {
+    public Long agreementID;
     public Long seekID;
     public Long seekerID;
+    public Long offerID;
+    public Long offererID;
     public StringProperty strtSuburb;
     public Integer strtPostCode;
     public Integer strtStreetNo;
@@ -24,27 +30,37 @@ public class Seek {
     public StringProperty pickUpTime;
     public StringProperty dateCreated;
     public StringProperty status;
+    public Long paymentID;
     public Integer numSeatsRequired;
 
-    public Seek(long seekID, long seekerID, String strtSuburb, int strtPostCode, int strtStreetNo, String strtStreetName, String endSuburb, int endPostCode, int endStreetNo, String endStreetName, String date, double price, String pickUpTime, String dateCreated, String status, int numSeatsRequired) {
-        this.seekID = new Long(seekID);
-        this.seekerID = new Long(seekerID);
-        this.strtSuburb = new SimpleStringProperty(strtSuburb);
-        this.strtPostCode = new Integer(strtPostCode);
-        this.strtStreetNo = new Integer(strtStreetNo);
-        this.strtStreetName = new SimpleStringProperty(strtStreetName);
-        this.endSuburb = new SimpleStringProperty(endSuburb);
-        this.endPostCode = new Integer(endPostCode);
-        this.endStreetNo = new Integer(endStreetNo);
-        this.endStreetName = new SimpleStringProperty(endStreetName);
-        this.date = new SimpleStringProperty(date);
-        this.price = new Double(price);
-        this.pickUpTime = new SimpleStringProperty(pickUpTime);
-        this.dateCreated = new SimpleStringProperty(dateCreated);
-        this.status = new SimpleStringProperty(status);
-        this.numSeatsRequired = new Integer (numSeatsRequired);
+    public Agreement(Long agreementID, Long seekID, Long seekerID, Long offerID, Long offererID, StringProperty strtSuburb, Integer strtPostCode, Integer strtStreetNo, StringProperty strtStreetName, StringProperty endSuburb, Integer endPostCode, Integer endStreetNo, StringProperty endStreetName, StringProperty date, Double price, StringProperty pickUpTime, StringProperty dateCreated, StringProperty status, Long paymentID, Integer numSeatsRequired) {
+        this.agreementID = agreementID;
+        this.seekID = seekID;
+        this.seekerID = seekerID;
+        this.offerID = offerID;
+        this.offererID = offererID;
+        this.strtSuburb = strtSuburb;
+        this.strtPostCode = strtPostCode;
+        this.strtStreetNo = strtStreetNo;
+        this.strtStreetName = strtStreetName;
+        this.endSuburb = endSuburb;
+        this.endPostCode = endPostCode;
+        this.endStreetNo = endStreetNo;
+        this.endStreetName = endStreetName;
+        this.date = date;
+        this.price = price;
+        this.pickUpTime = pickUpTime;
+        this.dateCreated = dateCreated;
+        this.status = status;
+        this.paymentID = paymentID;
+        this.numSeatsRequired = numSeatsRequired;
     }
-
+    
+    
+    public String getAgreementID() {
+        return agreementID.toString();
+    }
+    
     public String getSeekID() {
         return seekID.toString();
     }
@@ -52,7 +68,15 @@ public class Seek {
     public String getSeekerID() {
         return seekerID.toString();
     }
-
+    
+    public String getOfferID() {
+        return offerID.toString();
+    }
+    
+    public String getOffererID() {
+        return offererID.toString();
+    }
+    
     public String getStrtSuburb() {
         return strtSuburb.get();
     }
@@ -104,9 +128,19 @@ public class Seek {
     public String getStatus() {
         return status.get();
     }
+    
+    public String getPaymentID() {
+        return paymentID.toString();
+    }
 
     public String getNumSeatsRequired() {
         return numSeatsRequired.toString();
+    }
+
+    //---------------------------------------------------------------------------
+    
+    public Long getAgreementIDProperty() {
+        return agreementID;
     }
     
     public Long getSeekIDProperty() {
@@ -115,6 +149,14 @@ public class Seek {
     
     public Long getSeekerIDProperty() {
         return seekerID;
+    }
+    
+    public Long getOfferIDProperty() {
+        return offerID;
+    }
+    
+    public Long getOffererIDProperty() {
+        return offererID;
     }
     
     public StringProperty getStrtSuburbProperty() {
@@ -167,6 +209,10 @@ public class Seek {
     
     public StringProperty getStatusProperty() {
         return status;
+    }
+    
+    public Long getPaymentIDProperty() {
+        return paymentID;
     }
     
     public Integer getNumSeatsRequiredProperty() {

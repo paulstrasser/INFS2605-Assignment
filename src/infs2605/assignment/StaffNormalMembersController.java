@@ -8,6 +8,8 @@ package infs2605.assignment;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -78,6 +80,9 @@ public class StaffNormalMembersController implements Initializable {
     private Button Search;
     
     @FXML
+    private Button Delete;
+    
+    @FXML
     private TableView<NormalMember> Table;
 
     @FXML
@@ -95,9 +100,9 @@ public class StaffNormalMembersController implements Initializable {
     @FXML
     private TableColumn<NormalMember, String> GENDERCol;
     
-    /*@FXML
+    @FXML
     private TableColumn<NormalMember, String> DOBCol;
-    */
+    
     
     @FXML
     private TableColumn<NormalMember, String> HPHONECol;
@@ -163,6 +168,9 @@ public class StaffNormalMembersController implements Initializable {
     private TableColumn<NormalMember, String> LICENSENUMCol;
     
     @FXML
+    private TableColumn<NormalMember, String> EXPDATECol;
+    
+    @FXML
     private TableColumn<NormalMember, String> USERNAMECol;
     
     @FXML
@@ -178,14 +186,11 @@ public class StaffNormalMembersController implements Initializable {
     private TableColumn<NormalMember, String> CARDNUMCol;
     
     @FXML
+    private TableColumn<NormalMember, String> CARDEXPIRYCol;
+    
+    @FXML
     private TableColumn<NormalMember, String> CVVCol;
-    
-    @FXML
-    private TextField Value;
-    
-    @FXML
-    private ComboBox SearchBy;
-        
+            
     @FXML
     private AnchorPane ViewNormalMembersPane;
     
@@ -286,6 +291,9 @@ public class StaffNormalMembersController implements Initializable {
     private ComboBox WCity;
     
     @FXML
+    private ComboBox SearchBy;
+    
+    @FXML
     private DatePicker DOB;
     
     @FXML
@@ -293,6 +301,18 @@ public class StaffNormalMembersController implements Initializable {
     
     @FXML
     private DatePicker CExpiryDate;
+    
+    @FXML
+    private TextField SearchValue;
+    
+    @FXML
+    private ComboBox SearchType;
+    
+    @FXML
+    private ComboBox SearchGender;
+    
+    @FXML
+    private ComboBox SearchCity;
         
     @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -318,13 +338,11 @@ public class StaffNormalMembersController implements Initializable {
     
     @FXML
     private void CorporateMembers(ActionEvent event) throws Exception { //Goes to 'Corporate Members' screen
-
         stage=(Stage) CorporateMembers.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("StaffCorporateMembers.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
     }
     
     @FXML
@@ -401,7 +419,7 @@ public class StaffNormalMembersController implements Initializable {
 
         GENDERCol.setCellValueFactory(cellData -> cellData.getValue().getGENDERProperty());
         
-        //DOBCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDOBProperty()));
+        DOBCol.setCellValueFactory(cellData -> cellData.getValue().getDOBProperty());
         
         HPHONECol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getHPHONEProperty().toString()));
         
@@ -445,6 +463,8 @@ public class StaffNormalMembersController implements Initializable {
         
         LICENSENUMCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLICENSENUMProperty().toString()));
         
+        EXPDATECol.setCellValueFactory(cellData -> cellData.getValue().getEXPDATEProperty());
+        
         USERNAMECol.setCellValueFactory(cellData -> cellData.getValue().getUSERNAMEProperty());
         
         PASSWORDCol.setCellValueFactory(cellData -> cellData.getValue().getPASSWORDProperty());
@@ -455,24 +475,46 @@ public class StaffNormalMembersController implements Initializable {
         
         CARDNUMCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCARDNUMProperty().toString()));
         
+        CARDEXPIRYCol.setCellValueFactory(cellData -> cellData.getValue().getCARDEXPIRYProperty());
+        
         CVVCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCVVProperty().toString()));
         getNormalMembers();
         
         
         Table.setItems(FXCollections.observableArrayList(normalMembersList));
         Table.setEditable(true);
-        SearchBy.getItems().addAll("USERID","FNAME","LNAME", "USERTYPE", "GENDER", "HSUBURB", "HCITY", "WSUBURB", "WCITY", "USERNAME"); 
+        SearchBy.getItems().addAll("ID","First Name","Last Name", "Type", "Gender", "Username", "City"); 
+        SearchType.getItems().addAll("1", "2", "3");
+        SearchGender.getItems().addAll("Male", "Female", "Unspecified");
+        SearchCity.getItems().addAll("Sydney", "Melbourne", "Brisbane", "Perth", "Darwin", "Adelaide", "Hobart");
+        //SearchCITY.setEditable(true);
+        UserType.getItems().addAll("1", "2", "3");
+        Gender.getItems().addAll("Male", "Female", "Unspecified");
+        HCity.getItems().addAll("Sydney", "Melbourne", "Brisbane", "Perth", "Darwin", "Adelaide", "Hobart");
+        WCity.getItems().addAll("Sydney", "Melbourne", "Brisbane", "Perth", "Darwin", "Adelaide", "Hobart");
+       
+
+
+
         Table.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showNormalMemberDetails(newValue));
     }
     
     public void showNormalMemberDetails(NormalMember normalMember) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+        
+
+        
         EditNormalMembersPane.setVisible(true);
         USERID.setText(normalMember.getUSERID());
         FName.setText(normalMember.getFNAME());
         LName.setText(normalMember.getLNAME());
         UserType.setValue(normalMember.getUSERTYPE());
         Gender.setValue(normalMember.getGENDER());
+        LocalDate dob = LocalDate.parse(normalMember.getDOB());
+        DOB.setValue(dob);
+        
+        //DOB.setValue(normalMember.getDOB());
         HPhone.setText(normalMember.getHPHONE());
         WPhone.setText(normalMember.getWPHONE());
         MPhone.setText(normalMember.getMPHONE());
@@ -494,10 +536,14 @@ public class StaffNormalMembersController implements Initializable {
         Registration.setText(normalMember.getREGISTRATION());
         Seats.setText(normalMember.getNUMOFSEATS());
         LicenseNumber.setText(normalMember.getLICENSENUM());
+        LocalDate expdate = LocalDate.parse(normalMember.getEXPDATE());
+        LExpiryDate.setValue(expdate);
         Username.setText(normalMember.getUSERNAME());
         Password.setText(normalMember.getPASSWORD());
         NameOnCard.setText(normalMember.getNAMEONCARD());
         CardNumber.setText(normalMember.getCARDNUM());
+        LocalDate cardexpiry = LocalDate.parse(normalMember.getCARDEXPIRY());
+        CExpiryDate.setValue(cardexpiry);
         CVV.setText(normalMember.getCVV());        
     }                
     
@@ -505,34 +551,189 @@ public class StaffNormalMembersController implements Initializable {
     public void getNormalMembers() {
         try {
             normalMembersList.clear();
-            ResultSet rs = d.getResultSet("SELECT USERID, FNAME, LNAME, USERTYPE, GENDER, HPHONE, WPHONE, MPHONE, EMAIL, HNUM, HSTREET, HSUBURB, HCITY, HPOSTCODE, WNUM, WSTREET, WSUBURB, WCITY, WPOSTCODE, MAKE, MODEL, COLOUR, YEARMADE, REGISTRATION, NUMOFSEATS, LICENSENUM, USERNAME, PASSWORD, DESCRIPTION, NAMEONCARD, CARDNUM, CVV " 
+            ResultSet rs = d.getResultSet("SELECT USERID, FNAME, LNAME, USERTYPE, GENDER, DOB, HPHONE, WPHONE, MPHONE, EMAIL, HNUM, HSTREET, HSUBURB, HCITY, HPOSTCODE, WNUM, WSTREET, WSUBURB, WCITY, WPOSTCODE, MAKE, MODEL, COLOUR, YEARMADE, REGISTRATION, NUMOFSEATS, LICENSENUM, EXPDATE, USERNAME, PASSWORD, DESCRIPTION, NAMEONCARD, CARDNUM, CARDEXPIRY, CVV " 
                     + "FROM USER");
             while (rs.next()) {
-                normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), /*rs.getString("DOB"), */rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getInt("CVV")));
+                normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
             }
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(StaffNormalMembersController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     @FXML
+    private void ComboBoxChoice(ActionEvent event) throws Exception {
+        String SearchByType = (String) SearchBy.getSelectionModel().getSelectedItem();
+       
+        switch (SearchByType) {
+            case "ID":
+                SearchValue.setVisible(true);
+                SearchType.setVisible(false);
+                SearchGender.setVisible(false);
+                SearchCity.setVisible(false);
+                break;
+            case "First Name":
+                SearchValue.setVisible(true);
+                SearchType.setVisible(false);
+                SearchGender.setVisible(false);
+                SearchCity.setVisible(false);
+                break;
+            case "Last Name":
+                SearchValue.setVisible(true);
+                SearchType.setVisible(false);
+                SearchGender.setVisible(false);
+                SearchCity.setVisible(false);
+                break;
+            case "Type":
+                SearchValue.setVisible(false);
+                SearchType.setVisible(true);
+                SearchGender.setVisible(false);
+                SearchCity.setVisible(false);
+                break;
+            case "Gender":
+                SearchValue.setVisible(false);
+                SearchType.setVisible(false);
+                SearchGender.setVisible(true);
+                SearchCity.setVisible(false);
+                break;
+            case "Username":
+                SearchValue.setVisible(true);
+                SearchType.setVisible(false);
+                SearchGender.setVisible(false);
+                SearchCity.setVisible(false);
+                break;
+            case "City":
+                SearchValue.setVisible(false);
+                SearchType.setVisible(false);
+                SearchGender.setVisible(false);
+                SearchCity.setVisible(true);
+                break;
+            default:
+                break;
+        }
+        
+    }
+    
+    @FXML
     private void Search(ActionEvent event) throws Exception { //Goes to 'Staff' screen
-        String search = (String) SearchBy.getSelectionModel().getSelectedItem();
+        
+        String SearchByType = (String) SearchBy.getSelectionModel().getSelectedItem();        
+        
         normalMembersList.clear();
         try {
-            
-            ResultSet rs = d.getResultSet("SELECT USERID, FNAME, LNAME, USERTYPE, GENDER, HPHONE, WPHONE, MPHONE, EMAIL, HNUM, HSTREET, HSUBURB, HCITY, HPOSTCODE, WNUM, WSTREET, WSUBURB, WCITY, WPOSTCODE, MAKE, MODEL, COLOUR, YEARMADE, REGISTRATION, NUMOFSEATS, LICENSENUM, USERNAME, PASSWORD, DESCRIPTION, NAMEONCARD, CARDNUM, CVV " 
-                + "FROM USER "
-                + "WHERE " + search + " = '" + Value.getText() + "'");
-            while (rs.next()) {
-                normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), /*rs.getString("DOB"), */rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getInt("CVV")));
+            ResultSet rs;
+            switch (SearchByType) {
+                case "ID":
+                    rs = d.getResultSet("SELECT * " 
+                    + "FROM USER "
+                    + "WHERE USERID = '" + SearchValue.getText() + "'" );
+                    while (rs.next()) {
+                        normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
+                    }
+                    break;
+                case "First Name":
+                    rs = d.getResultSet("SELECT * " 
+                    + "FROM USER "
+                    + "WHERE FNAME LIKE '%" + SearchValue.getText() + "%'" );
+                    while (rs.next()) {
+                        normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
+                    }
+                    break;
+                case "Last Name":
+                    rs = d.getResultSet("SELECT * " 
+                    + "FROM USER "
+                    + "WHERE LNAME LIKE '%" + SearchValue.getText() + "%'" );
+                    while (rs.next()) {
+                        normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
+                    }
+                    break;
+                case "Type":
+                    rs = d.getResultSet("SELECT * " 
+                    + "FROM USER "
+                    + "WHERE USERTYPE = '" + SearchType.getSelectionModel().getSelectedItem().toString() + "'" );
+                    while (rs.next()) {
+                        normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
+                    }
+                    break;
+                case "Gender":
+                    rs = d.getResultSet("SELECT * " 
+                    + "FROM USER "
+                    + "WHERE GENDER = '" + SearchGender.getSelectionModel().getSelectedItem().toString() + "'" );
+                    while (rs.next()) {
+                        normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
+                    }
+                    break;
+                case "Username":
+                    rs = d.getResultSet("SELECT * " 
+                    + "FROM USER "
+                    + "WHERE USERNAME LIKE '%" + SearchValue.getText() + "%'" );
+                    while (rs.next()) {
+                        normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
+                    }
+                    break;
+                case "City":
+                    rs = d.getResultSet("SELECT * " 
+                    + "FROM USER "
+                    + "WHERE HCITY = '" + SearchCity.getSelectionModel().getSelectedItem().toString() + "' " 
+                    + "OR WCITY = '" + SearchCity.getSelectionModel().getSelectedItem().toString() + "'");
+                    while (rs.next()) {
+                        normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
+                    }
+                    break; 
+                default:
+                    break;
             }
-            Table.setItems(FXCollections.observableArrayList(normalMembersList));            
+
+            Table.setItems(FXCollections.observableArrayList(normalMembersList));
+            SearchType.getEditor().clear();
+            SearchValue.clear();
+            SearchCity.getEditor().clear();    
+            SearchGender.getEditor().clear();    
+
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(StaffNormalMembersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    /*@FXML
+    private void Search(ActionEvent event) throws Exception { //Goes to 'Staff' screen
+        String SrchFName = SearchFNAME.getText();
+        String SrchLName = SearchLNAME.getText();
+        String SrchUserType = (String) SearchUSERTYPE.getSelectionModel().getSelectedItem();
+        String SrchGender = (String) SearchGENDER.getSelectionModel().getSelectedItem();
+        String SrchUsername = SearchUSERNAME.getText();
+        String SrchCity = (String) SearchCITY.getSelectionModel().getSelectedItem();
+        System.out.println(SrchCity);
+                
+        
+        normalMembersList.clear();
+        try { 
+            System.out.println("4");
+            
+            ResultSet rs = d.getResultSet("SELECT * " 
+                    + "FROM USER "
+                    + "WHERE FNAME LIKE '%" + SrchFName + "%' "
+                    + "AND LNAME LIKE '%" + SrchLName + "%' "
+                    + "AND GENDER LIKE '%" + SrchGender + "%' "
+                    + "AND USERNAME LIKE '%" + SrchUsername + "%' "
+                    + "AND HCITY LIKE '%" + SrchCity + "%'");
+                    //+ "AND WCITY LIKE '%" + SearchCITY.getSelectionModel().getSelectedItem() + "%'");        
+            
+            System.out.println("5");
+            while (rs.next()) {
+                normalMembersList.add(new NormalMember(rs.getLong("USERID"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("USERTYPE"), rs.getString("GENDER"), rs.getString("DOB"), rs.getLong("HPHONE"), rs.getLong("WPHONE"), rs.getLong("MPHONE"), rs.getString("EMAIL"), rs.getInt("HNUM"), rs.getString("HSTREET"), rs.getString("HSUBURB"), rs.getString("HCITY"), rs.getInt("HPOSTCODE"), rs.getInt("WNUM"), rs.getString("WSTREET"), rs.getString("WSUBURB"), rs.getString("WCITY"), rs.getInt("WPOSTCODE"), rs.getString("MAKE"), rs.getString("MODEL"), rs.getString("COLOUR"), rs.getString("YEARMADE"), rs.getString("REGISTRATION"), rs.getInt("NUMOFSEATS"), rs.getLong("LICENSENUM"), rs.getString("EXPDATE"), rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("DESCRIPTION"), rs.getString("NAMEONCARD"), rs.getLong("CARDNUM"), rs.getString("CARDEXPIRY"), rs.getInt("CVV")));
+            }
+            System.out.println("6");
+            Table.setItems(FXCollections.observableArrayList(normalMembersList));  
+            System.out.println("7");
         }
         catch (SQLException ex) {
             Logger.getLogger(StaffNormalMembersController.class.getName()).log(Level.SEVERE, null, ex);
         }   
-    }
+    }*/
     
     @FXML
     private void clearSearch(MouseEvent event) throws Exception {
@@ -543,6 +744,13 @@ public class StaffNormalMembersController implements Initializable {
         normalMembersList.clear();
         getNormalMembers();
         Table.setItems(FXCollections.observableArrayList(normalMembersList));
+    }
+    
+    @FXML
+    private void DeleteRow(ActionEvent event) throws Exception {
+        d.Insert("DELETE FROM USER WHERE USERID = " + Long.parseLong(USERID.getText()));
+        EditNormalMembersPane.setVisible(false);
+        refreshTable();
     }
     
     @FXML
@@ -559,6 +767,7 @@ public class StaffNormalMembersController implements Initializable {
         String NewLNAME = LName.getText();
         String NewUSERTYPE = (String) UserType.getSelectionModel().getSelectedItem();
         String NewGENDER = (String) Gender.getSelectionModel().getSelectedItem();
+        LocalDate NewDOB = DOB.getValue();
         long NewHPHONE = Long.parseLong(HPhone.getText());
         long NewWPHONE = Long.parseLong(WPhone.getText());
         long NewMPHONE = Long.parseLong(MPhone.getText());
@@ -580,14 +789,16 @@ public class StaffNormalMembersController implements Initializable {
         String NewREGISTRATION = Registration.getText();
         int NewNUMOFSEATS = Integer.parseInt(Seats.getText());
         long NewLICENSENUM = Long.parseLong(LicenseNumber.getText());
+        LocalDate NewEXPDATE = LExpiryDate.getValue();
         String NewUSERNAME = Username.getText();
         String NewPASSWORD = Password.getText();
         String NewNAMEONCARD = NameOnCard.getText();
         long NewCARDNUM = Long.parseLong(CardNumber.getText());
+        LocalDate NewCARDEXPIRY = CExpiryDate.getValue();
         int NewCVV = Integer.parseInt(CVV.getText());
 
         d.Insert("UPDATE USER "
-                + "SET USERID = " + NewUSERID + ", FNAME = '" + NewFNAME + "', LNAME = '" + NewLNAME + "', USERTYPE = '" + NewUSERTYPE + "', GENDER = '" + NewGENDER + "', HPHONE = " + NewHPHONE + ", WPHONE = " + NewWPHONE + ", MPHONE = " + NewMPHONE + ", EMAIL = '" + NewEMAIL + "', HNUM = " + NewHNUM + ", HSTREET = '" + NewHSTREET + "', HSUBURB = '" + NewHSUBURB + "', HCITY = '" + NewHCITY + "', HPOSTCODE = " + NewHPOSTCODE + ", WNUM = " + NewWNUM + ", WSTREET = '" + NewWSTREET + "', WSUBURB = '" + NewWSUBURB + "', WCITY = '" + NewWCITY + "', WPOSTCODE = " + NewWPOSTCODE + ", MAKE = '" + NewMAKE + "', MODEL = '" + NewMODEL + "', COLOUR = '" + NewCOLOUR + "', YEARMADE = '" + NewYEARMADE + "', REGISTRATION = '" + NewREGISTRATION + "', NUMOFSEATS = " + NewNUMOFSEATS + ", LICENSENUM = " + NewLICENSENUM + ", USERNAME = '" + NewUSERNAME + "', PASSWORD = '" + NewPASSWORD + "', NAMEONCARD = '" + NewNAMEONCARD + "', CARDNUM = " + NewCARDNUM + ", CVV = " + NewCVV
+                + "SET USERID = " + NewUSERID + ", FNAME = '" + NewFNAME + "', LNAME = '" + NewLNAME + "', USERTYPE = '" + NewUSERTYPE + "', GENDER = '" + NewGENDER + "', DOB = PARSEDATETIME('"+NewDOB+"', 'YYYY-MM-DD'), HPHONE = " + NewHPHONE + ", WPHONE = " + NewWPHONE + ", MPHONE = " + NewMPHONE + ", EMAIL = '" + NewEMAIL + "', HNUM = " + NewHNUM + ", HSTREET = '" + NewHSTREET + "', HSUBURB = '" + NewHSUBURB + "', HCITY = '" + NewHCITY + "', HPOSTCODE = " + NewHPOSTCODE + ", WNUM = " + NewWNUM + ", WSTREET = '" + NewWSTREET + "', WSUBURB = '" + NewWSUBURB + "', WCITY = '" + NewWCITY + "', WPOSTCODE = " + NewWPOSTCODE + ", MAKE = '" + NewMAKE + "', MODEL = '" + NewMODEL + "', COLOUR = '" + NewCOLOUR + "', YEARMADE = '" + NewYEARMADE + "', REGISTRATION = '" + NewREGISTRATION + "', NUMOFSEATS = " + NewNUMOFSEATS + ", LICENSENUM = " + NewLICENSENUM + ", EXPDATE = PARSEDATETIME('"+NewEXPDATE+"', 'YYYY-MM-DD'), USERNAME = '" + NewUSERNAME + "', PASSWORD = '" + NewPASSWORD + "', NAMEONCARD = '" + NewNAMEONCARD + "', CARDNUM = " + NewCARDNUM + ", CARDEXPIRY = PARSEDATETIME('"+NewCARDEXPIRY+"', 'YYYY-MM-DD'), CVV = " + NewCVV
                 + "WHERE USERID = " + Long.parseLong(USERID.getText()));
         
         EditNormalMembersPane.setVisible(false);
@@ -595,7 +806,6 @@ public class StaffNormalMembersController implements Initializable {
     }
 }   
     
-
 
 
 

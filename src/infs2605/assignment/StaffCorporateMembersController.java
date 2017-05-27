@@ -6,7 +6,14 @@
 package infs2605.assignment;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +21,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 /**
@@ -55,7 +64,34 @@ public class StaffCorporateMembersController implements Initializable {
     private Button Add;
     
     @FXML
-    private Button Edit;
+    private TableView<CorporateMember> Table;
+
+    @FXML
+    private TableColumn<CorporateMember, String> corporateMemberIdCol;
+
+    @FXML
+    private TableColumn<CorporateMember, String> companyNameCol;
+
+    @FXML
+    private TableColumn<CorporateMember, String> cStreetNumCol;
+    
+    @FXML
+    private TableColumn<CorporateMember, String> cStreetNameCol;
+    
+    @FXML
+    private TableColumn<CorporateMember, String> cSuburbCol;
+    
+    @FXML
+    private TableColumn<CorporateMember, String> cCityCol;
+    
+    @FXML
+    private TableColumn<CorporateMember, String> cPostCodeCol;
+    
+    @FXML
+    private TableColumn<CorporateMember, String> companyPhoneNumCol;
+    
+    @FXML
+    private TableColumn<CorporateMember, String> ABNCol;
     
     @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -156,15 +192,48 @@ public class StaffCorporateMembersController implements Initializable {
         
     }
     
-    /*@FXML  MAKE THE TABLEVIEW EDITABLE
-    private void Edit(ActionEvent event) throws Exception {
+    DBController d = new DBController();
     
-    }
-    */
-    
+    ArrayList<CorporateMember> corporateMembersList = new ArrayList<>(); //Creates the array list
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        /*corporateMemberIdCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorporateMemberIdProperty().toString()));
+        
+        companyNameCol.setCellValueFactory(cellData -> cellData.getValue().getCompanyNameProperty());
+
+        cStreetNumCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCStreetNumProperty().toString()));
+        
+        cStreetNameCol.setCellValueFactory(cellData -> cellData.getValue().getCStreetNameProperty());
+
+        cSuburbCol.setCellValueFactory(cellData -> cellData.getValue().getCSuburbProperty());
+        
+        cCityCol.setCellValueFactory(cellData -> cellData.getValue().getCCityProperty());
+        
+        cPostCodeCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCPostCodeProperty().toString()));
+
+        companyPhoneNumCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCompanyPhoneNumProperty().toString()));
+        
+        ABNCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getABNProperty().toString()));
+        
+        getCorporateMembers();
+        
+        Table.setItems(FXCollections.observableArrayList(corporateMembersList));*/
+        //SearchCITY.getItems().addAll("Sydney", "Melbourne", "Brisbane", "Perth", "Darwin", "Adelaide", "Hobart");
     }    
-    
+    /*
+    public void getCorporateMembers() {
+        try {
+            corporateMembersList.clear();
+            ResultSet rs = d.getResultSet("SELECT * " 
+                    + "FROM CORPORATEMEMBER");
+            while (rs.next()) {
+                corporateMembersList.add(new CorporateMember(rs.getInt("CORPORATEMEMBERID"), rs.getString("COMPANYNAME"), rs.getInt("CSTREETNUM"), rs.getString("CSTREETNAME"), rs.getString("CSUBURB"), rs.getString("CCITY"), rs.getInt("CPOSTCODE"), rs.getLong("COMPANYPHONENUM"), rs.getLong("ABN")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffCorporateMembersController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }*/
 }
+
+

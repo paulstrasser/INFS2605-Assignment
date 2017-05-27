@@ -9,6 +9,7 @@
 package infs2605.assignment;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -56,6 +60,25 @@ public class StaffAddConsultationController implements Initializable {
     
     @FXML
     private Button Matches;
+    
+    @FXML
+    private TextField tfStaffID;
+    
+    @FXML
+    private TextField tfMemberID;
+    
+    @FXML
+    private TextField tfPrice;
+    
+    @FXML
+    private ComboBox cbStatus;
+    
+    @FXML
+    private DatePicker dpDateOpened;
+    
+    @FXML
+    private DatePicker dpDateClosed;
+    
             
     @FXML
     private void Cancel(ActionEvent event) throws Exception { //Goes to 'Matches' screen
@@ -68,11 +91,37 @@ public class StaffAddConsultationController implements Initializable {
         
     }
     
-    /*@FXML 
+    @FXML 
     private void Add(ActionEvent event) throws Exception {
-        Add the record to the database
+        long AddStaffID = Long.parseLong(tfStaffID.getText());
+        long AddCorporateMemberID = Long.parseLong(tfMemberID.getText());
+        double AddPrice = Double.parseDouble(tfPrice.getText());
+        LocalDate AddOpenDate = dpDateOpened.getValue();
+        LocalDate AddClosedDate = dpDateClosed.getValue();
+        String AddStatus = (String) cbStatus.getSelectionModel().getSelectedItem();
+        
+        String checkStaffID = tfStaffID.getText();
+        int thisPK = Integer.parseInt(d.returnSingleQuery("SELECT MAX(CONSULTID) AS ANSWER FROM CONSULTATION"))+1;
+
+        if (checkStaffID.isEmpty()) {
+            System.out.println("EMPTY");
+        }
+        else {
+            try {
+               d.Insert("INSERT INTO CONSULTATION (CONSULTID, STAFFID, CORPORATEMEMBERID, PRICE, OPENDATE, CLOSEDDATE, STATUS) VALUES (" + thisPK+ ", " + AddStaffID + ", " + AddCorporateMemberID + ", " + AddPrice + ", PARSEDATETIME('" + AddOpenDate + "', 'YYYY-MM-DD'), PARSEDATETIME('" + AddClosedDate + "', 'YYYY-MM-DD'), '" + AddStatus + "')");               
+               stage=(Stage) Add.getScene().getWindow();
+               root = FXMLLoader.load(getClass().getResource("StaffConsultations.fxml"));
+               Scene scene = new Scene(root);
+               stage.setScene(scene);
+               stage.show(); 
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+               
+        } 
     }
-    */
+    
     
         @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -151,9 +200,12 @@ public class StaffAddConsultationController implements Initializable {
         
     }
     
+    DBController d = new DBController();
+
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        cbStatus.getItems().addAll("Open", "Closed");
     }    
     
 }

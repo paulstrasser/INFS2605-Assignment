@@ -134,30 +134,27 @@
                                                             <Font name="Avenir Roman" size="52.0" />
                                                          </font>
                                                       </Label>
-                                                      <ScrollPane layoutX="53.0" layoutY="305.0" prefHeight="516.0" prefWidth="711.0">
+                                                      <ScrollPane layoutX="55.0" layoutY="268.0" prefHeight="516.0" prefWidth="711.0">
                                                         <content>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1496.0" prefWidth="1312.0">
                                                                <children>
-                                                                  <TableView prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <TableView fx:id="Table" prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <columns>
-                                                                      <TableColumn prefWidth="75.0" text="C1" />
-                                                                      <TableColumn prefWidth="75.0" text="C2" />
+                                                                      <TableColumn fx:id="consultIDCol" prefWidth="75.0" text="ID" />
+                                                                      <TableColumn fx:id="StaffIDCol" prefWidth="75.0" text="Staff ID" />
+                                                                        <TableColumn fx:id="CorporateMemberIDCol" prefWidth="75.0" text="Corporate Member ID" />
+                                                                        <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
+                                                                        <TableColumn fx:id="openDateCol" prefWidth="75.0" text="Open Date" />
+                                                                        <TableColumn fx:id="closedDateCol" prefWidth="75.0" text="Closed Date" />
+                                                                        <TableColumn fx:id="statusCol" prefWidth="75.0" text="Status" />
                                                                     </columns>
                                                                   </TableView>
                                                                </children>
                                                             </AnchorPane>
                                                         </content>
                                                       </ScrollPane>
-                                                      <Button fx:id="Edit" layoutX="320.0" layoutY="840.0" mnemonicParsing="false" style="-fx-background-color: #67afeb;" text="Edit" textAlignment="CENTER" textFill="WHITE">
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                         <font>
-                                                            <Font size="24.0" />
-                                                         </font>
-                                                      </Button>
-                                                      <Rectangle arcHeight="5.0" fill="#67afeb" height="162.0" layoutX="53.0" layoutY="122.0" stroke="#6b4c4c00" strokeType="INSIDE" width="476.0" />
-                                                      <Button fx:id="Signout1" layoutX="237.0" layoutY="229.0" mnemonicParsing="false" onAction="#SignOut" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Rectangle arcHeight="5.0" fill="#67afeb" height="96.0" layoutX="53.0" layoutY="133.0" stroke="#6b4c4c00" strokeType="INSIDE" width="465.0" />
+                                                      <Button fx:id="Search" layoutX="394.0" layoutY="160.0" mnemonicParsing="false" onAction="#Search" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -165,24 +162,13 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Button>
-                                                      <TextField layoutX="70.0" layoutY="138.0" prefHeight="33.0" prefWidth="49.0" promptText="ID">
+                                                      <TextField fx:id="SearchValue" layoutX="237.0" layoutY="164.0" prefHeight="33.0" prefWidth="144.0" promptText="Enter">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="131.0" layoutY="138.0" prefHeight="33.0" prefWidth="73.0" promptText="Staff ID">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="15.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <ComboBox layoutX="389.0" layoutY="140.0" prefHeight="30.0" prefWidth="121.0" promptText="Status" style="-fx-background-color: white;" />
-                                                      <ComboBox layoutX="652.0" layoutY="267.0" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: white;" />
-                                                      <Label layoutX="585.0" layoutY="269.0" text="Sort By" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="18.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Button fx:id="Add" layoutX="410.0" layoutY="840.0" mnemonicParsing="false" onAction="#Add" style="-fx-background-color: #67afeb;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                                                      <ComboBox fx:id="SearchBy" layoutX="80.0" layoutY="165.0" onAction="#ComboBoxChoice" prefHeight="30.0" prefWidth="144.0" promptText="Search By..." style="-fx-background-color: white;" />
+                                                      <Button fx:id="Add" layoutX="350.0" layoutY="810.0" mnemonicParsing="false" onAction="#Add" style="-fx-background-color: #67afeb;" text="Add" textAlignment="CENTER" textFill="WHITE">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -190,7 +176,7 @@
                                                             <Font size="24.0" />
                                                          </font>
                                                       </Button>
-                                                      <Button fx:id="GoBack" layoutX="583.0" layoutY="171.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="51.0" prefWidth="139.0" style="-fx-background-color: #67afeb;" text="Go back" textFill="WHITE">
+                                                      <Button fx:id="GoBack" layoutX="583.0" layoutY="154.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="51.0" prefWidth="139.0" style="-fx-background-color: #67afeb;" text="Go back" textFill="WHITE">
                                                          <font>
                                                             <Font name="Avenir Roman" size="17.0" />
                                                          </font>
@@ -198,18 +184,62 @@
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
                                                       </Button>
-                                                      <TextField layoutX="219.0" layoutY="138.0" prefHeight="33.0" prefWidth="73.0" promptText="Corp ID">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="15.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <TextField layoutX="302.0" layoutY="138.0" prefHeight="33.0" prefWidth="73.0" promptText="Price">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="15.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <DatePicker layoutX="133.0" layoutY="180.0" prefHeight="33.0" prefWidth="142.0" promptText="Opened" />
-                                                      <DatePicker layoutX="294.0" layoutY="180.0" prefHeight="33.0" prefWidth="142.0" promptText="Closed" />
+                                                      <DatePicker fx:id="SearchDate" layoutX="238.0" layoutY="164.0" prefHeight="33.0" prefWidth="142.0" />
+                                                      <ComboBox fx:id="SearchCombo" layoutX="237.0" layoutY="166.0" prefHeight="30.0" prefWidth="144.0" promptText="Status" style="-fx-background-color: white;" />
+                                                      <AnchorPane fx:id="EditPane" prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;" visible="false">
+                                                         <children>
+                                                            <Label layoutX="35.0" layoutY="31.0" text="Edit a Consultation" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="52.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Rectangle arcHeight="5.0" fill="#67afeb" height="70.0" layoutX="59.0" layoutY="126.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
+                                                            <Button fx:id="Delete" layoutX="364.0" layoutY="305.0" mnemonicParsing="false" onAction="#DeleteRow" prefHeight="40.0" prefWidth="107.0" style="-fx-background-color: white;" text="Delete" textAlignment="CENTER" textFill="#67afeb">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <TextField fx:id="tfStaffID" layoutX="270.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Staff ID">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="15.0" />
+                                                               </font>
+                                                            </TextField>
+                                                            <Button fx:id="Cancel" layoutX="251.0" layoutY="305.0" mnemonicParsing="false" onAction="#Cancel" style="-fx-background-color: white;" text="Cancel" textAlignment="CENTER" textFill="#67afeb">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Rectangle arcHeight="5.0" fill="#67afeb" height="70.0" layoutX="59.0" layoutY="214.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
+                                                            <TextField fx:id="tfPrice" layoutX="88.0" layoutY="232.0" prefHeight="33.0" prefWidth="121.0" promptText="Price">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="15.0" />
+                                                               </font>
+                                                            </TextField>
+                                                            <ComboBox fx:id="cbStatus" layoutX="228.0" layoutY="234.0" prefHeight="30.0" prefWidth="121.0" promptText="Status" style="-fx-background-color: white;" />
+                                                            <TextField fx:id="tfMemberID" layoutX="423.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Member ID">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="15.0" />
+                                                               </font>
+                                                            </TextField>
+                                                            <DatePicker fx:id="dpDateOpened" layoutX="370.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Opened" />
+                                                            <DatePicker fx:id="dpDateClosed" layoutX="556.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Closed" />
+                                                            <TextField fx:id="tfConsultID" layoutX="81.0" layoutY="148.0" prefHeight="27.0" prefWidth="52.0" />
+                                                            <Button fx:id="Update" layoutX="489.0" layoutY="305.0" mnemonicParsing="false" onAction="#UpdateAndGoToView" prefHeight="40.0" prefWidth="107.0" style="-fx-background-color: white;" text="Update" textAlignment="CENTER" textFill="#67afeb">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <font>
+                                                                  <Font size="20.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </AnchorPane>
                                                    </children>
                                                 </AnchorPane>
                                              </content>

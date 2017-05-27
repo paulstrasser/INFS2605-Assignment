@@ -207,8 +207,8 @@ public class StaffAddNormalMembersController implements Initializable {
         
         
         String AddGender = (String) Gender.getSelectionModel().getSelectedItem();
-        String AddEmail = Email.getText();
         LocalDate AddDOB = DOB.getValue();
+        String AddEmail = Email.getText();
         long AddHPhone = Long.parseLong(HPhone.getText()); //This is supposed to be a long
         long AddWPhone = Long.parseLong(WPhone.getText());
         long AddMPhone = Long.parseLong(MPhone.getText());
@@ -228,11 +228,11 @@ public class StaffAddNormalMembersController implements Initializable {
         String AddColour = Colour.getText();
         String AddRegistration = Registration.getText();
         int AddSeats = Integer.parseInt(Seats.getText());
-        long AddLicenseNumber = Long.parseLong(LicenseNumber.getText());
-        LocalDate AddLExpiryDate = LExpiryDate.getValue();
+        long AddLicenseNumber = Long.parseLong(LicenseNumber.getText());        
+        LocalDate AddExpDate = LExpiryDate.getValue();
         String AddNameOnCard = NameOnCard.getText();
         long AddCardNumber = Long.parseLong(CardNumber.getText());
-        LocalDate AddCExpiryDate = CExpiryDate.getValue();
+        LocalDate AddCardExpiry = CExpiryDate.getValue();
         int AddCVV = Integer.parseInt(CVV.getText());
 
         if (AddFNAME.isEmpty() || AddLNAME.isEmpty()) {
@@ -240,7 +240,7 @@ public class StaffAddNormalMembersController implements Initializable {
         }
         else {
             try {
-               d.Insert("INSERT INTO USER (USERNAME, PASSWORD, FNAME, LNAME, USERID, USERTYPE, GENDER, DOB, HPHONE, WPHONE, MPHONE, EMAIL, HNUM, HSTREET, HSUBURB, HCITY, HPOSTCODE, WNUM, WSTREET, WSUBURB, WCITY, WPOSTCODE, MAKE, MODEL, YEARMADE, COLOUR, REGISTRATION, NUMOFSEATS, LICENSENUM, EXPDATE, NAMEONCARD, CARDNUM, CARDEXPIRY, CVV) VALUES ('" + AddUsername+ "', '" + AddPassword + "', '" + AddFNAME + "', '" + AddLNAME + "', " + AddUSERID + ", '" + AddUserType + "', '" + AddGender + "', '" + AddDOB + "', " + AddHPhone + ", " + AddWPhone + ", " + AddMPhone + ", '" + AddEmail + "', " + AddHNum + ", '" + AddHStreet + "', '" + AddHSuburb + "', '" + AddHCity + "', " + AddHPostCode + ", " + AddWNum + ", '" + AddWStreet + "', '" + AddWSuburb + "', '" + AddWCity + "', " + AddWPostCode + ", '" + AddMake + "', '" + AddModel + "', '" + AddYear + "', '" + AddColour + "', '" + AddRegistration + "', " + AddSeats + ", " + AddLicenseNumber + ", '" + AddLExpiryDate + "', '" + AddNameOnCard + "', " + AddCardNumber + ", '" + AddCExpiryDate + "', " + AddCVV + ")");               
+               d.Insert("INSERT INTO USER (USERNAME, PASSWORD, FNAME, LNAME, USERID, USERTYPE, GENDER, DOB, HPHONE, WPHONE, MPHONE, EMAIL, HNUM, HSTREET, HSUBURB, HCITY, HPOSTCODE, WNUM, WSTREET, WSUBURB, WCITY, WPOSTCODE, MAKE, MODEL, YEARMADE, COLOUR, REGISTRATION, NUMOFSEATS, LICENSENUM, EXPDATE, NAMEONCARD, CARDNUM, CARDEXPIRY, CVV) VALUES ('" + AddUsername+ "', '" + AddPassword + "', '" + AddFNAME + "', '" + AddLNAME + "', " + AddUSERID + ", '" + AddUserType + "', '" + AddGender + "', PARSEDATETIME('" + AddDOB + "', 'YYYY-MM-DD'), " + AddHPhone + ", " + AddWPhone + ", " + AddMPhone + ", '" + AddEmail + "', " + AddHNum + ", '" + AddHStreet + "', '" + AddHSuburb + "', '" + AddHCity + "', " + AddHPostCode + ", " + AddWNum + ", '" + AddWStreet + "', '" + AddWSuburb + "', '" + AddWCity + "', " + AddWPostCode + ", '" + AddMake + "', '" + AddModel + "', '" + AddYear + "', '" + AddColour + "', '" + AddRegistration + "', " + AddSeats + ", " + AddLicenseNumber + ", PARSEDATETIME('" + AddExpDate + "', 'YYYY-MM-DD'), '" + AddNameOnCard + "', " + AddCardNumber + ", PARSEDATETIME('" + AddCardExpiry + "', 'YYYY-MM-DD'), " + AddCVV + ")");               
                stage=(Stage) Add.getScene().getWindow();
                root = FXMLLoader.load(getClass().getResource("StaffNormalMembers.fxml"));
                Scene scene = new Scene(root);

@@ -1,6 +1,7 @@
 package infs2605.assignment;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -48,6 +51,30 @@ public class StaffAddStaffController implements Initializable {
     
     @FXML
     private Button Matches;
+    
+    @FXML
+    private TextField tfStaffId;
+    
+    @FXML
+    private TextField tfUsername;
+    
+    @FXML
+    private TextField tfPassword;
+    
+    @FXML
+    private TextField tfFName;
+    
+    @FXML
+    private TextField tfLName;
+    
+    @FXML
+    private TextField tfEmail;
+    
+    @FXML
+    private TextField tfRole;
+    
+    @FXML
+    private DatePicker dpDOB;
             
     @FXML
     private void Cancel(ActionEvent event) throws Exception { //Goes to 'Matches' screen
@@ -60,11 +87,6 @@ public class StaffAddStaffController implements Initializable {
         
     }
     
-    /*@FXML 
-    private void Add(ActionEvent event) throws Exception {
-        Add the record to the database
-    }
-    */
     
         @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -143,10 +165,45 @@ public class StaffAddStaffController implements Initializable {
         
     }
     
+    DBController d = new DBController();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    @FXML
+    private void Add(ActionEvent event) throws Exception {
+        String AddUsername = tfUsername.getText();
+        String AddPassword = tfPassword.getText();
+        String AddFName = tfFName.getText();
+        String AddLName = tfLName.getText();
+        LocalDate AddDOB = dpDOB.getValue();
+        String AddEmail = tfEmail.getText();
+        String AddRole = tfRole.getText();        
+        int thisPK = Integer.parseInt(d.returnSingleQuery("SELECT MAX(STAFFID) AS ANSWER FROM STAFF"))+1;
+
+        
+        
+        if (AddUsername.isEmpty() || AddPassword.isEmpty()) {
+            System.out.println("EMPTY");
+        }
+        else {
+            try {
+               d.Insert("INSERT INTO STAFF (STAFFID, USERNAME, PASSWORD, FNAME, LNAME, DOB, EMAIL, ROLE) VALUES (" + thisPK + ", '" + AddUsername + "', '" + AddPassword + "', '" + AddFName + "', '" + AddLName + "', PARSEDATETIME('"+AddDOB+"', 'YYYY-MM-DD'), '" + AddEmail + "', '" + AddRole + "')");               
+               stage=(Stage) Add.getScene().getWindow();
+               root = FXMLLoader.load(getClass().getResource("StaffViewStaff.fxml"));
+               Scene scene = new Scene(root);
+               stage.setScene(scene);
+               stage.show(); 
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+               
+        }
+    }
+    
     
 }
 

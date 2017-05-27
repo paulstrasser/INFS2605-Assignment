@@ -133,7 +133,7 @@
                                                          </font>
                                                       </Label>
                                                       <Rectangle arcHeight="5.0" fill="#67afeb" height="70.0" layoutX="59.0" layoutY="126.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
-                                                      <Button fx:id="Add" layoutX="427.0" layoutY="303.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: white;" text="Add" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Add" layoutX="427.0" layoutY="303.0" mnemonicParsing="false" onAction="#Add" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: white;" text="Add" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -141,7 +141,7 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Button>
-                                                      <TextField layoutX="270.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Staff ID">
+                                                      <TextField fx:id="tfStaffID" layoutX="270.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Staff ID">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
@@ -155,19 +155,19 @@
                                                          </font>
                                                       </Button>
                                                       <Rectangle arcHeight="5.0" fill="#67afeb" height="70.0" layoutX="59.0" layoutY="214.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
-                                                      <TextField layoutX="88.0" layoutY="232.0" prefHeight="33.0" prefWidth="121.0" promptText="Price">
+                                                      <TextField fx:id="tfPrice" layoutX="88.0" layoutY="232.0" prefHeight="33.0" prefWidth="121.0" promptText="Price">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <ComboBox layoutX="228.0" layoutY="234.0" prefHeight="30.0" prefWidth="121.0" promptText="Status" style="-fx-background-color: white;" />
-                                                      <TextField layoutX="423.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Member ID">
+                                                      <ComboBox fx:id="cbStatus" layoutX="228.0" layoutY="234.0" prefHeight="30.0" prefWidth="121.0" promptText="Status" style="-fx-background-color: white;" />
+                                                      <TextField fx:id="tfMemberID" layoutX="423.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Member ID">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <DatePicker layoutX="370.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Opened" />
-                                                      <DatePicker layoutX="556.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Closed" />
+                                                      <DatePicker fx:id="dpDateOpened" layoutX="370.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Opened" />
+                                                      <DatePicker fx:id="dpDateClosed" layoutX="556.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Closed" />
                                                    </children>
                                                 </AnchorPane>
                                              </content>
