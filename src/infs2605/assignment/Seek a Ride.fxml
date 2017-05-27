@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -25,7 +32,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infs2605.assignment.SeekARideController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="infs2605.assignment.SeekARideController">
    <children>
       <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>
@@ -158,19 +165,6 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TitledPane fx:id="searchResultsTitledPane" animated="false" layoutX="39.0" layoutY="530.0" prefHeight="471.0" prefWidth="752.0" text="Search Results">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="22.0" />
-                                                         </font>
-                                                         <content>
-                                                            <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #67afeb;">
-                                                              <columns>
-                                                                <TableColumn prefWidth="75.0" text="C1" />
-                                                                <TableColumn prefWidth="75.0" text="C2" />
-                                                              </columns>
-                                                            </TableView>
-                                                         </content>
-                                                      </TitledPane>
                                                       <Button fx:id="Search" layoutX="442.0" layoutY="380.0" mnemonicParsing="false" onAction="#makeSearch" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
@@ -284,6 +278,30 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </Text>
+                                                      <ScrollPane layoutX="40.0" layoutY="488.0" prefHeight="200.0" prefWidth="751.0">
+                                                         <content>
+                                                            <TableView fx:id="Table" prefHeight="2000.0" prefWidth="2000.0" style="-fx-background-color: #67afeb;">
+                                                              <columns>
+                                                                <TableColumn fx:id="offerIDCol" prefWidth="39.0" text="ID" />
+                                                                <TableColumn fx:id="offererIDCol" prefWidth="69.0" text="Offerer ID" />
+                                                                  <TableColumn fx:id="strtSuburbCol" prefWidth="81.0" text="Start Suburb" />
+                                                                  <TableColumn fx:id="strtPostCodeCol" minWidth="0.0" prefWidth="165.0" text="Start Postcode" />
+                                                                  <TableColumn fx:id="strtStreetNoCol" prefWidth="102.0" text="Start Street No" />
+                                                                  <TableColumn fx:id="strtStreetNameCol" prefWidth="102.0" text="Start Street Name" />
+                                                                  <TableColumn fx:id="endSuburbCol" prefWidth="102.0" text="End Suburb" />
+                                                                  <TableColumn fx:id="endPostCodeCol" prefWidth="102.0" text="End Postcode" />
+                                                                  <TableColumn fx:id="endStreetNoCol" prefWidth="102.0" text="End Street No" />
+                                                                  <TableColumn fx:id="endStreetNameCol" prefWidth="102.0" text="End Street Name" />
+                                                                  <TableColumn fx:id="dateCol" prefWidth="102.0" text="Date" />
+                                                                  <TableColumn fx:id="priceCol" prefWidth="102.0" text="Price" />
+                                                                  <TableColumn fx:id="pickUpTimeCol" prefWidth="102.0" text="Pick Up Time" />
+                                                                  <TableColumn fx:id="dateCreatedCol" prefWidth="102.0" text="Date Created" />
+                                                                  <TableColumn fx:id="statusCol" prefWidth="102.0" text="Status" />
+                                                                  <TableColumn fx:id="numSeatsAvailableCol" prefWidth="102.0" text="Seats Available" />
+                                                              </columns>
+                                                            </TableView>
+                                                         </content>
+                                                      </ScrollPane>
                                                    </children>
                                                 </AnchorPane>
                                              </content>
