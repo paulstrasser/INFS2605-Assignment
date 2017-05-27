@@ -7,13 +7,19 @@ package infs2605.assignment;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +33,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
@@ -58,7 +66,7 @@ public class SeekARideController implements Initializable {
     private RadioButton startHome, startWork, startOther, endHome, endWork, endOther;
     
     @FXML
-    private DatePicker pickupDate;
+    private DatePicker date;
     
     @FXML
     private ComboBox numPass;
@@ -70,21 +78,119 @@ public class SeekARideController implements Initializable {
     private MenuItem SeekaRide, YourSeeks, OfferaRide, YourOffers, AgreementRequests;
     
     @FXML
-    private MenuItem AdjustmentRequests;;
-    
-    
+    private MenuItem AdjustmentRequests;
     
     @FXML
-    private TitledPane searchResultsTitledPane;
+    private TableView<Offer> Table;
+    
+    @FXML
+    private TableColumn<Offer, String> offerIDCol;
+    
+    @FXML
+    private TableColumn<Offer, String> offererIDCol;
+    
+    @FXML
+    private TableColumn<Offer, String> strtSuburbCol;
+    
+    @FXML    
+    private TableColumn<Offer, String> strtPostCodeCol;    
+    
+    @FXML    
+    private TableColumn<Offer, String> strtStreetNoCol; 
+    
+    @FXML
+    private TableColumn<Offer, String> strtStreetNameCol;
+    
+    @FXML
+    private TableColumn<Offer, String> endSuburbCol;
+    
+    @FXML
+    private TableColumn<Offer, String> endPostCodeCol;
+    
+    @FXML
+    private TableColumn<Offer, String> endStreetNoCol;
+    
+    @FXML
+    private TableColumn<Offer, String> endStreetNameCol;
+    
+    @FXML
+    private TableColumn<Offer, String> dateCol;
+    
+    @FXML
+    private TableColumn<Offer, String> priceCol;
+    
+    @FXML
+    private TableColumn<Offer, String> pickUpTimeCol;
+    
+    @FXML
+    private TableColumn<Offer, String> dateCreatedCol;
+    
+    @FXML
+    private TableColumn<Offer, String> statusCol;
+    
+    @FXML
+    private TableColumn<Offer, String> numSeatsAvailableCol; 
+
+    DBController d = new DBController(); //Establish a connection to the db
+    
+    ArrayList<Offer> offersList = new ArrayList<>(); //Creates the array list
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Makes the 'Results' TitledPane not collapseable 
-        searchResultsTitledPane.setCollapsible(false); 
+        //Makes the 'Results' TitledPane not collapseable  
         numPass.getItems().addAll("1", "2", "3","4");
         numPass.getSelectionModel().selectFirst();
+        offerIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOfferIDProperty().toString()));
+        
+        offererIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOffererIDProperty().toString()));
+        
+        strtSuburbCol.setCellValueFactory(cellData -> cellData.getValue().getStrtSuburbProperty());
+        
+        strtPostCodeCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStrtPostCodeProperty().toString()));
+
+        strtStreetNoCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStrtStreetNoProperty().toString()));
+        
+        strtStreetNameCol.setCellValueFactory(cellData -> cellData.getValue().getStrtStreetNameProperty());
+        
+        endSuburbCol.setCellValueFactory(cellData -> cellData.getValue().getEndSuburbProperty());
+        
+        endPostCodeCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEndPostCodeProperty().toString()));
+
+        endStreetNoCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEndStreetNoProperty().toString()));
+        
+        endStreetNameCol.setCellValueFactory(cellData -> cellData.getValue().getEndStreetNameProperty());
+        
+        dateCol.setCellValueFactory(cellData -> cellData.getValue().getDateProperty());
+        
+        priceCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPriceProperty().toString()));
+        
+        pickUpTimeCol.setCellValueFactory(cellData -> cellData.getValue().getPickUpTimeProperty());
+        
+        dateCreatedCol.setCellValueFactory(cellData -> cellData.getValue().getDateCreatedProperty());
+        
+        statusCol.setCellValueFactory(cellData -> cellData.getValue().getStatusProperty());
+        
+        numSeatsAvailableCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNumSeatsAvailableProperty().toString()));
+        
+        getOffers();
+        
+        Table.setItems(FXCollections.observableArrayList(offersList));
+          
+        //Table.getSelectionModel().selectedItemProperty().addListener(
+                //(observable, oldValue, newValue) -> showOfferDetails(newValue));
+    }
+     public void getOffers() {
+        try {
+            offersList.clear();
+            ResultSet rs = d.getResultSet("SELECT * FROM OFFER");
+            while (rs.next()) {
+                offersList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SeekARideController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     } 
-    
     @FXML
     private void SignOut(ActionEvent event) throws Exception {
 
@@ -97,7 +203,7 @@ public class SeekARideController implements Initializable {
     }
     
     @FXML
-    private void SeekARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+    private void OfferARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
 
         stage=(Stage) Seek.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Seek a Ride.fxml"));
@@ -129,7 +235,7 @@ public class SeekARideController implements Initializable {
     }
     
     @FXML
-    private void OfferARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
+    private void SeekARide(ActionEvent event) throws Exception { //Goes to 'Seek a Ride' screen
 
         stage=(Stage) Offer.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Offer a Ride.fxml"));
@@ -198,45 +304,50 @@ public class SeekARideController implements Initializable {
     
     @FXML //HAMISH THIS IS WHERE THE RESULT SET IS
     private void makeSearch(ActionEvent event) throws Exception {
+        offersList.clear();
         if (verifySeek() == false){
-            DBController db1 = new DBController();
             String startPCX;
             String endPCX;
-            LocalDate dateX = pickupDate.getValue();
+            LocalDate dateX = date.getValue();
             String timeX = pickupTime.getText();
             String PriceX = maxPrice.getText();
             String StatusX = "Pending";
             String[] temp = maxPrice.getText().split(":");
-            int time1 = Integer.parseInt(temp[0]); //hour
+            int time1 = Integer.parseInt(temp[0]); //hourfve
             int time2 = Integer.parseInt(temp[0]) - 1; //hour - 1
             int time3 = Integer.parseInt(temp[0]) + 1; //hour + 1
             //Seats in the INSERT statement
             
             //determining address
             if (startHome.isSelected()){
-                startPCX = db1.returnSingleQuery("SELECT HPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
+                startPCX = d.returnSingleQuery("SELECT HPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
             }
             else if (startWork.isSelected()){
-                startPCX = db1.returnSingleQuery("SELECT WPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
+                startPCX = d.returnSingleQuery("SELECT WPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
             }
             else{
                 startPCX = startPC.getText();
             }
             
             if (endHome.isSelected()){
-                endPCX = db1.returnSingleQuery("SELECT HPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
+                endPCX = d.returnSingleQuery("SELECT HPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
             }
             else if (endWork.isSelected()){
-                endPCX = db1.returnSingleQuery("SELECT WPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
+                endPCX = d.returnSingleQuery("SELECT WPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
             }
             else{
                 endPCX = startPC.getText();
             }
 
             //Search conditions: same start + end suburbs, price window and time window
-            ResultSet searchResults = db1.getResultSet("SELECT CONCAT_WS(' ',u.FNAME,u.LNAME) AS Offerer, o.STRTSUBURB AS StartingSuburb, o.ENDSUBURB AS DestinationSuburb, o.DATE AS Date, o.PICKUPTIME AS Time, o.PRICE AS MinimumPrice FROM USER u, OFFER o WHERE u.USERID = o.OFFERERID AND o.STRTPOSTCODE = '" + startPCX + "' AND o.ENDPOSTCODE = '" + endPCX + "' AND CAST(o.PRICE AS INT) < " + PriceX + " AND o.DATE = PARSEDATETIME('"+dateX+"', 'YYYY-MM-DD') AND o.STATUS = '"+ StatusX+"' AND (o.PICKUPTIME LIKE '"+time1+"%' OR o.PICKUPTIME LIKE '"+time2+"%' OR o.PICKUPTIME LIKE '"+time3+"%')");
-            System.out.println(searchResults); //this is to test if it works
+            ResultSet rs = d.getResultSet("SELECT * FROM OFFER WHERE STRTPOSTCODE = '" + startPCX + "' AND ENDPOSTCODE = '" + endPCX + "' AND CAST(PRICE AS INT) < " + PriceX + " AND DATE = PARSEDATETIME('"+dateX+"', 'YYYY-MM-DD') AND o.STATUS = '"+ StatusX+"' AND (PICKUPTIME LIKE '"+time1+"%' OR PICKUPTIME LIKE '"+time2+"%' OR PICKUPTIME LIKE '"+time3+"%')");
+            while (rs.next()) {
+                offersList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
+            }
             //HAMISH - ADD DISPLAY LOGIC HERE
+            getOffers();
+            Table.setItems(FXCollections.observableArrayList(offersList));
+            System.out.println(rs); //this is to test if it works
         }
     }
     
@@ -254,7 +365,7 @@ public class SeekARideController implements Initializable {
             String endStreetX;
             String endSubX;
             String endPCX;
-            LocalDate dateX = pickupDate.getValue();
+            LocalDate dateX = date.getValue();
             String timeX = pickupTime.getText();
             LocalDate rightNow = LocalDate.now();
             String PriceX = maxPrice.getText();
@@ -305,9 +416,12 @@ public class SeekARideController implements Initializable {
             db1.Insert(insertStatement);
             notifyText.setText("            Your Seek has been posted successfully!");
             errorText.setVisible(false);
+            }
+            //HAMISH - ADD DISPLAY LOGIC HERE
+            getOffers();
+            Table.setItems(FXCollections.observableArrayList(offersList));
         }
-    }
-   
+    
     public boolean isNumeric(String s) {  
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
     }
@@ -424,7 +538,7 @@ public class SeekARideController implements Initializable {
         }
         
         //Date Picker
-        if (pickupDate.getValue() == null) {
+        if (date.getValue() == null) {
                 errorText.setText("   Pick Up date is not set");
                 errorText.setVisible(true);
                 return true;
@@ -432,7 +546,7 @@ public class SeekARideController implements Initializable {
 
         LocalDate localDate = LocalDate.now();
         
-        if (pickupDate.getValue().isBefore(localDate)){
+        if (date.getValue().isBefore(localDate)){
             errorText.setText("Pick today or a future date for pick up");
             errorText.setVisible(true);
             return true;
