@@ -5,6 +5,7 @@
  */
 package infs2605.assignment;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -33,25 +34,25 @@ public class Agreement {
     public Long paymentID;
     public Integer numSeatsRequired;
 
-    public Agreement(Long agreementID, Long seekID, Long seekerID, Long offerID, Long offererID, StringProperty strtSuburb, Integer strtPostCode, Integer strtStreetNo, StringProperty strtStreetName, StringProperty endSuburb, Integer endPostCode, Integer endStreetNo, StringProperty endStreetName, StringProperty date, Double price, StringProperty pickUpTime, StringProperty dateCreated, StringProperty status, Long paymentID, Integer numSeatsRequired) {
+    public Agreement(Long agreementID, Long seekID, Long seekerID, Long offerID, Long offererID, String strtSuburb, Integer strtPostCode, Integer strtStreetNo, String strtStreetName, String endSuburb, Integer endPostCode, Integer endStreetNo, String endStreetName, String date, Double price, String pickUpTime, String dateCreated, String status, Long paymentID, Integer numSeatsRequired) {
         this.agreementID = agreementID;
         this.seekID = seekID;
         this.seekerID = seekerID;
         this.offerID = offerID;
         this.offererID = offererID;
-        this.strtSuburb = strtSuburb;
+        this.strtSuburb = new SimpleStringProperty(strtSuburb);
         this.strtPostCode = strtPostCode;
         this.strtStreetNo = strtStreetNo;
-        this.strtStreetName = strtStreetName;
-        this.endSuburb = endSuburb;
+        this.strtStreetName = new SimpleStringProperty(strtStreetName);
+        this.endSuburb = new SimpleStringProperty(endSuburb);
         this.endPostCode = endPostCode;
         this.endStreetNo = endStreetNo;
-        this.endStreetName = endStreetName;
-        this.date = date;
+        this.endStreetName = new SimpleStringProperty(endStreetName);
+        this.date = new SimpleStringProperty(date);
         this.price = price;
-        this.pickUpTime = pickUpTime;
-        this.dateCreated = dateCreated;
-        this.status = status;
+        this.pickUpTime = new SimpleStringProperty(pickUpTime);
+        this.dateCreated = new SimpleStringProperty(dateCreated);
+        this.status = new SimpleStringProperty(status);
         this.paymentID = paymentID;
         this.numSeatsRequired = numSeatsRequired;
     }
