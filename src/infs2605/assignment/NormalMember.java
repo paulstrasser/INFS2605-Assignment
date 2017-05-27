@@ -5,6 +5,11 @@
  */
 package infs2605.assignment;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -20,12 +25,7 @@ public class NormalMember {
     public StringProperty LNAME;
     public StringProperty USERTYPE;
     public StringProperty GENDER;
-    /*DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-    public Date DOB1;
-    public String DOB = df.format(DOB1);*/
-    
-
-    //public Date DOB;
+    public StringProperty DOB;
     public Long HPHONE;
     public Long WPHONE;
     public Long MPHONE;
@@ -47,28 +47,28 @@ public class NormalMember {
     public StringProperty REGISTRATION;
     public Integer NUMOFSEATS;
     public Long LICENSENUM;
-    //public ObjectProperty EXPDATE;
-    //public ObjectProperty PROFILEPIC;
+    public StringProperty EXPDATE;
+    //public StringProperty PROFILEPIC;
     public StringProperty USERNAME;
     public StringProperty PASSWORD;
     public StringProperty DESCRIPTION;
     public StringProperty NAMEONCARD;
     public Long CARDNUM;
-    //public ObjectProperty CARDEXPIRY;
+    public StringProperty CARDEXPIRY;
     public Integer CVV;
 
 
-    public NormalMember(long USERID, String FNAME, String LNAME, String USERTYPE, String GENDER, /*String DOB, */long HPHONE
+    public NormalMember(long USERID, String FNAME, String LNAME, String USERTYPE, String GENDER, String DOB, long HPHONE
     , long WPHONE, long MPHONE, String EMAIL, int HNUM, String HSTREET, String HSUBURB, String HCITY, int HPOSTCODE, int WNUM
     , String WSTREET, String WSUBURB, String WCITY, int WPOSTCODE, String MAKE, String MODEL, String COLOUR, String YEARMADE, String REGISTRATION
-    , int NUMOFSEATS, long LICENSENUM, /*Date EXPDATE, Container PROFILEPIC, */String USERNAME, String PASSWORD, String DESCRIPTION, String NAMEONCARD, long CARDNUM
-    , /*Date CARDEXPIRY, */int CVV){
+    , int NUMOFSEATS, long LICENSENUM, String EXPDATE, /*Container PROFILEPIC, */String USERNAME, String PASSWORD, String DESCRIPTION, String NAMEONCARD, long CARDNUM
+    , String CARDEXPIRY, int CVV){
         this.USERID = new Long(USERID);
         this.FNAME = new SimpleStringProperty(FNAME);
         this.LNAME = new SimpleStringProperty(LNAME);
         this.USERTYPE = new SimpleStringProperty(USERTYPE);
         this.GENDER = new SimpleStringProperty(GENDER);
-        //this.DOB = new String(DOB);
+        this.DOB = new SimpleStringProperty(DOB);
         this.HPHONE = new Long(HPHONE);
         this.WPHONE = new Long(WPHONE);
         this.MPHONE = new Long(MPHONE);
@@ -90,14 +90,14 @@ public class NormalMember {
         this.REGISTRATION = new SimpleStringProperty(REGISTRATION);
         this.NUMOFSEATS = new Integer(NUMOFSEATS);
         this.LICENSENUM = new Long(LICENSENUM);
-        //this.EXPDATE = new SimpleObjectProperty(EXPDATE);
+        this.EXPDATE = new SimpleStringProperty(EXPDATE);
         //this.PROFILEPIC = new SimpleObjectProperty(PROFILEPIC);
         this.USERNAME = new SimpleStringProperty(USERNAME);
         this.PASSWORD = new SimpleStringProperty(PASSWORD);
         this.DESCRIPTION = new SimpleStringProperty(DESCRIPTION);
         this.NAMEONCARD = new SimpleStringProperty(NAMEONCARD);
         this.CARDNUM = new Long(CARDNUM);
-        //this.CARDEXPIRY = new SimpleObjectProperty(CARDEXPIRY);
+        this.CARDEXPIRY = new SimpleStringProperty(CARDEXPIRY);
         this.CVV = new Integer(CVV);
 
     }
@@ -124,6 +124,11 @@ public class NormalMember {
     public String getGENDER() {
         return GENDER.get();
     }
+    
+    public String getDOB() {
+        return DOB.get();
+    }
+    
     
     public String getHPHONE() {
         return HPHONE.toString();
@@ -209,6 +214,10 @@ public class NormalMember {
         return LICENSENUM.toString();
     }
     
+    public String getEXPDATE() {
+        return EXPDATE.get();
+    }
+    
     public String getUSERNAME() {
         return USERNAME.get();
     }
@@ -227,6 +236,10 @@ public class NormalMember {
     
     public String getCARDNUM() {
         return CARDNUM.toString();
+    }
+    
+    public String getCARDEXPIRY() {
+        return CARDEXPIRY.get();
     }
     
     public String getCVV() {
@@ -255,9 +268,9 @@ public class NormalMember {
         return GENDER;
     }
     
-    /*public String getDOBProperty() {
+    public StringProperty getDOBProperty() {
         return DOB;
-    }*/
+    }
     
     public Long getHPHONEProperty() {
         return HPHONE;
@@ -343,6 +356,10 @@ public class NormalMember {
         return LICENSENUM;
     }
     
+    public StringProperty getEXPDATEProperty() {
+        return EXPDATE;
+    }
+    
     public StringProperty getUSERNAMEProperty() {
         return USERNAME;
     }
@@ -361,6 +378,10 @@ public class NormalMember {
     
     public Long getCARDNUMProperty() {
         return CARDNUM;
+    }
+    
+    public StringProperty getCARDEXPIRYProperty() {
+        return CARDEXPIRY;
     }
     
     public Integer getCVVProperty() {
