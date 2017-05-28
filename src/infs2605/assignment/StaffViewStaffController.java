@@ -21,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -429,6 +430,9 @@ public class StaffViewStaffController implements Initializable {
             Table.setItems(FXCollections.observableArrayList(staffList));
             SearchDate.getEditor().clear();
             SearchValue.clear();
+            
+            
+        
         }
         catch (SQLException ex) {
             Logger.getLogger(StaffViewStaffController.class.getName()).log(Level.SEVERE, null, ex);

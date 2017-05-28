@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -123,7 +124,13 @@ public class StaffAddConsultationController implements Initializable {
                 ex.printStackTrace();
             }
                
-        } 
+        }
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action Processed");
+        alert.setHeaderText(null);
+        alert.setContentText("Consultation Added!");
+
+        alert.showAndWait();
     }
     
     
@@ -210,7 +217,7 @@ public class StaffAddConsultationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cbStatus.getItems().addAll("Open", "Closed");
-        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
 
     }    
     

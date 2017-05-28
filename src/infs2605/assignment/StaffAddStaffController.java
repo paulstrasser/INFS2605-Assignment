@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -206,6 +207,13 @@ public class StaffAddStaffController implements Initializable {
             }
                
         }
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action Processed");
+        alert.setHeaderText(null);
+        alert.setContentText("Staff Added!");
+
+        alert.showAndWait();
     }
     
     

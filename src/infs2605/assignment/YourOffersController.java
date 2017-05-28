@@ -44,7 +44,7 @@ public class YourOffersController implements Initializable {
     private Text Name;
     
     @FXML
-    private Button Signout;
+    private Button Signout, Back;
     
     @FXML
     private MenuButton Seek, Offer, Matches;
@@ -115,6 +115,8 @@ public class YourOffersController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {     
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        
         offerIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOfferIDProperty().toString()));
         
         offererIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOffererIDProperty().toString()));
@@ -166,6 +168,16 @@ public class YourOffersController implements Initializable {
             Logger.getLogger(SeekARideController.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
+     
+    @FXML
+    public void Back(ActionEvent event) throws Exception {
+        stage=(Stage) Matches.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Offer a Ride.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+     }
+    
     @FXML
     private void SignOut(ActionEvent event) throws Exception {
 

@@ -27,6 +27,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -59,7 +60,7 @@ public class OfferARideController implements Initializable {
     private Button Signout, Search, Post;
     
     @FXML
-    private Text Name, errorText, notifyText;
+    private Text Name, errorText, notifyText, name;
     
     @FXML
     private TextField startNum, startStreet, startSub, startPC, endNum, endStreet, endSub, endPC, pickupTime, maxPrice; 
@@ -199,7 +200,8 @@ public class OfferARideController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Makes the 'Results' TitledPane not collapseable 
+        name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        
         searchResultsTitledPane.setCollapsible(false); 
         SingleSeek.setVisible(false);
         numPass.getItems().addAll("1", "2", "3","4");
@@ -495,6 +497,13 @@ public class OfferARideController implements Initializable {
             db1.Insert(insertStatement);
             notifyText.setText("            Your Offer has been posted successfully!");
             errorText.setVisible(false);
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Action Processed");
+            alert.setHeaderText(null);
+            alert.setContentText("Offer Posted Successfully!");
+
+            alert.showAndWait();
         }
     }
    
@@ -639,10 +648,9 @@ public class OfferARideController implements Initializable {
     @FXML
     private void Back(ActionEvent event) throws Exception {
         SingleSeek.setVisible(false);
+    }
     /*@FXML
     private void findResults(ActionEvent event) throws Exception {
-    //this method is a test done by Paul (cool story bro). It displays 'hello' in each grid of the gridpane.
-    //Essentially, we want to show seek records in each gridPane.
     //If no results are found, put a button there that allows user to create a new seek
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
@@ -651,5 +659,5 @@ public class OfferARideController implements Initializable {
             }
         }
     }*/ 
-    }
+    
 }

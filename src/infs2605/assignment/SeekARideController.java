@@ -26,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -58,7 +59,7 @@ public class SeekARideController implements Initializable {
     private Button Signout, Search, Post;
     
     @FXML
-    private Text Name, errorText, notifyText;
+    private Text Name, errorText, notifyText, name;
     
     @FXML
     private TextField startNum, startStreet, startSub, startPC, endNum, endStreet, endSub, endPC, pickupTime, maxPrice; 
@@ -190,6 +191,9 @@ public class SeekARideController implements Initializable {
     private Button Back;
     
     @FXML
+    private Button Match;
+    
+    @FXML
     private TitledPane searchResultsTitledPane;
     
     DBController d = new DBController(); //Establish a connection to the db
@@ -199,6 +203,8 @@ public class SeekARideController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Makes the 'Results' TitledPane not collapseable 
+        name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        
         searchResultsTitledPane.setCollapsible(false); 
         SingleOffer.setVisible(false);
         numPass.getItems().addAll("1", "2", "3","4");
@@ -500,6 +506,12 @@ public class SeekARideController implements Initializable {
             db1.Insert(insertStatement);
             notifyText.setText("            Your Seek has been posted successfully!");
             errorText.setVisible(false);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Action Processed");
+            alert.setHeaderText(null);
+            alert.setContentText("Seek Posted Successfully!");
+
+            alert.showAndWait();
         }
     }
    
@@ -643,24 +655,34 @@ public class SeekARideController implements Initializable {
     }
     @FXML
     private void Back(ActionEvent event) throws Exception {
-        SingleOffer.setVisible(false);
+        SingleOffer.setVisible(false);       
+    }
     
-    /*@FXML
-    private void findResults(ActionEvent event) throws Exception {
-    //this method is a test done by Paul (cool story bro). It displays 'hello' in each grid of the gridpane.
-    //Essentially, we want to show seek records in each gridPane.
-    //If no results are found, put a button there that allows user to create a new seek
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                Label test = new Label("Hello");
-                results.add(test,i,j);
-            }
-        }
-    }*/
-    
-    
-    
-    
-       
+    @FXML
+    private void Match(ActionEvent event) throws Exception {
+        int thisPK = Integer.parseInt(d.returnSingleQuery("SELECT MAX(AGREEMENTID) AS ANSWER FROM AGREEMENT"))+1;
+        long thisSeeker = Integer.parseInt(d.returnSingleQuery("SELECT USERID AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        long AddOffererID = Long.parseLong(offererID.getText());
+        long AddOfferID = Long.parseLong(offerID.getText());
+        long AddSeekID = 0;
+        String AddStrtSuburb = strtSuburb.getText();
+        int AddStrtPostCode = Integer.parseInt(strtPostCode.getText());
+        int AddStrtStreetNo = Integer.parseInt(strtStreetNo.getText());
+        String AddStrtStreetName = strtStreetName.getText();
+        String AddEndSuburb = endSuburb.getText();
+        int AddEndPostCode = Integer.parseInt(endPostCode.getText());
+        int AddEndStreetNo = Integer.parseInt(endStreetNo.getText());
+        String AddEndStreetName = endStreetName.getText();
+        LocalDate AddDate = LocalDate.parse(date.getText());
+        double AddPrice = Double.parseDouble(price.getText());
+        String AddPickUpTime = pickUpTime.getText();
+        LocalDate AddDateCreated = LocalDate.parse(dateCreated.getText());
+        String AddStatus = "Matched";
+        long AddPaymentID = 0;
+        int AddNumSeatsRequired = Integer.parseInt(numberOfSeats.getText());
+        
+        d.Insert("INSERT INTO AGREEMENT(AGREEMENTID, SEEKERID, OFFERERID, SEEKID, OFFERID, STRTSUBURB, STRTPOSTCODE, STRTSTREETNO, STRTSTREETNAME, ENDSUBURB, ENDPOSTCODE, ENDSTREETNO, ENDSTREETNAME, DATE, PRICE, PICKUPTIME, DATECREATED, STATUS, NUMSEATSREQUIRED) VALUES(" + thisPK + ", " + thisSeeker + ", " + AddOffererID + ", " + AddSeekID + ", " + AddOfferID + ", '" + AddStrtSuburb + "', " + AddStrtPostCode + ", " + AddStrtStreetNo + ", '" + AddStrtStreetName + "', '" + AddEndSuburb + "', " + AddEndPostCode + ", " + AddEndStreetNo + ", '" + AddEndStreetName + "', " + "PARSEDATETIME('" + AddDate + "', 'YYYY-MM-DD'), " + AddPrice + ", '" + AddPickUpTime + "', PARSEDATETIME('" + AddDateCreated + "', 'YYYY-MM-DD'), '" + AddStatus + "', " + AddPaymentID + ", " + AddNumSeatsRequired + ")");
+        
+        SingleOffer.setVisible(false);       
     }
 }

@@ -21,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -385,7 +386,8 @@ public class AgreementRequestsController implements Initializable {
     public void getMatches() {
         try {
             agreementList.clear();
-            ResultSet rs = d.getResultSet("SELECT * FROM AGREEMENT");
+            int thisUser = Integer.parseInt(d.returnSingleQuery("SELECT USERID AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+            ResultSet rs = d.getResultSet("SELECT * FROM AGREEMENT WHERE SEEKERID = " + thisUser + " OR OFFERERID = " + thisUser + " ");
             while (rs.next()) {
                 agreementList.add(new Agreement(rs.getLong("AGREEMENTID"), rs.getLong("SEEKID"), rs.getLong("SEEKERID"), rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getLong("PAYMENTID"), rs.getInt("NUMSEATSREQUIRED")));
             }
@@ -441,6 +443,12 @@ public class AgreementRequestsController implements Initializable {
         
         Single.setVisible(false);
         refreshTable();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action Processed");
+        alert.setHeaderText(null);
+        alert.setContentText("Agreement Completed!");
+
+        alert.showAndWait();
     }
     
     public void Submit(ActionEvent event) throws Exception {
@@ -480,6 +488,13 @@ public class AgreementRequestsController implements Initializable {
             catch (Exception ex) {
                 ex.printStackTrace();
             }
+            
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action Processed");
+        alert.setHeaderText(null);
+        alert.setContentText("Adjustment Submitted!");
+
+        alert.showAndWait();
         }
     
     @FXML
@@ -509,6 +524,12 @@ public class AgreementRequestsController implements Initializable {
         d.Insert("UPDATE AGREEMENT SET STATUS = 'Paid'");
         PayPane.setVisible(false);
         Single.setVisible(false);
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action Processed");
+        alert.setHeaderText(null);
+        alert.setContentText("Payment Completed!");
+        alert.showAndWait();
         
         
     }

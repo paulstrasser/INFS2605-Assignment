@@ -21,6 +21,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -367,7 +369,7 @@ public class AdjustmentRequestsController implements Initializable {
             adjustmentList.clear();
             long thisUser = Long.parseLong(d.returnSingleQuery("SELECT USERID AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
 
-            ResultSet rs = d.getResultSet("SELECT * FROM Adjustment WHERE STATUS IN ('Pending') AND ADJUSTEDBY != " + thisUser);
+            ResultSet rs = d.getResultSet("SELECT * FROM Adjustment WHERE STATUS IN ('Pending') AND ADJUSTEDBY != " + thisUser + " AND SEEKERID = " + thisUser + " OR OFFERERID = " + thisUser + " ");
             while (rs.next()) {
                 adjustmentList.add(new Adjustment(rs.getLong("ADJUSTMENTID"), rs.getLong("AGREEMENTID"), rs.getLong("SEEKID"), rs.getLong("SEEKERID"), rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getLong("PAYMENTID"), rs.getInt("NUMSEATSREQUIRED"), rs.getLong("ADJUSTEDBY")));
             }
@@ -517,6 +519,14 @@ public class AdjustmentRequestsController implements Initializable {
         }
         
         d.Insert("UPDATE ADJUSTMENT SET STATUS = 'Approved' WHERE ADJUSTMENTID = '" + adjustmentID.getText() + "'");
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action Processed");
+        alert.setHeaderText(null);
+        alert.setContentText("Adjustment Accepted!");
+
+        alert.showAndWait();
+        
         refreshTable();
         Single.setVisible(false);
     }
