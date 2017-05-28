@@ -58,7 +58,7 @@
                                 <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Text fill="WHITE" layoutX="29.0" layoutY="159.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="John Smith" textAlignment="CENTER">
+                                          <Text fx:id="Name" fill="WHITE" layoutX="56.0" layoutY="159.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="John Smith" textAlignment="CENTER">
                                              <font>
                                                 <Font name="Avenir Roman" size="24.0" />
                                              </font>
@@ -71,7 +71,6 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Button>
-                                          <Rectangle arcHeight="5.0" fill="#67afeb" height="96.0" layoutX="36.0" layoutY="32.0" stroke="#6b4c4c00" strokeType="INSIDE" width="107.0" />
                                           <Button fx:id="NormalMembers" layoutX="3.0" layoutY="196.0" mnemonicParsing="false" onAction="#NormalMembers" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Normal Members" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
@@ -120,6 +119,11 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
+                                          <ImageView fitHeight="96.0" fitWidth="107.0" layoutX="42.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@SuBer%20Logo%202.png" />
+                                             </image>
+                                          </ImageView>
                                        </children>
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #93cff2;">
@@ -137,26 +141,25 @@
                                                         <content>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1496.0" prefWidth="1312.0">
                                                                <children>
-                                                                  <TableView prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <TableView fx:id="Table" prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <columns>
-                                                                      <TableColumn prefWidth="75.0" text="C1" />
-                                                                      <TableColumn prefWidth="75.0" text="C2" />
+                                                                        <TableColumn fx:id="corporateMemberIdCol" prefWidth="75.0" text="ID" />
+                                                                        <TableColumn fx:id="companyNameCol" prefWidth="75.0" text="Company" />
+                                                                        <TableColumn fx:id="cStreetNumCol" prefWidth="75.0" text="Street No." />
+                                                                        <TableColumn fx:id="cStreetNameCol" prefWidth="88.0" text="Street Name" />
+                                                                        <TableColumn fx:id="cSuburbCol" prefWidth="62.0" text="Suburb" />
+                                                                        <TableColumn fx:id="cCityCol" prefWidth="75.0" text="City" />
+                                                                        <TableColumn fx:id="cPostCodeCol" prefWidth="75.0" text="Post Code" />
+                                                                        <TableColumn fx:id="companyPhoneNumCol" prefWidth="75.0" text="Phone Number" />
+                                                                        <TableColumn fx:id="ABNCol" prefWidth="75.0" text="ABN" />
                                                                     </columns>
                                                                   </TableView>
                                                                </children>
                                                             </AnchorPane>
                                                         </content>
                                                       </ScrollPane>
-                                                      <Button fx:id="Edit" layoutX="320.0" layoutY="840.0" mnemonicParsing="false" style="-fx-background-color: #67afeb;" text="Edit" textAlignment="CENTER" textFill="WHITE">
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                         <font>
-                                                            <Font size="24.0" />
-                                                         </font>
-                                                      </Button>
                                                       <Rectangle arcHeight="5.0" fill="#67afeb" height="123.0" layoutX="53.0" layoutY="122.0" stroke="#6b4c4c00" strokeType="INSIDE" width="462.0" />
-                                                      <Button fx:id="Signout1" layoutX="237.0" layoutY="191.0" mnemonicParsing="false" onAction="#SignOut" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button layoutX="237.0" layoutY="191.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -181,7 +184,7 @@
                                                             <Font name="Avenir Roman" size="18.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button fx:id="Add" layoutX="410.0" layoutY="840.0" mnemonicParsing="false" onAction="#Add" style="-fx-background-color: #67afeb;" text="Add" textAlignment="CENTER" textFill="WHITE">
+                                                      <Button fx:id="Add" layoutX="370.0" layoutY="840.0" mnemonicParsing="false" onAction="#Add" style="-fx-background-color: #67afeb;" text="Add" textAlignment="CENTER" textFill="WHITE">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -212,10 +215,10 @@
             </AnchorPane>
             <AnchorPane maxHeight="35.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #93cff2;">
                <children>
-                  <Label layoutX="319.0" layoutY="19.0" text="Contact Us" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="231.0" />
-                  <Label layoutX="212.0" layoutY="19.0" text="Privacy Policy" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="321.0" />
-                  <Label layoutX="159.0" layoutY="19.0" text="FAQs" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="426.0" />
-                  <Label layoutX="404.0" layoutY="19.0" text="Our Mission" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="142.0" />
+                  <Label layoutX="525.0" layoutY="10.0" text="Contact Us" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="454.0" />
+                  <Label layoutX="418.0" layoutY="10.0" text="Privacy Policy" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="544.0" />
+                  <Label layoutX="365.0" layoutY="10.0" text="FAQs" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="649.0" />
+                  <Label layoutX="610.0" layoutY="10.0" text="Our Mission" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="365.0" />
                </children>
             </AnchorPane>
         </items>

@@ -57,7 +57,7 @@
                                 <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Text fill="WHITE" layoutX="29.0" layoutY="159.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="John Smith" textAlignment="CENTER">
+                                          <Text fx:id="Name" fill="WHITE" layoutX="56.0" layoutY="159.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="John Smith" textAlignment="CENTER">
                                              <font>
                                                 <Font name="Avenir Roman" size="24.0" />
                                              </font>
@@ -70,7 +70,6 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Button>
-                                          <Rectangle arcHeight="5.0" fill="#67afeb" height="96.0" layoutX="36.0" layoutY="32.0" stroke="#6b4c4c00" strokeType="INSIDE" width="107.0" />
                                           <Button fx:id="NormalMembers" layoutX="3.0" layoutY="196.0" mnemonicParsing="false" onAction="#NormalMembers" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Normal Members" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
@@ -119,6 +118,11 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
+                                          <ImageView fitHeight="96.0" fitWidth="107.0" layoutX="42.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@SuBer%20Logo%202.png" />
+                                             </image>
+                                          </ImageView>
                                        </children>
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #93cff2;">
@@ -133,7 +137,7 @@
                                                          </font>
                                                       </Label>
                                                       <Rectangle arcHeight="5.0" fill="#67afeb" height="70.0" layoutX="59.0" layoutY="126.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
-                                                      <Button fx:id="Add" layoutX="427.0" layoutY="303.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: white;" text="Add" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Add" layoutX="427.0" layoutY="303.0" mnemonicParsing="false" onAction="#Add" prefHeight="40.0" prefWidth="86.0" style="-fx-background-color: white;" text="Add" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -141,7 +145,7 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Button>
-                                                      <TextField layoutX="270.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Staff ID">
+                                                      <TextField fx:id="tfStaffID" layoutX="270.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Staff ID">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
@@ -155,19 +159,19 @@
                                                          </font>
                                                       </Button>
                                                       <Rectangle arcHeight="5.0" fill="#67afeb" height="70.0" layoutX="59.0" layoutY="214.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
-                                                      <TextField layoutX="88.0" layoutY="232.0" prefHeight="33.0" prefWidth="121.0" promptText="Price">
+                                                      <TextField fx:id="tfPrice" layoutX="88.0" layoutY="232.0" prefHeight="33.0" prefWidth="121.0" promptText="Price">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <ComboBox layoutX="228.0" layoutY="234.0" prefHeight="30.0" prefWidth="121.0" promptText="Status" style="-fx-background-color: white;" />
-                                                      <TextField layoutX="423.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Member ID">
+                                                      <ComboBox fx:id="cbStatus" layoutX="228.0" layoutY="234.0" prefHeight="30.0" prefWidth="121.0" promptText="Status" style="-fx-background-color: white;" />
+                                                      <TextField fx:id="tfMemberID" layoutX="423.0" layoutY="145.0" prefHeight="33.0" prefWidth="121.0" promptText="Member ID">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <DatePicker layoutX="370.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Opened" />
-                                                      <DatePicker layoutX="556.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Closed" />
+                                                      <DatePicker fx:id="dpDateOpened" layoutX="370.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Opened" />
+                                                      <DatePicker fx:id="dpDateClosed" layoutX="556.0" layoutY="234.0" prefHeight="30.0" prefWidth="165.0" promptText="Date Closed" />
                                                    </children>
                                                 </AnchorPane>
                                              </content>
@@ -183,10 +187,10 @@
             </AnchorPane>
             <AnchorPane maxHeight="35.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #93cff2;">
                <children>
-                  <Label layoutX="319.0" layoutY="19.0" text="Contact Us" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="231.0" />
-                  <Label layoutX="212.0" layoutY="19.0" text="Privacy Policy" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="321.0" />
-                  <Label layoutX="159.0" layoutY="19.0" text="FAQs" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="426.0" />
-                  <Label layoutX="404.0" layoutY="19.0" text="Our Mission" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="142.0" />
+                  <Label layoutX="525.0" layoutY="10.0" text="Contact Us" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="454.0" />
+                  <Label layoutX="418.0" layoutY="10.0" text="Privacy Policy" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="544.0" />
+                  <Label layoutX="365.0" layoutY="10.0" text="FAQs" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="649.0" />
+                  <Label layoutX="610.0" layoutY="10.0" text="Our Mission" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="365.0" />
                </children>
             </AnchorPane>
         </items>

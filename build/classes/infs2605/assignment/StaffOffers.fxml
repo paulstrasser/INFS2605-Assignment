@@ -59,7 +59,7 @@
                                 <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Text fill="WHITE" layoutX="29.0" layoutY="159.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="John Smith" textAlignment="CENTER">
+                                          <Text fx:id="Name" fill="WHITE" layoutX="56.0" layoutY="159.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="John Smith" textAlignment="CENTER">
                                              <font>
                                                 <Font name="Avenir Roman" size="24.0" />
                                              </font>
@@ -72,7 +72,6 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </Button>
-                                          <Rectangle arcHeight="5.0" fill="#67afeb" height="96.0" layoutX="36.0" layoutY="32.0" stroke="#6b4c4c00" strokeType="INSIDE" width="107.0" />
                                           <Button fx:id="NormalMembers" layoutX="3.0" layoutY="196.0" mnemonicParsing="false" onAction="#NormalMembers" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Normal Members" textFill="WHITE">
                                              <font>
                                                 <Font name="Avenir Roman" size="17.0" />
@@ -121,43 +120,54 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Button>
+                                          <ImageView fitHeight="96.0" fitWidth="107.0" layoutX="42.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@SuBer%20Logo%202.png" />
+                                             </image>
+                                          </ImageView>
                                        </children>
                                     </AnchorPane>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #93cff2;">
                                        <children>
                                           <ScrollPane hbarPolicy="NEVER" prefHeight="361.0" prefWidth="508.0" style="-fx-background-color: #93cff2;" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <content>
-                                                <AnchorPane prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
+                                                <AnchorPane fx:id="ViewPane" onMouseClicked="#clearSearch" prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
                                                    <children>
                                                       <Label layoutX="35.0" layoutY="31.0" text="Offers" textFill="WHITE">
                                                          <font>
                                                             <Font name="Avenir Roman" size="52.0" />
                                                          </font>
                                                       </Label>
-                                                      <ScrollPane layoutX="53.0" layoutY="345.0" prefHeight="516.0" prefWidth="711.0">
+                                                      <ScrollPane layoutX="53.0" layoutY="242.0" prefHeight="516.0" prefWidth="711.0">
                                                         <content>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1496.0" prefWidth="1312.0">
                                                                <children>
-                                                                  <TableView prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <TableView fx:id="Table" prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <columns>
-                                                                      <TableColumn prefWidth="75.0" text="C1" />
-                                                                      <TableColumn prefWidth="75.0" text="C2" />
+                                                                      <TableColumn fx:id="offerIDCol" prefWidth="75.0" text="ID" />
+                                                                      <TableColumn fx:id="offererIDCol" prefWidth="75.0" text="Offerer ID" />
+                                                                        <TableColumn fx:id="strtStreetNoCol" prefWidth="75.0" text="Start Street No" />
+                                                                        <TableColumn fx:id="strtStreetNameCol" prefWidth="75.0" text="Start Street Name" />
+                                                                        <TableColumn fx:id="strtSuburbCol" prefWidth="75.0" text="Start Suburb" />
+                                                                        <TableColumn fx:id="strtPostCodeCol" prefWidth="75.0" text="Start Post Code" />
+                                                                        <TableColumn fx:id="endStreetNoCol" prefWidth="75.0" text="End Street No" />
+                                                                        <TableColumn fx:id="endStreetNameCol" prefWidth="75.0" text="End Street Name" />
+                                                                        <TableColumn fx:id="endSuburbCol" prefWidth="75.0" text="End Suburb" />
+                                                                        <TableColumn fx:id="endPostCodeCol" prefWidth="75.0" text="End Post Code" />
+                                                                        <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
+                                                                        <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
+                                                                        <TableColumn fx:id="pickUpTimeCol" prefWidth="75.0" text="Pick Up Time" />
+                                                                        <TableColumn fx:id="dateCreatedCol" prefWidth="75.0" text="Date Created" />
+                                                                        <TableColumn fx:id="statusCol" prefWidth="75.0" text="Status" />
+                                                                        <TableColumn fx:id="numSeatsAvailableCol" prefWidth="75.0" text="Seats" />
                                                                     </columns>
                                                                   </TableView>
                                                                </children>
                                                             </AnchorPane>
                                                         </content>
                                                       </ScrollPane>
-                                                      <Button layoutX="294.0" layoutY="880.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="102.0" style="-fx-background-color: #67afeb;" text="Edit" textAlignment="CENTER" textFill="WHITE">
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                         <font>
-                                                            <Font size="24.0" />
-                                                         </font>
-                                                      </Button>
-                                                      <Rectangle arcHeight="5.0" fill="#67afeb" height="164.0" layoutX="60.0" layoutY="122.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
-                                                      <Button layoutX="349.0" layoutY="229.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Rectangle arcHeight="5.0" fill="#67afeb" height="78.0" layoutX="60.0" layoutY="130.0" stroke="#6b4c4c00" strokeType="INSIDE" width="696.0" />
+                                                      <Button fx:id="Search" layoutX="540.0" layoutY="148.0" mnemonicParsing="false" onAction="#Search" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -165,53 +175,202 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Button>
-                                                      <TextField layoutX="98.0" layoutY="138.0" prefHeight="33.0" prefWidth="49.0" promptText="ID">
+                                                      <TextField fx:id="SearchValue" layoutX="351.0" layoutY="152.0" prefHeight="33.0" prefWidth="173.0" promptText="Enter">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <TextField layoutX="166.0" layoutY="138.0" prefHeight="33.0" prefWidth="121.0" promptText="Start Suburb">
+                                                      <ComboBox fx:id="SearchBy" layoutX="161.0" layoutY="153.0" onAction="#ComboBoxChoice" prefHeight="30.0" prefWidth="173.0" promptText="Search By..." style="-fx-background-color: white;" />
+                                                      <DatePicker fx:id="SearchDate" layoutX="352.0" layoutY="152.0" prefHeight="33.0" prefWidth="172.0" />
+                                                      <ComboBox fx:id="SearchCombo" layoutX="352.0" layoutY="154.0" prefHeight="30.0" prefWidth="173.0" promptText="Status" style="-fx-background-color: white;" />
+                                                      <Label layoutX="595.0" layoutY="223.0" text="Click away to clear the Search" textFill="WHITE">
                                                          <font>
-                                                            <Font name="Avenir Roman" size="15.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <TextField layoutX="300.0" layoutY="138.0" prefHeight="33.0" prefWidth="121.0" promptText="End Suburb">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="15.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <ComboBox layoutX="411.0" layoutY="186.0" prefHeight="30.0" prefWidth="107.0" promptText="Status" style="-fx-background-color: white;" />
-                                                      <DatePicker layoutX="439.0" layoutY="138.0" prefHeight="33.0" prefWidth="130.0" promptText="Date" />
-                                                      <ComboBox layoutX="655.0" layoutY="307.0" prefHeight="30.0" prefWidth="107.0" style="-fx-background-color: white;" />
-                                                      <Label layoutX="588.0" layoutY="309.0" text="Sort By" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="18.0" />
+                                                            <Font name="Avenir Roman" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="410.0" layoutY="880.0" mnemonicParsing="false" style="-fx-background-color: #67afeb;" text="Remove" textAlignment="CENTER" textFill="WHITE">
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                         <font>
-                                                            <Font size="24.0" />
-                                                         </font>
-                                                      </Button>
-                                                      <DatePicker layoutX="588.0" layoutY="138.0" prefHeight="33.0" prefWidth="130.0" promptText="Date Created" />
-                                                      <TextField layoutX="138.0" layoutY="184.0" prefHeight="33.0" prefWidth="121.0" promptText="Min Price">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="15.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <TextField layoutX="272.0" layoutY="184.0" prefHeight="33.0" prefWidth="121.0" promptText="Max Price">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="15.0" />
-                                                         </font>
-                                                      </TextField>
-                                                      <TextField layoutX="534.0" layoutY="185.0" prefHeight="33.0" prefWidth="121.0" promptText="Seats Num">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="15.0" />
-                                                         </font>
-                                                      </TextField>
+                                                      <AnchorPane fx:id="Single" onMouseClicked="#clearSearch" prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
+                                                         <children>
+                                                            <Rectangle arcHeight="5.0" fill="#67afeb" height="325.0" layoutX="64.0" layoutY="146.0" stroke="#6b4c4c00" strokeType="INSIDE" width="699.0" />
+                                                            <Label layoutX="39.0" layoutY="37.0" text="Offer" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="52.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="160.0" layoutY="165.0" text="Offer ID:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="offerID" layoutX="240.0" layoutY="165.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="143.0" layoutY="193.0" text="Offerer ID:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="offererID" layoutX="241.0" layoutY="193.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="101.0" layoutY="255.0" text="Start Street No:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="strtStreetNo" layoutX="241.0" layoutY="255.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="132.0" layoutY="283.0" text="Start Street:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="strtStreet" layoutX="241.0" layoutY="283.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="122.0" layoutY="311.0" text="Start Suburb:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="strtSuburb" layoutX="241.0" layoutY="311.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="94.0" layoutY="339.0" text="Start Post Code:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="strtPostCode" layoutX="241.0" layoutY="339.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="502.0" layoutY="252.0" text="End Street No:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="endStreetNo" layoutX="638.0" layoutY="252.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="533.0" layoutY="280.0" text="End Street:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="endStreet" layoutX="638.0" layoutY="280.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="523.0" layoutY="308.0" text="End Suburb:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="endSuburb" layoutX="638.0" layoutY="308.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="495.0" layoutY="336.0" text="End Post Code:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="endPostCode" layoutX="638.0" layoutY="336.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="510.0" layoutY="165.0" text="Date Created:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="dateCreated" layoutX="638.0" layoutY="165.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="573.0" layoutY="193.0" text="Status:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="status" layoutX="638.0" layoutY="193.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="191.0" layoutY="401.0" text="Date:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="date" layoutX="242.0" layoutY="401.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="191.0" layoutY="429.0" text="Price:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="price" layoutX="242.0" layoutY="429.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="pickUpTime" layoutX="637.0" layoutY="399.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label layoutX="515.0" layoutY="399.0" text="Pick Up Time:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="numberOfSeats" layoutX="638.0" layoutY="427.0" text="Seek ID" textFill="#b6e2fc">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Button fx:id="Back" layoutX="369.0" layoutY="493.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-color: #67afeb;" text="Back" textAlignment="CENTER" textFill="WHITE">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <font>
+                                                                  <Font size="24.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Label layoutX="483.0" layoutY="427.0" text="Number of Seats:" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="19.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="offerID2" layoutX="172.0" layoutY="37.0" text="Offer" textFill="WHITE">
+                                                               <font>
+                                                                  <Font name="Avenir Roman" size="52.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </AnchorPane>
                                                    </children>
                                                 </AnchorPane>
                                              </content>
@@ -227,10 +386,10 @@
             </AnchorPane>
             <AnchorPane maxHeight="35.0" minHeight="30.0" minWidth="0.0" prefHeight="30.0" prefWidth="160.0" style="-fx-background-color: #93cff2;">
                <children>
-                  <Label layoutX="319.0" layoutY="19.0" text="Contact Us" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="231.0" />
-                  <Label layoutX="212.0" layoutY="19.0" text="Privacy Policy" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="321.0" />
-                  <Label layoutX="159.0" layoutY="19.0" text="FAQs" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="426.0" />
-                  <Label layoutX="404.0" layoutY="19.0" text="Our Mission" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="142.0" />
+                  <Label layoutX="525.0" layoutY="10.0" text="Contact Us" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="454.0" />
+                  <Label layoutX="418.0" layoutY="10.0" text="Privacy Policy" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="544.0" />
+                  <Label layoutX="365.0" layoutY="10.0" text="FAQs" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="649.0" />
+                  <Label layoutX="610.0" layoutY="10.0" text="Our Mission" textFill="WHITE" underline="true" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="365.0" />
                </children>
             </AnchorPane>
         </items>
