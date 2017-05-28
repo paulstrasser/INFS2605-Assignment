@@ -59,7 +59,7 @@ public class SeekARideController implements Initializable {
     private Button Signout, Search, Post;
     
     @FXML
-    private Text Name, errorText, notifyText, name;
+    private Text errorText, notifyText, name;
     
     @FXML
     private TextField startNum, startStreet, startSub, startPC, endNum, endStreet, endSub, endPC, pickupTime, maxPrice; 
@@ -202,8 +202,16 @@ public class SeekARideController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Makes the 'Results' TitledPane not collapseable 
         name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        
+        int type = SignInController.getUserType();
+        if (type == 1) {
+            Offer.setDisable(true);
+            
+        }
+        else if (type == 2) {
+            Seek.setDisable(true);
+        }
         
         searchResultsTitledPane.setCollapsible(false); 
         SingleOffer.setVisible(false);
@@ -247,11 +255,14 @@ public class SeekARideController implements Initializable {
           
         Table.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showOffer(newValue));
+        
+        
     }
-     public void getOffers() {
+    
+    public void getOffers() {
         try {
             offersList.clear();
-            ResultSet rs = d.getResultSet("SELECT * FROM OFFER");
+            ResultSet rs = d.getResultSet("SELECT * FROM OFFER WHERE STATUS LIKE 'Pending'");
             while (rs.next()) {
                 offersList.add(new Offer(rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getInt("NUMSEATSREQUIRED")));
             }
@@ -316,7 +327,7 @@ public class SeekARideController implements Initializable {
     @FXML
     private void Profile(MouseEvent event) throws Exception {
 
-        stage=(Stage) Name.getScene().getWindow();
+        stage=(Stage) name.getScene().getWindow();
         root = FXMLLoader.load(getClass().getResource("Profile Page.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -394,7 +405,6 @@ public class SeekARideController implements Initializable {
     @FXML //HAMISH THIS IS WHERE THE RESULT SET IS
     private void makeSearch(ActionEvent event) throws Exception {
         if (verifySeek() == false){
-            DBController db1 = new DBController();
             offersList.clear();
             String startPCX;
             String endPCX;
@@ -402,42 +412,74 @@ public class SeekARideController implements Initializable {
             String timeX = pickupTime.getText();
             String PriceX = maxPrice.getText();
             String StatusX = "Pending";
-            String[] temp = maxPrice.getText().split(":");
+            String[] temp = pickupTime.getText().split(":");
+            System.out.println(temp[0]);
             int time1 = Integer.parseInt(temp[0]); //hour
             int time2 = Integer.parseInt(temp[0]) - 1; //hour - 1
             int time3 = Integer.parseInt(temp[0]) + 1; //hour + 1
-            //Seats in the INSERT statement
+            
+            String tm1 = Integer.toString(time1);
+            String tm2 = Integer.toString(time2);
+            String tm3 = Integer.toString(time3);
+            
+            String tm1x;
+            String tm2x;
+            String tm3x;
+            
+            if (time1 < 10) {
+                tm1x = "0" + tm1;
+            }
+            else {
+                tm1x = tm1;
+            }
+            
+            if (time2 < 10) {
+                tm2x = "0" + tm2;
+            }
+            else {
+                tm2x = tm2;
+            }
+            
+            if (time3 < 10) {
+                tm3x = "0" + tm3;
+            }
+            else {
+                tm3x = tm3;
+            }
+            
+            
+            System.out.println(dateX);
             
             //determining address
             if (startHome.isSelected()){
-                startPCX = db1.returnSingleQuery("SELECT HPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
+                startPCX = d.returnSingleQuery("SELECT HPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
             }
             else if (startWork.isSelected()){
-                startPCX = db1.returnSingleQuery("SELECT WPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
+                startPCX = d.returnSingleQuery("SELECT WPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
             }
             else{
                 startPCX = startPC.getText();
             }
             
             if (endHome.isSelected()){
-                endPCX = db1.returnSingleQuery("SELECT HPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
+                endPCX = d.returnSingleQuery("SELECT HPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
             }
             else if (endWork.isSelected()){
-                endPCX = db1.returnSingleQuery("SELECT WPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
+                endPCX = d.returnSingleQuery("SELECT WPOSTCODE AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'");
             }
             else{
-                endPCX = startPC.getText();
+                endPCX = endPC.getText();
             }
-
             //Search conditions: same start + end suburbs, price window and time window
-            ResultSet searchResults = db1.getResultSet("SELECT * FROM OFFER WHERE STRTPOSTCODE = '" + startPCX + "' AND ENDPOSTCODE = '" + endPCX + " AND DATE = PARSEDATETIME('"+dateX+"', 'YYYY-MM-DD') AND (PICKUPTIME LIKE '"+time1+"%' OR PICKUPTIME LIKE '"+time2+"%' OR PICKUPTIME LIKE '"+time3+"%')");
+            ResultSet searchResults = d.getResultSet("SELECT * FROM OFFER WHERE STRTPOSTCODE = '" + startPCX + "' AND ENDPOSTCODE = '" + endPCX + "' AND DATE = '" + dateX + "' AND (PICKUPTIME LIKE '"+tm1x+":%' OR PICKUPTIME LIKE '"+tm2x+":%' OR PICKUPTIME LIKE '"+tm3x+":%') AND PRICE <= " + PriceX + " ");
             while (searchResults.next()) {
                 offersList.add(new Offer(searchResults.getLong("OFFERID"), searchResults.getLong("OFFERERID"), searchResults.getString("STRTSUBURB"), searchResults.getInt("STRTPOSTCODE"), searchResults.getInt("STRTSTREETNO"), searchResults.getString("STRTSTREETNAME"), searchResults.getString("ENDSUBURB"), searchResults.getInt("ENDPOSTCODE"), searchResults.getInt("ENDSTREETNO"), searchResults.getString("ENDSTREETNAME"), searchResults.getString("DATE"), searchResults.getDouble("PRICE"), searchResults.getString("PICKUPTIME"), searchResults.getString("DATECREATED"), searchResults.getString("STATUS"), searchResults.getInt("NUMSEATSREQUIRED")));
             }
+            
             //HAMISH - ADD DISPLAY LOGIC HERE
-            getOffers();
+            System.out.println(searchResults);
+            System.out.println("");
             Table.setItems(FXCollections.observableArrayList(offersList));
-            System.out.println(searchResults); //this is to test if it works
         }
     }
     
@@ -664,7 +706,6 @@ public class SeekARideController implements Initializable {
         long thisSeeker = Integer.parseInt(d.returnSingleQuery("SELECT USERID AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         long AddOffererID = Long.parseLong(offererID.getText());
         long AddOfferID = Long.parseLong(offerID.getText());
-        long AddSeekID = 0;
         String AddStrtSuburb = strtSuburb.getText();
         int AddStrtPostCode = Integer.parseInt(strtPostCode.getText());
         int AddStrtStreetNo = Integer.parseInt(strtStreetNo.getText());
@@ -681,8 +722,23 @@ public class SeekARideController implements Initializable {
         long AddPaymentID = 0;
         int AddNumSeatsRequired = Integer.parseInt(numberOfSeats.getText());
         
-        d.Insert("INSERT INTO AGREEMENT(AGREEMENTID, SEEKERID, OFFERERID, SEEKID, OFFERID, STRTSUBURB, STRTPOSTCODE, STRTSTREETNO, STRTSTREETNAME, ENDSUBURB, ENDPOSTCODE, ENDSTREETNO, ENDSTREETNAME, DATE, PRICE, PICKUPTIME, DATECREATED, STATUS, NUMSEATSREQUIRED) VALUES(" + thisPK + ", " + thisSeeker + ", " + AddOffererID + ", " + AddSeekID + ", " + AddOfferID + ", '" + AddStrtSuburb + "', " + AddStrtPostCode + ", " + AddStrtStreetNo + ", '" + AddStrtStreetName + "', '" + AddEndSuburb + "', " + AddEndPostCode + ", " + AddEndStreetNo + ", '" + AddEndStreetName + "', " + "PARSEDATETIME('" + AddDate + "', 'YYYY-MM-DD'), " + AddPrice + ", '" + AddPickUpTime + "', PARSEDATETIME('" + AddDateCreated + "', 'YYYY-MM-DD'), '" + AddStatus + "', " + AddPaymentID + ", " + AddNumSeatsRequired + ")");
-        
+        d.Insert("INSERT INTO AGREEMENT(AGREEMENTID, SEEKERID, OFFERERID, OFFERID, STRTSUBURB, STRTPOSTCODE, STRTSTREETNO, STRTSTREETNAME, ENDSUBURB, ENDPOSTCODE, ENDSTREETNO, ENDSTREETNAME, DATE, PRICE, PICKUPTIME, DATECREATED, STATUS, PAYMENTID, NUMSEATSREQUIRED) VALUES(" + thisPK + ", " + thisSeeker + ", " + AddOffererID + ", " + AddOfferID + ", '" + AddStrtSuburb + "', " + AddStrtPostCode + ", " + AddStrtStreetNo + ", '" + AddStrtStreetName + "', '" + AddEndSuburb + "', " + AddEndPostCode + ", " + AddEndStreetNo + ", '" + AddEndStreetName + "', " + "PARSEDATETIME('" + AddDate + "', 'YYYY-MM-DD'), " + AddPrice + ", '" + AddPickUpTime + "', PARSEDATETIME('" + AddDateCreated + "', 'YYYY-MM-DD'), '" + AddStatus + "', " + AddPaymentID + ", " + AddNumSeatsRequired + ")");
+        d.Insert("UPDATE OFFER SET STATUS = 'Matched' WHERE OFFERID = " + AddOfferID);
         SingleOffer.setVisible(false);       
+        refreshTable();
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action Processed");
+        alert.setHeaderText(null);
+        alert.setContentText("You have matched this ride!");
+
+        alert.showAndWait();
+        
+    }
+    
+    public void refreshTable() {
+        offersList.clear();
+        getOffers();
+        Table.setItems(FXCollections.observableArrayList(offersList));
     }
 }

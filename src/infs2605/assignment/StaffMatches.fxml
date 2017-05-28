@@ -133,7 +133,7 @@
                                              <content>
                                                 <AnchorPane fx:id="refreshSearch" onMouseClicked="#clearSearch" prefHeight="1060.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
                                                    <children>
-                                                      <Rectangle arcHeight="5.0" fill="#67afeb" height="82.0" layoutX="57.0" layoutY="126.0" stroke="#6b4c4c00" strokeType="INSIDE" width="482.0" />
+                                                      <Rectangle arcHeight="5.0" fill="#67afeb" height="82.0" layoutX="57.0" layoutY="126.0" stroke="#6b4c4c00" strokeType="INSIDE" width="702.0" />
                                                       <Label layoutX="35.0" layoutY="31.0" text="Matches" textFill="WHITE">
                                                          <font>
                                                             <Font name="Avenir Roman" size="52.0" />
@@ -171,7 +171,7 @@
                                                             </AnchorPane>
                                                         </content>
                                                       </ScrollPane>
-                                                      <Button fx:id="Search" layoutX="422.0" layoutY="146.0" mnemonicParsing="false" onAction="#Search" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
+                                                      <Button fx:id="Search" layoutX="501.0" layoutY="147.0" mnemonicParsing="false" onAction="#Search" style="-fx-background-color: white;" text="Search" textAlignment="CENTER" textFill="#67afeb">
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
                                                          </cursor>
@@ -179,28 +179,20 @@
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Button>
-                                                      <TextField fx:id="SearchValue" layoutX="253.0" layoutY="150.0" prefHeight="33.0" prefWidth="145.0" promptText="Enter">
+                                                      <TextField fx:id="SearchValue" layoutX="336.0" layoutY="152.0" prefHeight="33.0" prefWidth="145.0" promptText="Enter">
                                                          <font>
                                                             <Font name="Avenir Roman" size="15.0" />
                                                          </font>
                                                       </TextField>
-                                                      <DatePicker fx:id="SearchDate" layoutX="252.0" layoutY="150.0" prefHeight="33.0" prefWidth="146.0" />
-                                                      <ComboBox fx:id="SearchBy" layoutX="83.0" layoutY="151.0" onAction="#ComboBoxChoice" prefHeight="30.0" prefWidth="152.0" promptText="Search By" style="-fx-background-color: white;" />
+                                                      <DatePicker fx:id="SearchDate" layoutX="331.0" layoutY="151.0" prefHeight="33.0" prefWidth="146.0" />
+                                                      <ComboBox fx:id="SearchBy" layoutX="157.0" layoutY="152.0" onAction="#ComboBoxChoice" prefHeight="30.0" prefWidth="152.0" promptText="Search By" style="-fx-background-color: white;" />
                                                       <Label layoutX="606.0" layoutY="218.0" text="Click away to clear the Search" textFill="WHITE">
                                                          <font>
                                                             <Font name="Avenir Roman" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <Button layoutX="583.0" layoutY="140.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: #67afeb;" text="Go to Payments" textFill="WHITE">
-                                                         <font>
-                                                            <Font name="Avenir Roman" size="17.0" />
-                                                         </font>
-                                                         <cursor>
-                                                            <Cursor fx:constant="HAND" />
-                                                         </cursor>
-                                                      </Button>
-                                                      <ComboBox fx:id="SearchCombo" layoutX="250.0" layoutY="152.0" prefHeight="30.0" prefWidth="152.0" promptText="Search By" style="-fx-background-color: white;" />
-                                                      <AnchorPane fx:id="Single" onMouseClicked="#clearSearch" prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
+                                                      <ComboBox fx:id="SearchCombo" layoutX="332.0" layoutY="152.0" prefHeight="30.0" prefWidth="152.0" promptText="Status" style="-fx-background-color: white;" />
+                                                      <AnchorPane fx:id="Single" onMouseClicked="#clearSearch" prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;" visible="false">
                                                          <children>
                                                             <Rectangle arcHeight="5.0" fill="#67afeb" height="368.0" layoutX="37.0" layoutY="146.0" stroke="#6b4c4c00" strokeType="INSIDE" width="757.0" />
                                                             <Label layoutX="39.0" layoutY="37.0" text="Match" textFill="WHITE">

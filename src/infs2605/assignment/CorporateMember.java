@@ -15,7 +15,7 @@ import javafx.beans.property.StringProperty;
 
 
 public class CorporateMember {
-    public Integer corporateMemberId;
+    public Long corporateMemberId;
     public StringProperty companyName;
     public Integer cStreetNum;
     public StringProperty cStreetName;
@@ -26,8 +26,8 @@ public class CorporateMember {
     public Long ABN;
 
 
-    public CorporateMember(int corporateMemberId, String companyName, int cStreetNum, String cStreetName, String cSuburb, String cCity, int cPostcode, long companyPhoneNum, long ABN){
-        this.corporateMemberId = new Integer(corporateMemberId);
+    public CorporateMember(long corporateMemberId, String companyName, int cStreetNum, String cStreetName, String cSuburb, String cCity, int cPostcode, long companyPhoneNum, long ABN){
+        this.corporateMemberId = new Long(corporateMemberId);
         this.companyName = new SimpleStringProperty(companyName);
         this.cStreetNum = new Integer(cStreetNum);
         this.cStreetName = new SimpleStringProperty(cStreetName);
@@ -79,7 +79,7 @@ public class CorporateMember {
     
     //---------------------------------------------------------------------------
     
-    public Integer getCorporateMemberIdProperty() {
+    public Long getCorporateMemberIdProperty() {
         return corporateMemberId;
     }
     

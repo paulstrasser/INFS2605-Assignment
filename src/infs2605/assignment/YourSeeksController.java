@@ -119,6 +119,15 @@ public class YourSeeksController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        int type = Integer.parseInt(d.returnSingleQuery("SELECT USERTYPE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        if (type == 1) {
+            Offer.setDisable(true);
+            
+        }
+        else if (type == 2) {
+            Seek.setDisable(true);
+        }
+        
         Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         
         seekIDCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSeekIDProperty().toString()));

@@ -62,8 +62,13 @@ public class SignInController implements Initializable {
     @FXML
     private Text UserTypeError;
     
-    private static String loggedInUser;
+    public static String loggedInUser;
+    
+    public static int userType;
 
+    DBController d = new DBController(); //Establish a connection to the db
+
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -96,6 +101,7 @@ public class SignInController implements Initializable {
                 if (auth.authenticate(username.getText(), password.getText(), true)){
                     loadNext("StaffNormalMembers.fxml"); //putting it to 'Seek a Ride' for now, before we know what type of user each person is
                     loggedInUser = username.getText();
+                    userType = Integer.parseInt(d.returnSingleQuery("SELECT USERTYPE FROM USER WHERE USERNAME LIKE = '" + loggedInUser + "'"));
 
                 }
                 else {
@@ -145,6 +151,9 @@ public class SignInController implements Initializable {
     
     public static String getUser(){
         return loggedInUser;
-    }
+    } 
     
+    public static int getUserType() {
+        return userType;
+    }
 }

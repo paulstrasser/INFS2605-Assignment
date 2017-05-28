@@ -369,8 +369,8 @@ public class StaffViewStaffController implements Initializable {
             SearchValue.setVisible(false);
         }
         else if (SearchByType.equals("Role")) {
-            SearchDate.setVisible(true);
-            SearchValue.setVisible(false);
+            SearchDate.setVisible(false);
+            SearchValue.setVisible(true);
         }
     }
     

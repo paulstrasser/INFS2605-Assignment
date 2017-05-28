@@ -233,13 +233,17 @@ public class StaffCorporateMembersController implements Initializable {
             corporateMembersList.clear();
             ResultSet rs = d.getResultSet("SELECT * " 
                     + "FROM CORPORATEMEMBER");
+            System.out.println("2");
             while (rs.next()) {
-                corporateMembersList.add(new CorporateMember(rs.getInt("CORPORATEMEMBERID"), rs.getString("COMPANYNAME"), rs.getInt("CSTREETNUM"), rs.getString("CSTREETNAME"), rs.getString("CSUBURB"), rs.getString("CCITY"), rs.getInt("CPOSTCODE"), rs.getLong("COMPANYPHONENUM"), rs.getLong("ABN")));
+                System.out.println("3");
+                corporateMembersList.add(new CorporateMember(rs.getLong("CORPORATEMEMBERID"), rs.getString("COMPANYNAME"), rs.getInt("CSTREETNUM"), rs.getString("CSTREETNAME"), rs.getString("CSUBURB"), rs.getString("CCITY"), rs.getInt("CPOSTCODE"), rs.getLong("COMPANYPHONENUM"), rs.getLong("ABN")));
+                System.out.println("4");
             }
         } catch (SQLException ex) {
             Logger.getLogger(StaffCorporateMembersController.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
+    
 }
 
 

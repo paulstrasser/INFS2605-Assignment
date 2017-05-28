@@ -291,6 +291,16 @@ public class AdjustmentRequestsController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        int type = Integer.parseInt(d.returnSingleQuery("SELECT USERTYPE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        if (type == 1) {
+            Offer.setDisable(true);
+            
+        }
+        else if (type == 2) {
+            Seek.setDisable(true);
+        }
+        
+        
         Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         Single.setVisible(false);
         agreementID.setVisible(false);
@@ -369,7 +379,7 @@ public class AdjustmentRequestsController implements Initializable {
             adjustmentList.clear();
             long thisUser = Long.parseLong(d.returnSingleQuery("SELECT USERID AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
 
-            ResultSet rs = d.getResultSet("SELECT * FROM Adjustment WHERE STATUS IN ('Pending') AND ADJUSTEDBY != " + thisUser + " AND SEEKERID = " + thisUser + " OR OFFERERID = " + thisUser + " ");
+            ResultSet rs = d.getResultSet("SELECT * FROM Adjustment WHERE STATUS IN ('Pending') AND ADJUSTEDBY != " + thisUser + " AND (SEEKERID = " + thisUser + " OR OFFERERID = " + thisUser + ") ");
             while (rs.next()) {
                 adjustmentList.add(new Adjustment(rs.getLong("ADJUSTMENTID"), rs.getLong("AGREEMENTID"), rs.getLong("SEEKID"), rs.getLong("SEEKERID"), rs.getLong("OFFERID"), rs.getLong("OFFERERID"), rs.getString("STRTSUBURB"), rs.getInt("STRTPOSTCODE"), rs.getInt("STRTSTREETNO"), rs.getString("STRTSTREETNAME"), rs.getString("ENDSUBURB"), rs.getInt("ENDPOSTCODE"), rs.getInt("ENDSTREETNO"), rs.getString("ENDSTREETNAME"), rs.getString("DATE"), rs.getDouble("PRICE"), rs.getString("PICKUPTIME"), rs.getString("DATECREATED"), rs.getString("STATUS"), rs.getLong("PAYMENTID"), rs.getInt("NUMSEATSREQUIRED"), rs.getLong("ADJUSTEDBY")));
             }

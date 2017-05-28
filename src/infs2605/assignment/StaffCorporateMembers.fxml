@@ -143,8 +143,8 @@
                                                                <children>
                                                                   <TableView fx:id="Table" prefHeight="1496.0" prefWidth="1312.0" style="-fx-background-color: #67afeb;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <columns>
-                                                                      <TableColumn fx:id="corporateMemberIdCol" prefWidth="75.0" text="ID" />
-                                                                      <TableColumn fx:id="companyNameCol" prefWidth="75.0" text="Company" />
+                                                                        <TableColumn fx:id="corporateMemberIdCol" prefWidth="75.0" text="ID" />
+                                                                        <TableColumn fx:id="companyNameCol" prefWidth="75.0" text="Company" />
                                                                         <TableColumn fx:id="cStreetNumCol" prefWidth="75.0" text="Street No." />
                                                                         <TableColumn fx:id="cStreetNameCol" prefWidth="88.0" text="Street Name" />
                                                                         <TableColumn fx:id="cSuburbCol" prefWidth="62.0" text="Suburb" />

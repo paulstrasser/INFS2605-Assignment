@@ -217,16 +217,6 @@
                                                                   <Font name="Avenir Roman" size="19.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label layoutX="318.0" layoutY="193.0" text="Seek ID" textFill="#b6e2fc">
-                                                               <font>
-                                                                  <Font name="Avenir Roman" size="19.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label layoutX="391.0" layoutY="193.0" text="Seek ID" textFill="#b6e2fc">
-                                                               <font>
-                                                                  <Font name="Avenir Roman" size="19.0" />
-                                                               </font>
-                                                            </Label>
                                                             <Label layoutX="101.0" layoutY="255.0" text="Start Street No:" textFill="WHITE">
                                                                <font>
                                                                   <Font name="Avenir Roman" size="19.0" />

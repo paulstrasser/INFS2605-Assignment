@@ -15,12 +15,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.text.Text;
@@ -70,7 +73,7 @@ public class ProfilePageController implements Initializable {
     private TitledPane Payment;
     
     @FXML
-    private Text fName;
+    private TextField fName;
     
     @FXML
     private TextField lName;
@@ -151,7 +154,7 @@ public class ProfilePageController implements Initializable {
     private PasswordField passWord;
     
     @FXML
-    private TextField description;
+    private TextArea description;
     
     @FXML
     private TextField nameOnCard;
@@ -171,21 +174,43 @@ public class ProfilePageController implements Initializable {
     @FXML
     private Text Name;
     
+    @FXML
+    private Label Name2;
+    
+    @FXML
+    private Button Update;
+    
     DBController d = new DBController();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Makes all the titledPanes not able to be collapsed
+        
+        
         AccountInformation.setCollapsible(false);
         Addresses.setCollapsible(false);
         CarDetails.setCollapsible(false);
         LicenseDetails.setCollapsible(false);
         Payment.setCollapsible(false); 
+        Name2.setText(d.returnSingleQuery("SELECT CONCAT(FNAME, ' ', LNAME) AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         fName.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         description.setText(d.returnSingleQuery("SELECT DESCRIPTION AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         lName.setText(d.returnSingleQuery("SELECT LNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
-        userType.setText(d.returnSingleQuery("SELECT USERTYPE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        
+        int type = Integer.parseInt(d.returnSingleQuery("SELECT USERTYPE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        if (type == 1) {
+            userType.setText("Seeker");
+            Offer.setDisable(true);
+            
+        }
+        else if (type == 2) {
+            userType.setText("Offerer");
+            Seek.setDisable(true);
+        }
+        else {
+            userType.setText("Both Seeker and Offerer");
+        }
         LocalDate DOB = LocalDate.parse(d.returnSingleQuery("SELECT DOB AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         dob.setValue(DOB);
         hPhone.setText(d.returnSingleQuery("SELECT HPHONE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
@@ -209,18 +234,72 @@ public class ProfilePageController implements Initializable {
         registration.setText(d.returnSingleQuery("SELECT REGISTRATION AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         numOfSeats.setValue(d.returnSingleQuery("SELECT NUMOFSEATS AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         licenseNum.setText(d.returnSingleQuery("SELECT LICENSENUM AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
-        LocalDate ExpiryDate = LocalDate.parse(d.returnSingleQuery("SELECT EXPIRYDATE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        LocalDate ExpiryDate = LocalDate.parse(d.returnSingleQuery("SELECT EXPDATE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         expDate.setValue(ExpiryDate);
         userName.setText(d.returnSingleQuery("SELECT USERNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         passWord.setText(d.returnSingleQuery("SELECT PASSWORD AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         nameOnCard.setText(d.returnSingleQuery("SELECT NAMEONCARD AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         cardNum.setText(d.returnSingleQuery("SELECT CARDNUM AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
-        LocalDate CardExpiry = LocalDate.parse(d.returnSingleQuery("SELECT EXPIRYDATE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        LocalDate CardExpiry = LocalDate.parse(d.returnSingleQuery("SELECT CARDEXPIRY AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         cardExpiry.setValue(CardExpiry);
         cVV.setText(d.returnSingleQuery("SELECT CVV AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         colour.getItems().addAll("Blue", "Red", "Green", "Black", "Silver", "White", "Orange");
         numOfSeats.getItems().addAll("1", "2", "3", "4", "5", "6");
-    }   
+    }  
+    
+    @FXML
+    private void Update(ActionEvent event) throws Exception {
+        String NewDescription = description.getText();
+        String NewFNAME = fName.getText();
+        String NewLNAME = lName.getText();
+        LocalDate NewDOB = dob.getValue();
+        long NewHPHONE = Long.parseLong(hPhone.getText());
+        long NewWPHONE = Long.parseLong(wPhone.getText());
+        long NewMPHONE = Long.parseLong(mPhone.getText());
+        String NewEMAIL = email.getText();
+        int NewHNUM = Integer.parseInt(hNum.getText());
+        String NewHSTREET = hStreet.getText();
+        String NewHSUBURB = hSuburb.getText();
+        String NewHCITY = hCity.getText();
+        int NewHPOSTCODE = Integer.parseInt(hPostCode.getText());
+        int NewWNUM = Integer.parseInt(wNum.getText());
+        String NewWSTREET = wStreet.getText();
+        String NewWSUBURB = wSuburb.getText();
+        String NewWCITY = wCity.getText();
+        int NewWPOSTCODE = Integer.parseInt(wPostCode.getText());
+        String NewMAKE = make.getText();
+        String NewMODEL = model.getText();
+        String NewCOLOUR = colour.getSelectionModel().getSelectedItem().toString();
+        String NewYEARMADE = yearMade.getText();
+        String NewREGISTRATION = registration.getText();
+        String NewSeats = (String) numOfSeats.getSelectionModel().getSelectedItem();
+        long NewLICENSENUM = Long.parseLong(licenseNum.getText());
+        LocalDate NewEXPDATE = expDate.getValue();
+        String NewUSERNAME = userName.getText();
+        String NewPASSWORD = passWord.getText();
+        String NewNAMEONCARD = nameOnCard.getText();
+        long NewCARDNUM = Long.parseLong(cardNum.getText());
+        LocalDate NewCARDEXPIRY = cardExpiry.getValue();
+        int NewCVV = Integer.parseInt(cVV.getText());
+
+        d.Insert("UPDATE USER "
+                + "SET DESCRIPTION = '" + NewDescription + "', FNAME = '" + NewFNAME + "', LNAME = '" + NewLNAME + "', DOB = PARSEDATETIME('"+NewDOB+"', 'YYYY-MM-DD'), HPHONE = " + NewHPHONE + ", WPHONE = " + NewWPHONE + ", MPHONE = " + NewMPHONE + ", EMAIL = '" + NewEMAIL + "', HNUM = " + NewHNUM + ", HSTREET = '" + NewHSTREET + "', HSUBURB = '" + NewHSUBURB + "', HCITY = '" + NewHCITY + "', HPOSTCODE = " + NewHPOSTCODE + ", WNUM = " + NewWNUM + ", WSTREET = '" + NewWSTREET + "', WSUBURB = '" + NewWSUBURB + "', WCITY = '" + NewWCITY + "', WPOSTCODE = " + NewWPOSTCODE + ", MAKE = '" + NewMAKE + "', MODEL = '" + NewMODEL + "', COLOUR = '" + NewCOLOUR + "', YEARMADE = '" + NewYEARMADE + "', REGISTRATION = '" + NewREGISTRATION + "', NUMOFSEATS = " + NewSeats + ", LICENSENUM = " + NewLICENSENUM + ", EXPDATE = PARSEDATETIME('"+NewEXPDATE+"', 'YYYY-MM-DD'), USERNAME = '" + NewUSERNAME + "', PASSWORD = '" + NewPASSWORD + "', NAMEONCARD = '" + NewNAMEONCARD + "', CARDNUM = " + NewCARDNUM + ", CARDEXPIRY = PARSEDATETIME('"+NewCARDEXPIRY+"', 'YYYY-MM-DD'), CVV = " + NewCVV
+                + "WHERE USERNAME LIKE '" + SignInController.getUser() + "'");
+        
+        stage=(Stage) Update.getScene().getWindow();
+        root = FXMLLoader.load(getClass().getResource("Profile Page.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Action Processed");
+        alert.setHeaderText(null);
+        alert.setContentText("Your profile has been updated!");
+
+        alert.showAndWait();
+    }
+    
     
     @FXML
     private void SignOut(ActionEvent event) throws Exception { //Goes Back to Sign in Screen
@@ -294,7 +373,4 @@ public class ProfilePageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-     
-    
 }
