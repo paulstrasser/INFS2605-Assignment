@@ -302,7 +302,7 @@
                                                             <Font name="Avenir Roman" size="20.0" />
                                                          </font>
                                                       </Text>
-                                                      <AnchorPane fx:id="SingleOffer" layoutX="10.0" layoutY="10.0" prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;" visible="false">
+                                                      <AnchorPane fx:id="SingleOffer" layoutX="10.0" layoutY="10.0" prefHeight="1038.0" prefWidth="827.0" style="-fx-background-color: #93cff2;">
                                                          <children>
                                                             <Rectangle arcHeight="5.0" fill="#67afeb" height="325.0" layoutX="64.0" layoutY="146.0" stroke="#6b4c4c00" strokeType="INSIDE" width="699.0" />
                                                             <Label layoutX="63.0" layoutY="37.0" text="Offer" textFill="WHITE">
@@ -465,7 +465,7 @@
                                                                   <Font name="Avenir Roman" size="19.0" />
                                                                </font>
                                                             </Label>
-                                                            <Button fx:id="Back" layoutX="369.0" layoutY="493.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-color: #67afeb;" text="Back" textAlignment="CENTER" textFill="WHITE">
+                                                            <Button fx:id="Back" layoutX="294.0" layoutY="497.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-color: #67afeb;" text="Back" textAlignment="CENTER" textFill="WHITE">
                                                                <cursor>
                                                                   <Cursor fx:constant="HAND" />
                                                                </cursor>
@@ -483,6 +483,14 @@
                                                                   <Font name="Avenir Roman" size="52.0" />
                                                                </font>
                                                             </Label>
+                                                            <Button fx:id="Back1" layoutX="392.0" layoutY="497.0" mnemonicParsing="false" onAction="#Back" style="-fx-background-color: #67afeb;" text="Match" textAlignment="CENTER" textFill="WHITE">
+                                                               <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                               </cursor>
+                                                               <font>
+                                                                  <Font size="24.0" />
+                                                               </font>
+                                                            </Button>
                                                          </children>
                                                       </AnchorPane>
                                                    </children>
