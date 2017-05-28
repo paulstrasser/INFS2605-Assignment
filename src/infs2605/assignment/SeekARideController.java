@@ -202,11 +202,12 @@ public class SeekARideController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+        name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM USER WHERE USERNAME = '" + SignInController.getUser() + "'"));
         
-        int type = SignInController.getUserType();
+        System.out.println(SignInController.getUser());
+        int type = Integer.parseInt(d.returnSingleQuery("SELECT USERTYPE AS ANSWER FROM USER WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
         if (type == 1) {
-            Offer.setDisable(true);
+           Offer.setDisable(true);
             
         }
         else if (type == 2) {
@@ -413,7 +414,7 @@ public class SeekARideController implements Initializable {
             String PriceX = maxPrice.getText();
             String StatusX = "Pending";
             String[] temp = pickupTime.getText().split(":");
-            System.out.println(temp[0]);
+            //System.out.println(temp[0]);
             int time1 = Integer.parseInt(temp[0]); //hour
             int time2 = Integer.parseInt(temp[0]) - 1; //hour - 1
             int time3 = Integer.parseInt(temp[0]) + 1; //hour + 1
@@ -448,7 +449,7 @@ public class SeekARideController implements Initializable {
             }
             
             
-            System.out.println(dateX);
+            //System.out.println(dateX);
             
             //determining address
             if (startHome.isSelected()){
@@ -477,8 +478,8 @@ public class SeekARideController implements Initializable {
             }
             
             //HAMISH - ADD DISPLAY LOGIC HERE
-            System.out.println(searchResults);
-            System.out.println("");
+            //System.out.println(searchResults);
+            //System.out.println("");
             Table.setItems(FXCollections.observableArrayList(offersList));
         }
     }

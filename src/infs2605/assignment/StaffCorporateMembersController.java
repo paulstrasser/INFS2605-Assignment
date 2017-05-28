@@ -200,9 +200,8 @@ public class StaffCorporateMembersController implements Initializable {
     
     ArrayList<CorporateMember> corporateMembersList = new ArrayList<>(); //Creates the array list
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME LIKE '" + SignInController.getUser() + "'"));
+    public void initTable(){
+        Name.setText(d.returnSingleQuery("SELECT FNAME AS ANSWER FROM STAFF WHERE USERNAME = '" + SignInController.getUser() + "'"));
         
         corporateMemberIdCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorporateMemberIdProperty().toString()));
         
@@ -226,6 +225,11 @@ public class StaffCorporateMembersController implements Initializable {
         
         Table.setItems(FXCollections.observableArrayList(corporateMembersList));
         //SearchCITY.getItems().addAll("Sydney", "Melbourne", "Brisbane", "Perth", "Darwin", "Adelaide", "Hobart");
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
     }    
     
     public void getCorporateMembers() {

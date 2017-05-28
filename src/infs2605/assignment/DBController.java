@@ -119,7 +119,7 @@ public class DBController {
         openConnection();
         java.sql.Statement statement = conn.createStatement();
         ResultSet RS = statement.executeQuery(sqlstatement);
-        System.out.println(sqlstatement);
+        //System.out.println(sqlstatement);
         return RS;
     }
     
