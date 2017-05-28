@@ -26,7 +26,7 @@ public class CorporateMember {
     public Long ABN;
 
 
-    public CorporateMember(long corporateMemberId, String companyName, int cStreetNum, String cStreetName, String cSuburb, String cCity, int cPostcode, long companyPhoneNum, long ABN){
+    public CorporateMember(long corporateMemberId, String companyName, int cStreetNum, String cStreetName, String cSuburb, String cCity, int cPostCode, long companyPhoneNum, long ABN){
         this.corporateMemberId = new Long(corporateMemberId);
         this.companyName = new SimpleStringProperty(companyName);
         this.cStreetNum = new Integer(cStreetNum);
@@ -37,10 +37,21 @@ public class CorporateMember {
         this.companyPhoneNum = new Long(companyPhoneNum);
         this.ABN = new Long(ABN);   
     }
-    /*public NormalMember() {
-        this();  
-    }*/
+
+    public CorporateMember(Long corporateMemberId, StringProperty companyName, Integer cStreetNum, StringProperty cStreetName, StringProperty cSuburb, StringProperty cCity, Integer cPostCode, Long companyPhoneNum, Long ABN) {
+        this.corporateMemberId = corporateMemberId;
+        this.companyName = companyName;
+        this.cStreetNum = cStreetNum;
+        this.cStreetName = cStreetName;
+        this.cSuburb = cSuburb;
+        this.cCity = cCity;
+        this.cPostCode = cPostCode;
+        this.companyPhoneNum = companyPhoneNum;
+        this.ABN = ABN;
+    }
     
+    
+   
     public String getCorporateMemberId() {
         return corporateMemberId.toString();
     }
